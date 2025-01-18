@@ -119,16 +119,16 @@ function Login(){
 
         // HTML Code
         <section>
-            <div className="flex flex-col space-y-10">
+            <div className="flex flex-col space-y-10 lg:flex-row lg:justify-center lg:items-center lg:h-screen">
                 {/* Image Container */}
 
-                <div className="w-1/2 mx-auto">
-                    <img src="/dark_logo.svg" alt="Logo Image" />
+                <div className="w-1/2 mx-auto lg:w-full">
+                    <img src="/dark_logo.svg" alt="Logo Image" className='w-full h-auto object-contain' />
                 </div>
 
 
                 {/* Login Form (Existing Users) */}
-                <div className="mx-7">
+                <div className="mx-7 lg:w-full lg:px-10">
                     <form id = "login-field" className="space-y-6">
                         <h1 className="text-3xl font-bold text-center">Welcome, Sign in!</h1>
 
