@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { ref, set } from 'firebase/database';
+import { ref, set, get } from 'firebase/database';
 import { database } from './firebase'; // Import from your firebase.js file
 
 function Login(){
     // JS Logic
     const [Username, setUsername] = useState('');
     const [Password, setPassword] = useState('');
+    const [UserID] = useState(new Date().getTime()); // Unique ID for the data
+
+    const[userData, setUserData] = useState(null);
+    const [error, setError] = useState("");
 
     /**
      * Function that switches window to the home page
@@ -15,7 +19,10 @@ function Login(){
     }
 
     /**
-     * Function that signs up the user
+     * Function that signs up the user.
+     * Takes in username and password and adds it to the database.
+     * Unique ID is generated for the user.
+     * @param e
      */
     function signUpButton(e){
 
@@ -23,13 +30,16 @@ function Login(){
         e.preventDefault();
         
         
-            const userId = new Date().getTime(); // Unique ID for the data
-            set(ref(database, `users/${userId}`), {
+        //Adding user's data to the database
+            set(ref(database, `users/${Username}`), {
             Username: Username,
             Password: Password,
+            UserID: UserID,
             })
             .then(() => {
-                alert('Data written successfully!');
+                //Displays message that the account was created successfully
+                accountCreationMessage(Username);
+
                 setUsername('');
                 setPassword('');
             })
@@ -39,25 +49,66 @@ function Login(){
     }
 
 
-
     /**
-     * Function that listens for the login button to be clicked
+     * Function that logs in the user.
+     * Takes in username and password and checks if it matches the database.
+     * If it matches, it logs in the user.
+     * @param {*} e 
      */
-    function loginButton(){
-         //Prevent the form from submitting
-         e.preventDefault();
-        
+    const signInButton = async (e) => {
+        //Prevent the form from submitting
+        e.preventDefault();
 
-         //Get the username and password
-         var username = document.getElementById('username').value;
-         var password = document.getElementById('password').value;
-         if(username !== "" && password == !""){
-             loginSuccessMessage(username);
-         }else{
-             loginFailedMessage();
-         }
+        try {
+            //Getting user's data from the database by their username
+            const userRef = ref(database, `users/${Username}`);
+            const snapshot = await get(userRef);
+
+            //Checking to see if the user exists
+            if(snapshot.exists()){
+                const user = snapshot.val();
+
+                //Checking to see if the user's password is correct
+                if(user.Password === Password){
+                    // alert("User logged in successfully!");
+                    loginSuccessMessage(user)
+                    setUserData(user);
+                    setError("");
+                    console.log("User logged in successfully!");
+                }
+                else{
+                    setError("Incorrect password");
+                    loginFailedMessage();
+                }
+            }
+            else{
+                setError("User does not exist");
+                document.getElementById('login-message').innerHTML = "User does not exist!";
+                document.getElementById('login-message').style.color = "#ff014f";
+            }
+
+
+        } catch (error) {
+            console.error("Error during sign in", error)
+            setError("Error during sign in");
+        }
+        
+       
     }
 
+    /**
+     * Function that display message that the account was created successfully.
+     * Takes in username and adds it to local storage to display on the home page.
+     * @param {*} user 
+     */
+    function accountCreationMessage(user){
+        localStorage.setItem("username", user);
+        let signUpMessage = document.getElementById('signup-message');
+
+        signUpMessage.innerHTML = "Account Created! Redirecting to main menu...";
+        signUpMessage.style.color = "#00FF7F";
+    }
+    
 
 
     /**
@@ -69,12 +120,12 @@ function Login(){
         localStorage.setItem("username", user)
     
         document.getElementById('login-message').innerHTML = "Logging in! Loading...";
-        document.getElementById('login-message').style.color = "green";
+        document.getElementById('login-message').style.color = "#00FF7F";
     
     
         //Add a little delay and then switch to the main menu
         setTimeout(function(){
-            window.location.href = "/public/home.html";
+            // window.location.href = "/public/home.html";
         }, 2000);
     
     }
@@ -84,7 +135,7 @@ function Login(){
      * Function for login failed message
      */
     function loginFailedMessage(){
-        document.getElementById('login-message').innerHTML = "Try again!";
+        document.getElementById('login-message').innerHTML = "Incorrect Password, Try again!";
         document.getElementById('login-message').style.color = "#ff014f";
     }
 
@@ -118,7 +169,7 @@ function Login(){
     return(
 
         // HTML Code
-        <section>
+        <section className='text-base'>
             <div className="flex flex-col space-y-10 lg:flex-row lg:justify-center lg:items-center lg:h-screen">
                 {/* Image Container */}
 
@@ -129,25 +180,31 @@ function Login(){
 
                 {/* Login Form (Existing Users) */}
                 <div className="mx-7 lg:w-full lg:px-10">
-                    <form id = "login-field" className="space-y-6">
+                    <form onSubmit={signInButton} id = "login-field" className="space-y-6 ">
                         <h1 className="text-3xl font-bold text-center">Welcome, Sign in!</h1>
 
                         {/* Enter Username */}
                         <div>
                             <label htmlFor="Username" className="block mb-2 text-base font-medium text-gray-900 dark:text-white">Enter Username</label>
                             <input type="text" name="username" id="username" className="
-                            bg-violet-600 border border-violet-400 text-white text-sm rounded-lg focus:ring-violet-300 focus:border-violet-400 block w-full p-4 
+                            bg-violet-600 border border-violet-400 text-white  rounded-lg focus:ring-violet-300 focus:border-violet-400 block w-full p-4 
                             dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-300 dark:focus:border-violet-400" 
-                            placeholder="Username" required/>
+                            placeholder="Username"
+                            value={Username}
+                            onChange={(e) => setUsername(e.target.value)} 
+                             required/>
                         </div>
 
 
                         {/* Enter Password */}
                         <div>
                         <label htmlFor="password" className="block mb-2 text-base font-medium text-gray-900 dark:text-white">Enter Password</label>
-                        <input type="password" name="password" id="password" placeholder="Password" className="bg-violet-600 border border-violet-400 text-white text-sm 
+                        <input type="password" name="password" id="password" placeholder="Password" className="bg-violet-600 border border-violet-400 text-white  
                         rounded-lg focus:ring-violet-300 focus:border-violet-400 block w-full p-4 dark:bg-violet-700 dark:border-violet-600 
-                        dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-300 dark:focus:border-violet-400" required/>
+                        dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-300 dark:focus:border-violet-400"
+                        value={Password}
+                        onChange={(e) => setPassword(e.target.value)}
+                         required/>
                       </div>
 
 
@@ -166,6 +223,11 @@ function Login(){
                     </form>
 
 
+
+
+
+
+
                     {/* Sign Up Form (New Users) */}
                     <div id="signUp-field" className="hidden">
                         <form onSubmit={signUpButton} className="space-y-6">
@@ -173,10 +235,10 @@ function Login(){
 
                           {/* Create Username */}
                             <div>
-                              <label htmlFor="username" className="block mb-2 text-base font-medium text-gray-900 dark:text-white">Create Username</label>
+                              <label htmlFor="username" className="block mb-2 font-medium text-gray-900 dark:text-white">Create Username</label>
                               <input type="text" name="username" id="create-username-field" placeholder="Username" 
                               className="
-                            bg-violet-600 border border-violet-400 text-white text-sm rounded-lg focus:ring-violet-300 focus:border-violet-400 block w-full p-4 
+                            bg-violet-600 border border-violet-400 text-white rounded-lg focus:ring-violet-300 focus:border-violet-400 block w-full p-4 
                             dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-300 dark:focus:border-violet-400" 
                             value={Username} onChange={(e) => setUsername(e.target.value)} required />
                             </div>
@@ -184,9 +246,9 @@ function Login(){
 
                             {/* Create Password */}
                              <div>
-                              <label htmlFor="password" className="block mb-2 text-base font-medium text-gray-900 dark:text-white">Create Password</label>
+                              <label htmlFor="password" className="block mb-2 font-medium text-gray-900 dark:text-white">Create Password</label>
                               <input type="password" name="password" id="create-password-field" placeholder="Password" 
-                              className="bg-violet-600 border border-violet-400 text-white text-sm 
+                              className="bg-violet-600 border border-violet-400 text-white 
                               rounded-lg focus:ring-violet-300 focus:border-violet-400 block w-full p-4 dark:bg-violet-700 dark:border-violet-600 
                               dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-300 dark:focus:border-violet-400" 
                               value={Password} onChange={(e) => setPassword(e.target.value)} required />
@@ -198,7 +260,7 @@ function Login(){
                              focus:ring-violet-300 font-medium rounded-lg text-base px-5 py-4 text-center dark:bg-violet-700 dark:hover:bg-violet-800 
                              dark:focus:ring-violet-500">Sign up</button>
       
-                             <p className="text-white text-center" id="login-message"></p>
+                             <p className="text-white text-center" id="signup-message"></p>
       
       
                              {/* Switch to Sign In */}
