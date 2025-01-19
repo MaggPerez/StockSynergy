@@ -166,6 +166,37 @@ function Login(){
     }
 
 
+    /**
+     * Function that allows to show and hide password.
+     */
+    function showPassword(){
+
+        //If login field is not hidden, these functionalities will be used
+        if(!document.getElementById('login-field').classList.contains('hidden')){
+            let showPasswordField = document.getElementById('password-field');
+            if(showPasswordField.type === "password"){
+                showPasswordField.type = "text";
+            }
+            else{
+                showPasswordField.type = "password";
+            }
+        }
+        else{
+            //If sign up field is not hidden, these functionalities will be used
+            let showPasswordField = document.getElementById('create-password-field');
+            if(showPasswordField.type === "password"){
+                showPasswordField.type = "text";
+            }
+            else{
+                showPasswordField.type = "password";
+            }
+        }
+
+
+        
+    }
+
+
     return(
 
         // HTML Code
@@ -198,14 +229,20 @@ function Login(){
 
                         {/* Enter Password */}
                         <div>
-                        <label htmlFor="password" className="block mb-2 text-base font-medium text-gray-900 dark:text-white">Enter Password</label>
-                        <input type="password" name="password" id="password" placeholder="Password" className="bg-violet-600 border border-violet-400 text-white  
-                        rounded-lg focus:ring-violet-300 focus:border-violet-400 block w-full p-4 dark:bg-violet-700 dark:border-violet-600 
-                        dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-300 dark:focus:border-violet-400"
-                        value={Password}
-                        onChange={(e) => setPassword(e.target.value)}
-                         required/>
-                      </div>
+                            <label htmlFor="password" className="block mb-2 text-base font-medium text-gray-900 dark:text-white">Enter Password</label>
+                            <input type="password" name="password" id="password-field" placeholder="Password" className="bg-violet-600 border border-violet-400 text-white  
+                            rounded-lg focus:ring-violet-300 focus:border-violet-400 block w-full p-4 dark:bg-violet-700 dark:border-violet-600 
+                            dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-300 dark:focus:border-violet-400"
+                            value={Password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required/>
+                        </div>
+
+                        {/* Show password (Sign in) */}
+                        <div className='text-gray-500 dark:text-gray-400 text-sm px-1'>
+                            <input type="checkbox" id='show-password' className="" onClick={() => showPassword()} />
+                            <label htmlFor="" className='px-2' >Show Password</label>
+                        </div>
 
 
                       {/* Login Button */}
@@ -253,6 +290,13 @@ function Login(){
                               dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-300 dark:focus:border-violet-400" 
                               value={Password} onChange={(e) => setPassword(e.target.value)} required />
                              </div>
+
+
+                             {/* Show Password (Sign Up) */}
+                             <div id='signup-show-password' className='text-gray-500 dark:text-gray-400 text-sm px-1'>
+                                <input type="checkbox" id='show-password' className="" onClick={() => showPassword()} />
+                                <label htmlFor="" className='px-2' >Show Password</label>
+                            </div>
 
 
                              {/* Sign Up Button */}
