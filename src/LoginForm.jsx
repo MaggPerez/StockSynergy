@@ -1,5 +1,5 @@
 import React from "react";
-import LoginScript from "./loginScript";
+import LoginFunctions from "./loginScript";
 
 
 function LoginForm(){
@@ -11,7 +11,7 @@ function LoginForm(){
         signInButton,
         switchToSignUp,
         switchToLogin,
-        showPassword} = LoginScript();
+        showPassword} = LoginFunctions();
         
     return(
 

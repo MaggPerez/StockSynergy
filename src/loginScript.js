@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ref, set, get } from 'firebase/database';
 import { database } from './firebase'; // Import from your firebase.js file
 
+import { useNavigate } from 'react-router-dom';
+
 function LoginFunctions(){
     // JS Logic
     const [Username, setUsername] = useState('');
@@ -10,6 +12,8 @@ function LoginFunctions(){
 
     const[userData, setUserData] = useState(null);
     const [error, setError] = useState("");
+
+    const navigate = useNavigate();
 
     /**
      * Function that switches window to the home page
@@ -71,7 +75,7 @@ function LoginFunctions(){
                 //Checking to see if the user's password is correct
                 if(user.Password === Password){
                     // alert("User logged in successfully!");
-                    loginSuccessMessage(user)
+                    loginSuccessMessage(Username);
                     setUserData(user);
                     setError("");
                     console.log("User logged in successfully!");
@@ -107,6 +111,11 @@ function LoginFunctions(){
 
         signUpMessage.innerHTML = "Account Created! Redirecting to main menu...";
         signUpMessage.style.color = "#00FF7F";
+
+        //Add a little delay and then switch to the main menu
+        setTimeout(function () {
+            navigate('/home');
+        }, 2000);
     }
 
 
@@ -125,7 +134,7 @@ function LoginFunctions(){
 
         //Add a little delay and then switch to the main menu
         setTimeout(function(){
-            // window.location.href = "/public/home.html";
+            navigate('/home');
         }, 2000);
 
     }
