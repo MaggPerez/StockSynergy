@@ -1,10 +1,14 @@
+
+import { Link } from "react-router-dom";
+
+
 function Home(){
     let name = localStorage.getItem("username");
     return(
         <>
         <header className="text-white p-3 flex justify-between">
             <h1 className="text-3xl font-bold">Hi {name}</h1>
-            <p className="font-medium text-violet-600 hover:underline dark:text-violet-500">Log out</p>
+            <Link className="font-medium text-violet-600 hover:underline dark:text-violet-500" to="/logout">Log out</Link>
         </header>
 
         <hr />
