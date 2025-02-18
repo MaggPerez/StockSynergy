@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LoginFunctions from "./loginScript";
 
 
@@ -12,16 +12,20 @@ function LoginForm(){
         switchToSignUp,
         switchToLogin,
         showPassword} = LoginFunctions();
+
+        useEffect(() => {
+            document.body.style.background = "#080a12"
+        })
         
     return(
 
         // HTML Code
-        <section className='text-base'>
+        <section className='text-base bg-custom-black h-screen'>
             <div className="flex flex-col space-y-10 lg:flex-row lg:justify-center lg:items-center lg:h-screen">
                 {/* Image Container */}
 
                 <div className="w-1/2 mx-auto lg:w-full">
-                    <img src="/dark_logo.svg" alt="Logo Image" className='w-full h-auto object-contain' />
+                    <img src="/images/stock-synergy_dark.svg" alt="Logo Image" className='w-full h-auto object-contain' />
                 </div>
 
 
@@ -32,7 +36,7 @@ function LoginForm(){
 
                         {/* Enter Username */}
                         <div>
-                            <label htmlFor="Username" className="block mb-2 text-base font-medium text-gray-900 dark:text-white">Enter Username</label>
+                            <label htmlFor="Username" className="block mb-2 text-base font-medium text-white">Enter Username</label>
                             <input type="text" name="username" id="username" className="
                             bg-violet-600 border border-violet-400 text-white  rounded-lg focus:ring-violet-300 focus:border-violet-400 block w-full p-4 
                             dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-300 dark:focus:border-violet-400" 
@@ -45,7 +49,7 @@ function LoginForm(){
 
                         {/* Enter Password */}
                         <div>
-                            <label htmlFor="password" className="block mb-2 text-base font-medium text-gray-900 dark:text-white">Enter Password</label>
+                            <label htmlFor="password" className="block mb-2 text-base font-medium text-white">Enter Password</label>
                             <input type="password" name="password" id="password-field" placeholder="Password" className="bg-violet-600 border border-violet-400 text-white  
                             rounded-lg focus:ring-violet-300 focus:border-violet-400 block w-full p-4 dark:bg-violet-700 dark:border-violet-600 
                             dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-300 dark:focus:border-violet-400"

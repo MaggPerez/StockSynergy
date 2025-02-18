@@ -1,36 +1,57 @@
+import { Link } from "react-router-dom";
+import DarkModeToggle from "./DarkModeToggle";
+
 export default function Dashboard() {
+    let name = localStorage.getItem('username')
     return (
-        <div className="flex gap-[30px] flex-wrap">
-            <div className="grow bg-gray-100 rounded-3xl">
-                {/* Upper left */}
-                <div className="p-3">
-                    <h1 className="text-3xl font-bold">NOF Updates</h1>
-                    <p className="text-fuchsia-500 text-xl font-bold">NOF: 426</p>
-                    <p className="text-fuchsia-500 text-xs font-bold">Previously: 786</p>
-                </div>
-            </div>
-            <div className="grow bg-gray-100 rounded-3xl">
-                {/* Upper Right */}
-                <div className="p-3">
-                    <p className="text-3xl font-bold">Leaderboards</p>
-                    <p className="text-fuchsia-500 text-xl font-bold">1. U.S Constitution (Pulled 200)</p>
-                    <p className="text-fuchsia-500 text-xl font-bold">2. Statue of Liberty (Pulled 100)</p>
-                    <p className="text-fuchsia-500 text-xl font-bold">3. Kendrick Lamar (Pulled 60)</p>
-                    <p className="text-fuchsia-500 text-xl font-bold">4. Sam (Pulled 0)</p>
-                </div>
-            </div>
-            <div className="w-full p-10 bg-violet-400 text-white text-3xl font-bold text-center">
-                {/* Middle Wide */}
-                <h1>Restock</h1>
+        <div>
+            <header className="text-black dark:text-white p-3 flex justify-between">
+                <h1 className="text-3xl font-bold">Hi {name}!</h1>
+                <DarkModeToggle />
+                <Link className="font-medium text-violet-600 hover:underline dark:text-violet-500" to="/logout">Log out</Link>
+            </header>
 
-            </div>
-            <div className="grow bg-fuchsia-300 p-10 rounded-3xl">
-                {/* Bottom Left */}
-                <h1 className="text-3xl font-bold">Sales Floor</h1>
+            <hr />
+            <header className="font-bold text-3xl p-3">Lastest Activity</header>
 
-            </div>
-            <div className="grow rounded-3xl">
-                {/* Bottom right */}
+            <div className="flex gap-[30px] flex-wrap justify-center text-center items-center pb-10">
+
+                {/* Overview of Not on Floor */}
+                <div className="w-1/2 rounded-3xl bg-white dark:bg-common-black p-5 shadow-xl flex justify-around">
+                    <div>
+                        <p className="text-fuchsia-400 font-bold text-xl">426</p>
+                        <p className="text-fuchsia-400">Units</p>
+                        <h3>NOF</h3>
+                    </div>
+                    <div>
+                        <p className="text-fuchsia-400 font-bold text-xl">786</p>
+                        <p className="text-fuchsia-400">Units</p>
+                        <h3>Previously</h3>
+                    </div>
+
+
+                </div>
+
+                <div className="w-1/4 rounded-3xl bg-white dark:bg-common-black p-5 shadow-2xl">
+                    <p className="text-fuchsia-400 font-bold text-xl">10,742</p>
+                    <p className="text-fuchsia-400">Units</p>
+                    <h3>Sales Floor</h3>
+                </div>
+
+                <div className="w-1/4 rounded-3xl bg-white dark:bg-common-black p-5 shadow-2xl">
+                    <p className="text-fuchsia-400 font-bold text-xl">12,831</p>
+                    <p className="text-fuchsia-400">Units</p>
+                    <h3>Stockroom</h3>
+                </div>
+
+                <div className="w-1/4 rounded-3xl bg-white dark:bg-common-black p-5 shadow-2xl">
+                    <p className="text-fuchsia-400 font-bold text-xl">0</p>
+                    <p className="text-fuchsia-400">Units</p>
+                    <h3>Selected</h3>
+                </div>
+
+
+
             </div>
         </div>
 
