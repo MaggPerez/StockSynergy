@@ -106,7 +106,7 @@ function LoginFunctions(){
      * @param {*} user 
      */
     function accountCreationMessage(user){
-        localStorage.setItem("username", user);
+        sessionStorage.setItem("username", user);
         let signUpMessage = document.getElementById('signup-message');
 
         signUpMessage.innerHTML = "Account Created! Redirecting to main menu...";
@@ -126,7 +126,7 @@ function LoginFunctions(){
      * @param {*} user 
      */
     function loginSuccessMessage(user){
-        localStorage.setItem("username", user)
+        sessionStorage.setItem("username", user);
 
         document.getElementById('login-message').innerHTML = "Logging in! Loading...";
         document.getElementById('login-message').style.color = "#00FF7F";
