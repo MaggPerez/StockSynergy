@@ -49,7 +49,7 @@ const Graph = () => {
   };
 
   return (
-    <div className="lg:h-5/6 flex justify-center">
+    <div className="lg:h-4/5 flex justify-center">
       <Bar data={data} options={options}  />
     </div>
   );

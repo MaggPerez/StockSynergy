@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
-import LoginFunctions from "./loginScript";
+import LoginFunctions from "../loginScript";
+import { setDocumentTitle } from "../script";
 
 
-function LoginForm(){
+function Login(){
+    setDocumentTitle("Login")
     const {Username,
         setUsername,
         setPassword,
@@ -139,4 +141,4 @@ function LoginForm(){
     );
 }
 
-export default LoginForm;
+export default Login;

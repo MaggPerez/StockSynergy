@@ -42,9 +42,9 @@ function Sidebar() {
 
                         {/* Main Links */}
                         <div className="flex flex-col pl-5 gap-6">
-                            <Link className="flex gap-2"><img className="w-7" src="/images/home_icon.svg" alt="Home Icon" />Home</Link>
-                            <Link className="flex gap-2"><img className="w-7" src="/images/stockroom_logo_white.svg" alt="Restock Icon" />Restock</Link>
-                            <Link className="flex gap-2"><img className="w-7" src="/images/sales_floor_white.svg" alt="Sales Floor Icon" />Sales Floor</Link>
+                            <Link to='/home' className="flex gap-2"><img className="w-7" src="/images/home_icon.svg" alt="Home Icon" />Home</Link>
+                            <Link to='/stockroom' className="flex gap-2"><img className="w-7" src="/images/stockroom_logo_white.svg" alt="Restock Icon" />Stockroom</Link>
+                            <Link to='/salesfloor' className="flex gap-2"><img className="w-7" src="/images/sales_floor_white.svg" alt="Sales Floor Icon" />Sales Floor</Link>
                         </div>
 
 

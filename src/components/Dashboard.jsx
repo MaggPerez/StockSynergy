@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import DarkModeToggle from "./DarkModeToggle";
+import PageHeader from "./PageHeader";
+
 
 export default function Dashboard() {
     let name = localStorage.getItem('username');
@@ -10,6 +12,8 @@ export default function Dashboard() {
 
             {/* Header and Light/Dark mode */}
             <p className="text-center">Stock Synergy is currently under development.</p>
+
+
 
             <div className="flex justify-between">
                 <header className="flex gap-2 font-bold text-3xl p-4">
