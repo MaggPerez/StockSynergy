@@ -1,8 +1,7 @@
-# React + Vite
+# Stock Synergy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- An inventory retail system designed to track stock units, sales floor inventory, and incoming products in real-time. 
+- Built to optimize retail operations, improve stock accuracy, and simplify inventory management for seamless business workflows.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Layout
+<img width="1800" alt="Screenshot 2025-02-27 at 7 16 23 PM" src="https://github.com/user-attachments/assets/cc65f48b-a1f2-425d-ad66-a7a7abf4cb7a" />
