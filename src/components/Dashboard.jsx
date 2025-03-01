@@ -11,7 +11,7 @@ export default function Dashboard() {
         <div className="bg-gray-50 dark:bg-common-black lg:pt-10">
 
             {/* Header and Light/Dark mode */}
-            <p className="text-center">Stock Synergy is currently under development.</p>
+            {/* <p className="text-center">Stock Synergy is currently under development.</p> */}
 
 
 
