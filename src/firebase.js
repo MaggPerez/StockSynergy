@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { get, getDatabase } from 'firebase/database';
+import { getFirestore } from "firebase/firestore";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -27,6 +28,7 @@ const app = initializeApp(firebaseConfig);
 
 
 export const database = getDatabase(app);
+export const firestoreDB = getFirestore(app);
 
 
 
