@@ -4,9 +4,15 @@ import Sidebar from "../components/Sidebar";
 import PageHeader from "../components/PageHeader";
 import DarkModeToggle from "../components/DarkModeToggle";
 import ProductList from "../components/ProductList.jsx";
+import Products from "../components/Products.jsx";
+import { useEffect } from "react";
 
 
 function Stockroom() {
+
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    })
 
     return (
         <main className="lg:pl-56 lg:duration-300 text-black dark:text-white h-[130vh]">
@@ -32,12 +38,11 @@ function Stockroom() {
                         <p className="text-violet-500">Units</p>
                         <h3>Previously</h3>
                     </div>
-
-
                 </div>
 
-                {/* Displays a list of products from firebase */}
-                <ProductList />
+                {/* continue adding more designs onto the page */}
+                <Products />
+
 
                 
             </div>

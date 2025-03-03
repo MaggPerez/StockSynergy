@@ -22,7 +22,7 @@ function Sidebar() {
 
 
     return (
-        <div className="bg-gray-50 dark:bg-common-black">
+        <div className="bg-white dark:bg-common-black">
             <nav id="sidebar" className={`${isSidebarOpen ? "md:w-1/3 w-1/2 lg:w-56" : "w-0 lg:w-56"} bg-violet-600 w-0 h-screen fixed z-0 top-0 left-0 overflow-x-hidden pt-0 duration-500 rounded-tr-[4em]`}>
 
                 {/* Sidebar Interior */}
