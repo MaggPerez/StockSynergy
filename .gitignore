@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 .env
 TextGeneration.py
+populateProducts.json
+populate.js

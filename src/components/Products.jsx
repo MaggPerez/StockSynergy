@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ProductButtons from "./ProductButtons";
 import ProductList from "./ProductList";
+import { handlePopulate } from "../populate";
 
 
 function Products() {
@@ -10,12 +11,13 @@ function Products() {
         setSelectedProduct(categoryType);
     }
 
+    
     const renderProductContent = () => {
         switch (selectedProduct) {
             case 'M_Tees':
                 return <div>
                     <h2 className="text-xl font-bold pl-4 pt-2">Men's T-Shirts</h2>
-                    <ProductList categoryType={selectedProduct}/>
+                    <ProductList categoryType={selectedProduct} />
                 </div>;
             case 'M_Shorts':
                 return <div className="">
