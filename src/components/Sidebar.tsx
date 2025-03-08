@@ -2,24 +2,21 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-
-
-function Sidebar() {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const Sidebar = () => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);  // Typing state as boolean
     const navigate = useNavigate();
+  
+    const name: string | null = sessionStorage.getItem("username");  // name is either a string or null
 
-    let name = sessionStorage.getItem("username");
-
-
-    // add useEffect or useState for siebar
-    const toggleMenu = () => {
-        setIsSidebarOpen(!isSidebarOpen);
+    // Function to toggle the sidebar state
+    const toggleMenu = (): void => {
+        setIsSidebarOpen((prevState) => !prevState);
     }
 
-    const logOut = () => {
-        navigate('/logout')
+    // Function to log out and navigate to the logout page
+    const logOut = (): void => {
+        navigate('/logout');
     }
-
 
     return (
         <div className="bg-white dark:bg-common-black">
@@ -36,7 +33,6 @@ function Sidebar() {
                         <Link to="/home"><img className="w-10/12 mx-auto" src="/images/stock_synergy_all_white.svg" alt="" /></Link>
                     </div>
 
-
                     {/* Links */}
                     <div className="flex flex-col h-full text-2xl">
 
@@ -47,11 +43,10 @@ function Sidebar() {
                             <Link to='/salesfloor' className="flex gap-2"><img className="w-7" src="/images/sales_floor_white.svg" alt="Sales Floor Icon" />Sales Floor</Link>
                         </div>
 
-
                         {/* Profile/Logout Links */}
                         <div className="flex flex-col gap-3 mt-auto pl-10 pb-5">
                             <p className="bg-violet-700">Hi {name}</p>
-                            <Link onClick={logOut} className="flex gap-2 "><img className="w-7" src="/images/logout_icon.svg" alt="Latest Activity" />Logout</Link>
+                            <Link to='/logout' className="flex gap-2 "><img className="w-7" src="/images/logout_icon.svg" alt="Latest Activity" />Logout</Link>
                         </div>
                     </div>
 

@@ -3,15 +3,17 @@ import ProductButtons from "./ProductButtons";
 import ProductList from "./ProductList";
 import { handlePopulate } from "../populate";
 
+// Define a type for the selected product category
+type CategoryType = 'M_Tees' | 'M_Shorts' | 'M_Jackets' | 'M_Belts' | 'M_Sweaters' | 'M_Sandals' | null;
 
 function Products() {
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    // Use a type for selectedProduct to ensure it's one of the CategoryType or null
+    const [selectedProduct, setSelectedProduct] = useState<CategoryType>(null);
 
-    const handleProductClick = (categoryType) => {
+    const handleProductClick = (categoryType: CategoryType) => {
         setSelectedProduct(categoryType);
     }
 
-    
     const renderProductContent = () => {
         switch (selectedProduct) {
             case 'M_Tees':
@@ -20,7 +22,7 @@ function Products() {
                     <ProductList categoryType={selectedProduct} />
                 </div>;
             case 'M_Shorts':
-                return <div className="">
+                return <div>
                     <h2 className="text-xl font-bold pl-4 pt-2">Men's Shorts</h2>
                     <ProductList categoryType={selectedProduct} />
                 </div>;
@@ -50,7 +52,6 @@ function Products() {
         }
     }
 
-
     return (
         <div>
             {/* Product List */}
@@ -65,6 +66,7 @@ function Products() {
             </div>
             <hr className="border-gray-200 dark:border-gray-600" />
             {renderProductContent()}
+
         </div>
     );
 }

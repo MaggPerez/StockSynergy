@@ -1,21 +1,21 @@
-
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Dashboard from "../components/Dashboard";
 import Graph from "../components/Graph";
-import { setDocumentTitle } from "../script";
+import { setDocumentTitle } from "../script.js"
 import PageHeader from "../components/PageHeader";
 
+const Home: React.FC = () => {
+    setDocumentTitle("Home");
 
-function Home() {
-    setDocumentTitle("Home")
-    let name = sessionStorage.getItem("username");
+    // `name` could be a string or null based on sessionStorage result
+    const name: string | null = sessionStorage.getItem("username");
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.body.style.background = "white"
-    })
+        document.body.style.background = "white";
+    }, []); // Empty array to run once after the first render
 
     return (
         <>
@@ -24,7 +24,6 @@ function Home() {
 
                 {/* Title of current page */}
                 <PageHeader title="Home" />
-
 
                 {/* Dashboard having latest activities */}
                 <Dashboard />
@@ -35,11 +34,8 @@ function Home() {
                 {/* Main Div */}
                 <div className="flex gap-[35px] flex-col lg:flex-wrap lg:flex-row">
 
-
-
                     {/* News Section */}
-                    <section className="items-center p-4 mx-3 bg-gray-50 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl
-                    lg:w-1/3">
+                    <section className="items-center p-4 mx-3 bg-gray-50 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/3">
                         {/* Restock with Logo */}
                         <header className="flex gap-2 text-3xl font-bold pb-5">
                             <img className="w-9 px-1 bg-violet-500 rounded-xl" src="/images/news_logo_white.svg" alt="restock logo" />News
@@ -54,11 +50,8 @@ function Home() {
                         </ul>
                     </section>
 
-
-
                     {/* Sales Floor Section */}
-                    <section className="items-center p-4 mx-3 bg-gray-50 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl
-                    lg:w-1/2">
+                    <section className="items-center p-4 mx-3 bg-gray-50 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2">
                         {/* Sales Floor with Logo */}
                         <header className="flex gap-2 text-3xl font-bold pb-5">
                             <img className="w-9 px-1 bg-violet-500 rounded-xl" src="/images/sales_floor_white.svg" alt="Sales Floor logo" />Sales Floor
@@ -68,12 +61,8 @@ function Home() {
                         <Graph />
                     </section>
 
-
-
                     {/* Stockroom Section */}
-                    <section className="items-center p-4 mx-3 bg-gray-50 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl
-                    lg:w-1/2">
-
+                    <section className="items-center p-4 mx-3 bg-gray-50 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2">
                         {/* Stockroom with Logo */}
                         <header className="flex gap-2 text-3xl font-bold pb-5">
                             <img className="w-9 bg-violet-500 rounded-xl" src="/images/stockroom_logo_white.svg" alt="Stockroom Logo" />Stockroom
@@ -81,8 +70,7 @@ function Home() {
 
                         <div className="flex gap-[30px] items-center">
                             {/* Units selected */}
-                            <div className="w-1/3 rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl text-center
-                            lg:w-1/5">
+                            <div className="w-1/3 rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl text-center lg:w-1/5">
                                 <p className="text-violet-500 font-bold text-xl">0</p>
                                 <p className="text-violet-500">Units</p>
                                 <h3>Selected</h3>
@@ -102,10 +90,8 @@ function Home() {
 
                 </div>
             </main>
-
-
         </>
     );
-}
+};
 
 export default Home;

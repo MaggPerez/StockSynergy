@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import PageHeader from "../components/PageHeader";
 import DarkModeToggle from "../components/DarkModeToggle";
-import ProductList from "../components/ProductList.jsx";
-import Products from "../components/Products.jsx";
+import ProductList from "../components/ProductList.js";
+import Products from "../components/Products.js";
 import { useEffect } from "react";
 
 
