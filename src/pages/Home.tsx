@@ -6,6 +6,7 @@ import Graph from "../components/Graph";
 import { setDocumentTitle } from "../script.js"
 import PageHeader from "../components/PageHeader";
 
+
 const Home: React.FC = () => {
     setDocumentTitle("Home");
 
@@ -19,8 +20,9 @@ const Home: React.FC = () => {
 
     return (
         <>
-            <main className="bg-white dark:bg-common-black text-black dark:text-white h-[200vh] lg:pl-56 lg:duration-300">
-                <Sidebar />
+            <main className="bg-gray-50 dark:bg-common-black text-black dark:text-white h-[200vh] lg:pl-56 lg:duration-300">
+                <Sidebar /> 
+
 
                 {/* Title of current page */}
                 <PageHeader title="Home" />
@@ -35,7 +37,7 @@ const Home: React.FC = () => {
                 <div className="flex gap-[35px] flex-col lg:flex-wrap lg:flex-row">
 
                     {/* News Section */}
-                    <section className="items-center p-4 mx-3 bg-gray-50 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/3">
+                    <section className="items-center p-4 mx-3 bg-white dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/3">
                         {/* Restock with Logo */}
                         <header className="flex gap-2 text-3xl font-bold pb-5">
                             <img className="w-9 px-1 bg-violet-500 rounded-xl" src="/images/news_logo_white.svg" alt="restock logo" />News
@@ -51,7 +53,7 @@ const Home: React.FC = () => {
                     </section>
 
                     {/* Sales Floor Section */}
-                    <section className="items-center p-4 mx-3 bg-gray-50 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2">
+                    <section className="items-center p-4 mx-3 bg-white dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2">
                         {/* Sales Floor with Logo */}
                         <header className="flex gap-2 text-3xl font-bold pb-5">
                             <img className="w-9 px-1 bg-violet-500 rounded-xl" src="/images/sales_floor_white.svg" alt="Sales Floor logo" />Sales Floor
@@ -62,7 +64,7 @@ const Home: React.FC = () => {
                     </section>
 
                     {/* Stockroom Section */}
-                    <section className="items-center p-4 mx-3 bg-gray-50 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2">
+                    <section className="items-center p-4 mx-3 bg-white dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2">
                         {/* Stockroom with Logo */}
                         <header className="flex gap-2 text-3xl font-bold pb-5">
                             <img className="w-9 bg-violet-500 rounded-xl" src="/images/stockroom_logo_white.svg" alt="Stockroom Logo" />Stockroom

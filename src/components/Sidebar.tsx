@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import DarkModeToggle from "./DarkModeToggle";
 
 const Sidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);  // Typing state as boolean
     const navigate = useNavigate();
-  
+
     const name: string | null = sessionStorage.getItem("username");  // name is either a string or null
 
     // Function to toggle the sidebar state
@@ -13,49 +14,52 @@ const Sidebar = () => {
         setIsSidebarOpen((prevState) => !prevState);
     }
 
-    // Function to log out and navigate to the logout page
-    const logOut = (): void => {
-        navigate('/logout');
-    }
-
     return (
-        <div className="bg-white dark:bg-common-black">
-            <nav id="sidebar" className={`${isSidebarOpen ? "md:w-1/3 w-1/2 lg:w-56" : "w-0 lg:w-56"} bg-violet-600 w-0 h-screen fixed z-0 top-0 left-0 overflow-x-hidden pt-0 duration-500 rounded-tr-[4em]`}>
+        <>
 
-                {/* Sidebar Interior */}
-                <div className="flex flex-col h-full text-white font-normal">
+            <div>
+                <nav id="sidebar" className={`${isSidebarOpen ? "md:w-1/3 w-1/2" : "w-0 lg:w-56"} bg-violet-600 w-0 h-screen fixed z-0 top-0 left-0 overflow-x-hidden pt-0 duration-500 rounded-tr-[4em]`}>
 
-                    {/* X Button */}
-                    <a className="flex justify-end text-3xl pr-10 pt-3 lg:p-1 lg:hidden" href="#" onClick={toggleMenu}>&times;</a>
+                    {/* Sidebar Interior */}
+                    <div className="flex flex-col h-full text-white font-normal">
 
-                    {/* Logo */}
-                    <div className="flex items-center justify-center pt-3">
-                        <Link to="/home"><img className="w-10/12 mx-auto" src="/images/stock_synergy_all_white.svg" alt="" /></Link>
-                    </div>
+                        {/* X Button */}
+                        <a className="flex justify-end text-3xl pr-10 pt-3 lg:p-1 lg:hidden" href="#" onClick={toggleMenu}>&times;</a>
 
-                    {/* Links */}
-                    <div className="flex flex-col h-full text-2xl">
-
-                        {/* Main Links */}
-                        <div className="flex flex-col pl-5 gap-6">
-                            <Link to='/home' className="flex gap-2"><img className="w-7" src="/images/home_icon.svg" alt="Home Icon" />Home</Link>
-                            <Link to='/stockroom' className="flex gap-2"><img className="w-7" src="/images/stockroom_logo_white.svg" alt="Restock Icon" />Stockroom</Link>
-                            <Link to='/salesfloor' className="flex gap-2"><img className="w-7" src="/images/sales_floor_white.svg" alt="Sales Floor Icon" />Sales Floor</Link>
+                        {/* Logo */}
+                        <div className="flex items-center justify-center pt-3">
+                            <Link to="/home"><img className="w-10/12 sm:w-8/12 mx-auto" src="/images/stock_synergy_all_white.svg" alt="" /></Link>
                         </div>
 
-                        {/* Profile/Logout Links */}
-                        <div className="flex flex-col gap-3 mt-auto pl-10 pb-5">
-                            <p className="bg-violet-700">Hi {name}</p>
-                            <Link to='/logout' className="flex gap-2 "><img className="w-7" src="/images/logout_icon.svg" alt="Latest Activity" />Logout</Link>
-                        </div>
-                    </div>
+                        {/* Links */}
+                        <div className="flex flex-col h-full text-2xl">
 
+                            {/* Main Links */}
+                            <div className="flex flex-col pl-5 gap-6">
+                                <Link to='/home' className="flex gap-2"><img className="w-7" src="/images/home_icon.svg" alt="Home Icon" />Home</Link>
+                                <Link to='/stockroom' className="flex gap-2"><img className="w-7" src="/images/stockroom_logo_white.svg" alt="Restock Icon" />Stockroom</Link>
+                                <Link to='/salesfloor' className="flex gap-2"><img className="w-7" src="/images/sales_floor_white.svg" alt="Sales Floor Icon" />Sales Floor</Link>
+                            </div>
+
+                            {/* Profile/Logout Links */}
+                            <div className="flex flex-col gap-3 mt-auto pl-10 pb-5">
+                                <p className="bg-violet-700">Hi {name}</p>
+                                <Link to='/logout' className="flex gap-2 "><img className="w-7" src="/images/logout_icon.svg" alt="Latest Activity" />Logout</Link>
+                            </div>
+                        </div>
+
+                    </div>
+                </nav>
+
+                {/* Hamburger Icon */}
+                <div className="flex justify-between lg:justify-end items-center px-4 py-2">
+                    <span className={`${isSidebarOpen ? "lg:hidden" : "lg:hidden"} text-5xl cursor-pointer text-violet-600`} onClick={toggleMenu}>
+                        &#9776;
+                    </span>
+                    <DarkModeToggle />
                 </div>
-            </nav>
-
-            <span className={`${isSidebarOpen ? "w-1/2 lg:hidden" : "w-0 lg:hidden"} text-5xl cursor-pointer text-right text-violet-600`} onClick={toggleMenu}>&#9776;</span>
-
-        </div>
+            </div>
+        </>
     );
 }
 

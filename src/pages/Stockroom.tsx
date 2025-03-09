@@ -19,9 +19,7 @@ function Stockroom() {
             <Sidebar />
 
             <div className="flex justify-between">
-                <PageHeader title="Stockroom" />
-                <DarkModeToggle />
-
+                <PageHeader title="Stockroom" pathTo="/home" />
             </div>
 
             {/* Overview of Not on Floor */}
