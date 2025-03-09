@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 
 import Sidebar from "../components/Sidebar";
 import PageHeader from "../components/PageHeader";
-import Section from "../components/Section";
 import Graph from "../components/Graph";
 
 function SalesFloor() {
