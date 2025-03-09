@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ProductButtons from "./ProductButtons";
 import ProductList from "./ProductList";
-import { handlePopulate } from "../populate";
+
 
 // Define a type for the selected product category
 type CategoryType = 'M_Tees' | 'M_Shorts' | 'M_Jackets' | 'M_Belts' | 'M_Sweaters' | 'M_Sandals' | null;
