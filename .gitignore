@@ -25,4 +25,4 @@ dist-ssr
 .env
 TextGeneration.py
 populateProducts.json
-populate.js
+src/populate.ts

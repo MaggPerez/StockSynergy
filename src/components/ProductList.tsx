@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Item from "./Item";
-import { collection, getDocs } from "firebase/firestore";
+import { getDocs, collection, QuerySnapshot, DocumentData } from "firebase/firestore";
 import { firestoreDB } from "../firebase";
 
 // Define the type for a Product
@@ -37,6 +37,33 @@ export async function getRestockNumber(categoryType: string): Promise<number> {
     return sum;
 }
 
+
+/**
+ * Function that calculates the total available restock units
+ * @returns total value of restockable items 
+ */
+export async function getNotOnFloorNum() {
+    const collectionTable: Record<string, string> = {
+            m_tees: "M_Tees",
+            m_shorts: "M_Shorts",
+            m_jackets: "M_Jackets"
+        };
+    
+        const m_tee_collection = collection(firestoreDB, collectionTable.m_tees);
+        const m_shorts_collection = collection(firestoreDB, collectionTable.m_shorts);
+    
+        const retrieveM_Tees: QuerySnapshot<DocumentData> = await getDocs(m_tee_collection);
+        const retrieveM_Shorts: QuerySnapshot<DocumentData> = await getDocs(m_shorts_collection);
+    
+        const mTeeNOF: number[] = retrieveM_Tees.docs.map(doc => doc.data().availableRestock)
+        const mShortsNOF: number[] = retrieveM_Shorts.docs.map(doc => doc.data().availableRestock)
+
+        const NOF = mTeeNOF.reduce((increment, currentValue) => increment + currentValue, 0) + 
+        mShortsNOF.reduce((increment, currentValue) => increment + currentValue, 0);
+
+        return NOF;
+}
+
 /**
  * Function that takes category name (e.g M_Tee or M_Shorts) and fetches its data from firebase
  * @param categoryType The category name
@@ -45,6 +72,8 @@ export async function getRestockNumber(categoryType: string): Promise<number> {
 interface ProductListProps {
     categoryType: string;
 }
+
+
 
 function ProductList({ categoryType }: ProductListProps): JSX.Element {
     const [products, setProducts] = useState<Product[]>([]);  // Typed as an array of Product
