@@ -1,12 +1,18 @@
+import { useState, useEffect } from "react";
 
+interface props{
+    onClick?: () => void;
+}
 
+function Checkbox({onClick}: props) {
 
-function Checkbox() {
+    //figure out how to click an item and it moves to selected region
+    
     return (
         <div className="flex gap-2">
             <input type="checkbox" id="some_id" className="relative peer shrink-0
              appearance-none w-4 h-4 border-2 border-blue-500 rounded-sm bg-white mt-1 checked:bg-blue-800 checked:border-0"/>
-            <label htmlFor="some_id" className="mt-1">Select</label>
+            <label onClick={onClick} htmlFor="some_id" className="mt-1">Select</label>
             <svg
                 className="absolute w-4 h-4 mt-1 hidden peer-checked:block pointer-events-none "
                 xmlns="https://www.w3.org/2000/svg"

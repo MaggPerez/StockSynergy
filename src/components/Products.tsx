@@ -4,7 +4,8 @@ import ProductList from "./ProductList";
 
 
 // Define a type for the selected product category
-type CategoryType = 'M_Tees' | 'M_Shorts' | 'M_Jackets' | 'M_Belts' | 'M_Sweaters' | 'M_Sandals' | null;
+type CategoryType = 'M_Tees' | 'M_Shorts' | 'M_Jackets' | 'M_Belts' | 'M_Sweaters' | 'M_Sandals' | 
+'selected' | null;
 
 function Products() {
     // Use a type for selectedProduct to ensure it's one of the CategoryType or null
@@ -46,6 +47,11 @@ function Products() {
                     <h2 className="text-xl font-bold pl-4 pt-2">Men's Sandals</h2>
                     <p className="text-center text-green-700 dark:text-[#00FF7F]">Nothing to be restocked</p>
                 </div>
+            case 'selected':
+                return <div>
+                <h2 className="text-xl font-bold pl-4 pt-2">Items Selected</h2>
+                <p className="text-center text-green-700 dark:text-[#00FF7F]">Items Selected</p>
+            </div>
 
             default:
                 return <div className="p-4">Select a category to view products</div>
@@ -63,6 +69,7 @@ function Products() {
                 <ProductButtons categoryType='M_Belts' onClick={() => handleProductClick('M_Belts')} />
                 <ProductButtons categoryType='M_Sweaters' onClick={() => handleProductClick('M_Sweaters')} />
                 <ProductButtons categoryType='M_Sandals' onClick={() => handleProductClick('M_Sandals')} />
+                <ProductButtons categoryType='Selected' onClick={() => handleProductClick('selected')} />
             </div>
             <hr className="border-gray-200 dark:border-gray-600" />
             {renderProductContent()}

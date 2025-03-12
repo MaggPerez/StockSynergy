@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import PageHeader from "../components/PageHeader";
 import Graph from "../components/Graph";
+import InventorySidebar from "../components/TestSidebar";
 
 function SalesFloor() {
 
     return (
         <main className="lg:pl-56 lg:duration-300 text-black dark:text-white bg-gray-50 dark:bg-common-black h-screen">
-            <Sidebar />
+            {/* <Sidebar /> */}
+            <InventorySidebar />
 
             <PageHeader title="Sales Floor" pathTo="/home" />
 

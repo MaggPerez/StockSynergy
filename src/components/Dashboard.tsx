@@ -1,10 +1,17 @@
-import { Link } from "react-router-dom";
-import DarkModeToggle from "./DarkModeToggle";
-import PageHeader from "./PageHeader";
-
-
+import { useState, useEffect } from "react"
+import { getNotOnFloorNum } from "../components/ProductList";
+import { generateSales } from "../script";
 export default function Dashboard() {
-    let name = localStorage.getItem('username');
+    let current_sales = generateSales();
+
+    const [NOF, setNOF] = useState<number | string>("Loading");
+        useEffect(() =>{
+    
+            async function fetchNOF() {
+                setNOF(await getNotOnFloorNum());
+            }
+            fetchNOF();
+        }, [])
 
     
     return (
@@ -18,45 +25,45 @@ export default function Dashboard() {
 
             </div>
 
-            <div className="flex gap-[35px] flex-wrap justify-center text-center items-center pb-10 px-10
+            <div className="flex gap-[35px] overflow-x-auto text-center items-center pb-10 px-10 w-full
             lg:justify-evenly">
 
-                {/* Overview of Not on Floor */}
-                <div className="w-1/3 rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl flex justify-around
-                lg:w-1/4">
+                {/* Overview of current sales */}
+                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl 
+                flex flex-col justify-center items-center lg:w-1/4">
                     <div>
-                        <p className="text-violet-500 font-bold text-xl">521</p>
+                        <p className="text-violet-500 font-bold text-xl">${current_sales}</p>
+                        <p className="text-violet-500">Sales</p>
+                        <h3>Generated</h3>
+                    </div>
+                </div>
+
+                {/* Overview of Not on Floor */}
+                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl 
+                flex flex-col justify-center items-center lg:w-1/4">
+                    <div>
+                        <p className="text-violet-500 font-bold text-xl">{NOF}</p>
                         <p className="text-violet-500">Units</p>
                         <h3>Not on Floor</h3>
                     </div>
-
-
                 </div>
-                <div className="w-1/3 rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl
-                lg:w-1/5">
+
+                {/* Previously Units */}
+                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl 
+                flex flex-col justify-center items-center lg:w-1/4">
                         <p className="text-violet-500 font-bold text-xl">426</p>
                         <p className="text-violet-500">Units</p>
                         <h3>Previously</h3>
                     </div>
 
                 {/* Sales floor units */}
-                <div className="w-1/3 rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl
-                lg:w-1/5">
+                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl 
+                flex flex-col justify-center items-center lg:w-1/4">
                     <p className="text-violet-500 font-bold text-xl">10,742</p>
                     <p className="text-violet-500">Units</p>
                     <h3>Sales Floor</h3>
                 </div>
-
-                {/* Stockroom unit */}
-                <div className="w-1/3 rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl
-                lg:w-1/5">
-                    <p className="text-violet-500 font-bold text-xl">12,831</p>
-                    <p className="text-violet-500">Units</p>
-                    <h3>Stockroom</h3>
-                </div>
-
-
-
+                
 
             </div>
         </div>

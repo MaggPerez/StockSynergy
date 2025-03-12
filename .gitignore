@@ -25,4 +25,5 @@ dist-ssr
 .env
 TextGeneration.py
 populateProducts.json
-src/populate.ts
+populate.ts
+.qodo

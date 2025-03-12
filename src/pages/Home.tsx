@@ -5,23 +5,22 @@ import Dashboard from "../components/Dashboard";
 import Graph from "../components/Graph";
 import { setDocumentTitle } from "../script.js"
 import PageHeader from "../components/PageHeader";
+import InventorySidebar from '../components/TestSidebar'
 
 
 const Home: React.FC = () => {
     setDocumentTitle("Home");
 
-    // `name` could be a string or null based on sessionStorage result
-    const name: string | null = sessionStorage.getItem("username");
-
     useEffect(() => {
         window.scrollTo(0, 0);
         document.body.style.background = "white";
-    }, []); // Empty array to run once after the first render
+    }, []);
 
     return (
         <>
             <main className="bg-gray-50 dark:bg-common-black text-black dark:text-white h-[200vh] lg:pl-56 lg:duration-300">
-                <Sidebar /> 
+                {/* <Sidebar /> */}
+                <InventorySidebar />
 
 
                 {/* Title of current page */}
@@ -71,11 +70,12 @@ const Home: React.FC = () => {
                         </header>
 
                         <div className="flex gap-[30px] items-center">
-                            {/* Units selected */}
-                            <div className="w-1/3 rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl text-center lg:w-1/5">
-                                <p className="text-violet-500 font-bold text-xl">0</p>
+                            {/* Stockroom unit */}
+                            <div className="w-1/3 rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm text-center dark:shadow-2xl
+                            lg:w-1/5">
+                                <p className="text-violet-500 font-bold text-xl">12,831</p>
                                 <p className="text-violet-500">Units</p>
-                                <h3>Selected</h3>
+                                <h3>Stockroom</h3>
                             </div>
 
                             {/* Stockroom Link */}
@@ -84,7 +84,7 @@ const Home: React.FC = () => {
                                 rounded-3xl p-5 cursor-pointer hover:bg-fuchsia-500 hover:text-white dark:hover:bg-fuchsia-500 shadow-sm dark:shadow-2xl
                                 lg:justify-around">
                                     <p>Enter Stockroom Inventory →</p>
-                                    <img className="w-1/4 lg:w-1/12" src="/images/stockroom_logo.svg" alt="" />
+                                    <img className="w-10 lg:w-1/12" src="/images/stockroom_logo.svg" alt="" />
                                 </div>
                             </Link>
                         </div>
