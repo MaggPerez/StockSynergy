@@ -44,24 +44,33 @@ export async function getRestockNumber(categoryType: string): Promise<number> {
  */
 export async function getNotOnFloorNum() {
     const collectionTable: Record<string, string> = {
-            m_tees: "M_Tees",
-            m_shorts: "M_Shorts",
-            m_jackets: "M_Jackets"
-        };
-    
-        const m_tee_collection = collection(firestoreDB, collectionTable.m_tees);
-        const m_shorts_collection = collection(firestoreDB, collectionTable.m_shorts);
-    
-        const retrieveM_Tees: QuerySnapshot<DocumentData> = await getDocs(m_tee_collection);
-        const retrieveM_Shorts: QuerySnapshot<DocumentData> = await getDocs(m_shorts_collection);
-    
-        const mTeeNOF: number[] = retrieveM_Tees.docs.map(doc => doc.data().availableRestock)
-        const mShortsNOF: number[] = retrieveM_Shorts.docs.map(doc => doc.data().availableRestock)
+        m_tees: "M_Tees",
+        m_shorts: "M_Shorts",
+        m_jackets: "M_Jackets",
+        m_belts: "M_Belts",
+    };
 
-        const NOF = mTeeNOF.reduce((increment, currentValue) => increment + currentValue, 0) + 
-        mShortsNOF.reduce((increment, currentValue) => increment + currentValue, 0);
+    const m_tee_collection = collection(firestoreDB, collectionTable.m_tees);
+    const m_shorts_collection = collection(firestoreDB, collectionTable.m_shorts);
+    const m_jackets_collection = collection(firestoreDB, collectionTable.m_jackets);
+    const m_belts_collection = collection(firestoreDB, collectionTable.m_belts);
 
-        return NOF;
+    const retrieveM_Tees: QuerySnapshot<DocumentData> = await getDocs(m_tee_collection);
+    const retrieveM_Shorts: QuerySnapshot<DocumentData> = await getDocs(m_shorts_collection);
+    const retrieveM_Jackets: QuerySnapshot<DocumentData> = await getDocs(m_jackets_collection);
+    const retrieveM_Belts: QuerySnapshot<DocumentData> = await getDocs(m_belts_collection);
+
+    const mTeeNOF: number[] = retrieveM_Tees.docs.map(doc => doc.data().availableRestock)
+    const mShortsNOF: number[] = retrieveM_Shorts.docs.map(doc => doc.data().availableRestock)
+    const mJacketsNOF: number[] = retrieveM_Jackets.docs.map(doc => doc.data().availableRestock)
+    const mBeltsNOF: number[] = retrieveM_Belts.docs.map(doc => doc.data().availableRestock)
+
+    const NOF = mTeeNOF.reduce((increment, currentValue) => increment + currentValue, 0) +
+        mShortsNOF.reduce((increment, currentValue) => increment + currentValue, 0) + 
+        mJacketsNOF.reduce((increment, currentValue) => increment + currentValue, 0) + 
+        mBeltsNOF.reduce((increment, currentValue) => increment + currentValue, 0);
+
+    return NOF;
 }
 
 /**

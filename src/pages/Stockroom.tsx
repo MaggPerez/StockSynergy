@@ -36,7 +36,7 @@ function Stockroom() {
                         <h3>NOF</h3>
                     </div>
                     <div>
-                        <p className="text-violet-500 font-bold text-xl">521</p>
+                        <p className="text-violet-500 font-bold text-xl">26</p>
                         <p className="text-violet-500">Units</p>
                         <h3>Previously</h3>
                     </div>

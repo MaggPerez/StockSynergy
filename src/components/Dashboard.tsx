@@ -51,7 +51,7 @@ export default function Dashboard() {
                 {/* Previously Units */}
                 <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl 
                 flex flex-col justify-center items-center lg:w-1/4">
-                        <p className="text-violet-500 font-bold text-xl">426</p>
+                        <p className="text-violet-500 font-bold text-xl">26</p>
                         <p className="text-violet-500">Units</p>
                         <h3>Previously</h3>
                     </div>

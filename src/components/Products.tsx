@@ -3,6 +3,7 @@ import ProductButtons from "./ProductButtons";
 import ProductList from "./ProductList";
 
 
+
 // Define a type for the selected product category
 type CategoryType = 'M_Tees' | 'M_Shorts' | 'M_Jackets' | 'M_Belts' | 'M_Sweaters' | 'M_Sandals' | 
 'selected' | null;
@@ -30,12 +31,12 @@ function Products() {
             case 'M_Jackets':
                 return <div>
                     <h2 className="text-xl font-bold pl-4 pt-2">Men's Jackets</h2>
-                    <p className="text-center text-green-700 dark:text-[#00FF7F]">Nothing to be restocked</p>
+                    <ProductList categoryType={selectedProduct} />
                 </div>
             case 'M_Belts':
                 return <div>
                     <h2 className="text-xl font-bold pl-4 pt-2">Men's Belts</h2>
-                    <p className="text-center text-green-700 dark:text-[#00FF7F]">Nothing to be restocked</p>
+                    <ProductList categoryType={selectedProduct} />
                 </div>
             case 'M_Sweaters':
                 return <div>
