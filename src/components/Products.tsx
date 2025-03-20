@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductButtons from "./ProductButtons";
 import ProductList from "./ProductList";
+import { getNotOnFloorNum } from "./ProductList";
 
 
 
@@ -8,9 +9,23 @@ import ProductList from "./ProductList";
 type CategoryType = 'M_Tees' | 'M_Shorts' | 'M_Jackets' | 'M_Belts' | 'M_Sweaters' | 'M_Sandals' | 
 'selected' | null;
 
+
+
 function Products() {
     // Use a type for selectedProduct to ensure it's one of the CategoryType or null
     const [selectedProduct, setSelectedProduct] = useState<CategoryType>(null);
+
+    //Setting the Not on Floor tracker
+    const [NOF, setNOF] = useState<number | string>("Loading");
+    useEffect(() => {
+        window.scrollTo(0, 0);
+
+        async function fetchNOF() {
+            setNOF(await getNotOnFloorNum());
+        }
+        fetchNOF();
+    }, [])
+
 
     const handleProductClick = (categoryType: CategoryType) => {
         setSelectedProduct(categoryType);
@@ -61,6 +76,24 @@ function Products() {
 
     return (
         <div>
+            {/* Overview of Not on Floor */}
+            <div className="flex flex-col gap-10 py-5">
+                <div className="w-full rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl flex justify-around
+                text-center lg:w-1/4">
+                    <div>
+                        <p className="text-violet-500 font-bold text-xl">{NOF}</p>
+                        <p className="text-violet-500">Units</p>
+                        <h3>NOF</h3>
+                    </div>
+                    <div>
+                        <p className="text-violet-500 font-bold text-xl">26</p>
+                        <p className="text-violet-500">Units</p>
+                        <h3>Previously</h3>
+                    </div>
+                </div>
+
+            </div>
+            
             {/* Product List */}
             <hr className="border-gray-200 dark:border-gray-600" />
             <div className="flex pl-2 py-3 gap-5 overflow-x-auto">

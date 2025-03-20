@@ -1,15 +1,12 @@
-import { Link } from "react-router-dom";
-
-import Sidebar from "../components/Sidebar";
 import PageHeader from "../components/PageHeader";
 import Graph from "../components/Graph";
-import InventorySidebar from "../components/TestSidebar";
+import InventorySidebar from "../components/InventorySidebar";
 
 function SalesFloor() {
 
     return (
         <main className="lg:pl-56 lg:duration-300 text-black dark:text-white bg-gray-50 dark:bg-common-black h-screen">
-            {/* <Sidebar /> */}
+            {/* Sidebar */}
             <InventorySidebar />
 
             <PageHeader title="Sales Floor" pathTo="/home" />
@@ -22,7 +19,7 @@ function SalesFloor() {
                         <h2>Sales Floor Units</h2>
                     </header>
 
-                    <Graph />
+                    <Graph chart="SalesFloor" />
                 </section>
 
                 {/* Popular Items */}
@@ -30,7 +27,7 @@ function SalesFloor() {
                     <header className="flex gap-2 text-3xl font-bold pb-5">
                         <h2>Popular Items</h2>
                     </header>
-                    
+
                     <div className="w-full max-w-[600px] mx-auto grid grid-cols-3 gap-4 justify-start text-center text-white font-bold
                     ">
                         <div className="bg-blue-500 p-4 rounded-xl"><img src="/stock_images/t_shirt_icon.svg" alt="" />Waffle Tee</div>
@@ -38,7 +35,7 @@ function SalesFloor() {
                         <div className="bg-blue-500 p-4 rounded-xl"><img src="/stock_images/t_shirt_icon.svg" alt="" />Happy T-Shirt</div>
                     </div>
                 </section>
-                
+
             </div>
         </main>
     );

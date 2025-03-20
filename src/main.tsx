@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Stockroom from './pages/Stockroom';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SalesFloor from './pages/SalesFloor';
+import Restock from './pages/Restock';
 
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: '/stockroom',
     element: <Stockroom />,
+  },
+  {
+    path: 'restock',
+    element: <Restock />
   },
   {
     path: '/salesfloor',

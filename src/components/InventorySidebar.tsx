@@ -14,8 +14,8 @@ const InventorySidebar: React.FC = () => {
     return (
         <>
             <div>
-                <nav className={`${isSidebarOpen ? "w-0 lg:w-56" : "w-2/3 md:w-72"} bg-violet-600 w-0 h-screen fixed
-                    top-0 left-0 overflow-x-hidden pt-0 duration-500 rounded-tr-[4em] text-lg`}>
+                <nav className={`${isSidebarOpen ? "w-0 lg:w-56" : "w-1/2 md:w-72"} bg-violet-600 w-0 h-screen fixed
+                    top-0 left-0 overflow-x-hidden pt-0 duration-500 rounded-tr-[4em] text-lg z-10`}>
 
                     <div className="flex flex-col h-full text-white font-normal">
                         {/* Close Button */}
@@ -24,9 +24,9 @@ const InventorySidebar: React.FC = () => {
                            onClick={toggleMenu}>&times;</a>
 
                         {/* Logo */}
-                        <div className="flex items-center justify-center pt-3">
+                        <div className="flex items-center justify-center lg:pt-1">
                             <Link to="/home">
-                                <img className="w-10/12 sm:w-8/12 mx-auto" 
+                                <img className="lg:w-10/12 sm:w-8/12 w-10/12 mx-auto" 
                                      src="/images/stock_synergy_all_white.svg" 
                                      alt="Logo" />
                             </Link>
@@ -58,9 +58,9 @@ const InventorySidebar: React.FC = () => {
                                     <img className="w-7" src="/images/sales_floor_white.svg" alt="Sales Floor" />
                                     Sales Floor
                                 </Link>
-                                <Link to='/categories' className="flex gap-2">
+                                <Link to='/restock' className="flex gap-2">
                                     <img className="w-7" src="/images/stockroom_logo_white.svg" alt="Categories" />
-                                    Categories
+                                    Restock
                                 </Link>
                             </div>
 

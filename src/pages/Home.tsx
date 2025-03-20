@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
 import Dashboard from "../components/Dashboard";
 import Graph from "../components/Graph";
 import { setDocumentTitle } from "../script.js"
 import PageHeader from "../components/PageHeader";
-import InventorySidebar from '../components/TestSidebar'
+import InventorySidebar from '../components/InventorySidebar'
 
 
 const Home: React.FC = () => {
@@ -19,7 +18,7 @@ const Home: React.FC = () => {
     return (
         <>
             <main className="bg-gray-50 dark:bg-common-black text-black dark:text-white h-[200vh] lg:pl-56 lg:duration-300">
-                {/* <Sidebar /> */}
+                {/* Sidebar */}
                 <InventorySidebar />
 
 
@@ -59,7 +58,7 @@ const Home: React.FC = () => {
                         </header>
 
                         {/* Graph */}
-                        <Graph />
+                        <Graph chart="SalesFloor" />
                     </section>
 
                     {/* Stockroom Section */}

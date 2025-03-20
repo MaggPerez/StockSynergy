@@ -27,3 +27,4 @@ TextGeneration.py
 populateProducts.json
 populate.ts
 .qodo
+SearchBar.tsx
