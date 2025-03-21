@@ -1,6 +1,7 @@
 import PageHeader from "../components/PageHeader";
 import Graph from "../components/Graph";
 import InventorySidebar from "../components/InventorySidebar";
+import SalesFloorDashboard from "../components/UI/SalesFloorDashboard";
 
 function SalesFloor() {
 
@@ -11,15 +12,23 @@ function SalesFloor() {
 
             <PageHeader title="Sales Floor" pathTo="/home" />
 
+            <SalesFloorDashboard />
+
             <div className="flex flex-col lg:flex-row gap-5 flex-wrap pt-2">
 
                 {/* Sales Floor Units */}
                 <section className="p-4 mx-3 bg-white dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/3">
+
+                    {/* inner gray bg */}
                     <header className="flex gap-2 text-3xl font-bold pb-5">
                         <h2>Sales Floor Units</h2>
                     </header>
 
-                    <Graph chart="SalesFloor" />
+                    <div className="bg-gray-100 dark:bg-common-black p-2 rounded-3xl">
+
+                        <Graph chart="SalesFloor" />
+
+                    </div>
                 </section>
 
                 {/* Popular Items */}

@@ -77,7 +77,7 @@ function Products() {
     return (
         <div>
             {/* Overview of Not on Floor */}
-            <div className="flex flex-col gap-10 py-5">
+            <div className="flex gap-10 py-5 lg:justify-center mx-10">
                 <div className="w-full rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl flex justify-around
                 text-center lg:w-1/4">
                     <div>

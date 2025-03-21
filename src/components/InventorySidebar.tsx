@@ -50,14 +50,16 @@ const InventorySidebar: React.FC = () => {
                             {/* Inventory Section */}
                             <div className="flex flex-col gap-4 p-6">
                                 <h3 className="text-sm text-violet-300 uppercase">Inventory</h3>
-                                <Link to='/stockroom' className="flex gap-2">
-                                    <img className="w-7" src="/images/stockroom_logo_white.svg" alt="Stockroom" />
-                                    Stockroom
-                                </Link>
                                 <Link to='/salesfloor' className="flex gap-2">
                                     <img className="w-7" src="/images/sales_floor_white.svg" alt="Sales Floor" />
                                     Sales Floor
                                 </Link>
+                                
+                                <Link to='/stockroom' className="flex gap-2">
+                                    <img className="w-7" src="/images/stockroom_logo_white.svg" alt="Stockroom" />
+                                    Stockroom
+                                </Link>
+                                
                                 <Link to='/restock' className="flex gap-2">
                                     <img className="w-7" src="/images/stockroom_logo_white.svg" alt="Categories" />
                                     Restock
