@@ -16,6 +16,14 @@ function Item({
     description,
     availableRestock,
 }: ItemProps): JSX.Element {
+    const product = {
+        productImage,
+        productName,
+        styleNumber,
+        description,
+        availableRestock,
+    }
+
     return (
         <section
             className="items-center p-4 mx-3 bg-gray-50 border-2 border-violet-600 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2"
@@ -46,7 +54,7 @@ function Item({
                 <h4 className="font-bold text-green-700 dark:text-[#00FF7F]">
                     Available Restock: {availableRestock} Unit(s)
                 </h4>
-                <Checkbox />
+                <Checkbox product={product} />
                 <a href="#" className="hover:text-violet-600 dark:hover:text-violet-400">
                     View item
                 </a>

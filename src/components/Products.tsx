@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ProductButtons from "./ProductButtons";
 import ProductList from "./ProductList";
 import { getNotOnFloorNum } from "./ProductList";
+import SelectedItems from "./SelectedItems";
 
 
 
@@ -65,8 +66,8 @@ function Products() {
                 </div>
             case 'selected':
                 return <div>
-                <h2 className="text-xl font-bold pl-4 pt-2">Items Selected</h2>
-                <p className="text-center text-green-700 dark:text-[#00FF7F]">Items Selected</p>
+                <h2 className="text-xl font-bold pl-4 pt-2">Selected Items</h2>
+                    <SelectedItems />
             </div>
 
             default:
