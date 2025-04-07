@@ -20,23 +20,24 @@ const Login: React.FC = () => {
     } = LoginFunctions();
 
     useEffect(() => {
-        document.body.style.background = "#080a12";
-    }, []);
+        document.body.style.background = "white";
+    })
+
 
     return (
-        <section className="text-base bg-custom-black h-screen">
-            <div className="flex flex-col space-y-10 lg:flex-row lg:justify-center lg:items-center lg:h-screen">
+        <section className="text-base bg-white h-screen text-black">
+            <div className="flex flex-col space-y-3 lg:flex-row lg:justify-center lg:items-center lg:h-screen">
                 {/* Image Container */}
                 <div className="w-1/2 mx-auto lg:w-full">
                     <img
-                        src="/images/stock-synergy_dark.svg"
+                        src="/images/stock_synergy_light.svg"
                         alt="Logo Image"
                         className="w-full h-auto object-contain"
                     />
                 </div>
 
                 {/* Login Form (Existing Users) */}
-                <div className="mx-7 lg:w-full lg:px-10">
+                <div className="mx-12 lg:w-full lg:px-10">
                     <form onSubmit={signInButton} id="login-field" className="space-y-6">
                         <h1 className="text-3xl font-bold text-center">Welcome, Sign in!</h1>
 
@@ -44,7 +45,7 @@ const Login: React.FC = () => {
                         <div>
                             <label
                                 htmlFor="Username"
-                                className="block mb-2 text-base font-medium text-white"
+                                className="block mb-2 text-base font-medium "
                             >
                                 Enter Username
                             </label>
@@ -64,7 +65,7 @@ const Login: React.FC = () => {
                         <div>
                             <label
                                 htmlFor="password"
-                                className="block mb-2 text-base font-medium text-white"
+                                className="block mb-2 text-base font-medium "
                             >
                                 Enter Password
                             </label>
@@ -125,7 +126,7 @@ const Login: React.FC = () => {
                             <div>
                                 <label
                                     htmlFor="username"
-                                    className="block mb-2 font-medium text-gray-900 dark:text-white"
+                                    className="block mb-2 font-medium "
                                 >
                                     Create Username
                                 </label>
@@ -145,7 +146,7 @@ const Login: React.FC = () => {
                             <div>
                                 <label
                                     htmlFor="password"
-                                    className="block mb-2 font-medium text-gray-900 dark:text-white"
+                                    className="block mb-2 font-medium "
                                 >
                                     Create Password
                                 </label>
@@ -198,6 +199,8 @@ const Login: React.FC = () => {
                         </form>
                     </div>
                 </div>
+
+
             </div>
         </section>
     );
