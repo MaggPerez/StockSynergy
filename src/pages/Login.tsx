@@ -37,7 +37,7 @@ const Login: React.FC = () => {
                 </div>
 
                 {/* Login Form (Existing Users) */}
-                <div className="mx-12 lg:w-full lg:px-10">
+                <div className="mx-7 lg:mx-12 lg:w-full lg:px-10">
                     <form onSubmit={signInButton} id="login-field" className="space-y-6">
                         <h1 className="text-3xl font-bold text-center">Welcome, Sign in!</h1>
 
