@@ -8,6 +8,7 @@ import Stockroom from './pages/Stockroom';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SalesFloor from './pages/SalesFloor';
 import Restock from './pages/Restock';
+import Analytics from './pages/Analytics';
 
 
 const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
     path: '/salesfloor',
     element: <SalesFloor />,
   },
+  {
+    path: '/analytics',
+    element: <Analytics />
+  }
 ]);
 
 createRoot(document.getElementById('root') as HTMLElement).render(
