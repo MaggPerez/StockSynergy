@@ -42,7 +42,7 @@ function Stockroom() {
             <div className="flex flex-col gap-10">
                 {/* Overview of Not on Floor */}
                 <section className="flex flex-col gap-10">
-                    <div className="w-full rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl flex justify-around
+                    <div className="w-full rounded-3xl bg-white dark:bg-zinc-800 p-5 shadow-sm dark:shadow-2xl flex justify-around
                     text-center lg:w-1/4">
                         <div>
                             <p className="text-violet-500 font-bold text-xl">{NOF}</p>
@@ -58,29 +58,29 @@ function Stockroom() {
                 </section>
 
                 {/* Analytics */}
-                <section className="items-center p-4 mx-3 bg-white dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2">
+                <section className="items-center p-4 mx-3 bg-white dark:bg-zinc-800 rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2">
                     {/* Stockroom with Logo */}
                     <header className="flex gap-2 text-3xl font-bold pb-5">
                         <img className="w-9 bg-violet-500 rounded-xl" src="/images/stockroom_logo_white.svg" alt="Stockroom Logo" />Analytics
                     </header>
 
-                    <div className="flex flex-col [&>*]:bg-gray-100 dark:[&>*]:bg-gray-800 [&>*]:p-6 gap-5">
+                    <div className="flex flex-col [&>*]:bg-gray-100 dark:[&>*]:bg-zinc-700 [&>*]:p-6 gap-5">
                         <div className="rounded-xl">
                             <h3 className="text-xl font-semibold mb-3">Stockroom Efficiency</h3>
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <div className="bg-white dark:bg-zinc-800 p-4 rounded-lg">
                                     <p className="text-sm text-gray-500">Average Processing Time</p>
                                     <p className="text-2xl font-bold text-violet-600">24 min</p>
                                 </div>
-                                <div className="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <div className="bg-white dark:bg-zinc-800 p-4 rounded-lg">
                                     <p className="text-sm text-gray-500">Restock Completion Rate</p>
                                     <p className="text-2xl font-bold text-violet-600">{progress}%</p>
                                 </div>
-                                <div className="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <div className="bg-white dark:bg-zinc-800 p-4 rounded-lg">
                                     <p className="text-sm text-gray-500">Items Processed Today</p>
                                     <p className="text-2xl font-bold text-violet-600">0</p>
                                 </div>
-                                <div className="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                                <div className="bg-white dark:bg-zinc-800 p-4 rounded-lg">
                                     <p className="text-sm text-gray-500">Pending Restocks</p>
                                     <p className="text-2xl font-bold text-violet-600">17</p>
                                 </div>
@@ -90,7 +90,7 @@ function Stockroom() {
                         {/* stockroom vs sales floor */}
                         <div className="rounded-xl">
                             <h3 className="text-xl font-semibold mb-3">Stockroom vs Sales Floor</h3>
-                            <div className=" bg-white dark:bg-gray-700 rounded-lg flex flex-col items-center justify-center">
+                            <div className=" bg-white dark:bg-zinc-800 rounded-lg flex flex-col items-center justify-center">
                                 <Graph chart="stockroom" />
                                 <Graph chart="SalesFloor" />
                             </div>
@@ -101,7 +101,7 @@ function Stockroom() {
 
 
                 {/* Enter Restock Page */}
-                <section className="items-center p-4 mx-3 bg-white dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl py-5 lg:w-1/2">
+                <section className="items-center p-4 mx-3 bg-white dark:bg-zinc-800 rounded-3xl shadow-sm dark:shadow-2xl py-5 lg:w-1/2">
                     {/* Stockroom with Logo */}
                     <header className="flex gap-2 text-3xl font-bold pb-5">
                         <img className="w-9 bg-violet-500 rounded-xl" src="/images/stockroom_logo_white.svg" alt="Stockroom Logo" />Restock Zone
@@ -110,7 +110,7 @@ function Stockroom() {
                     <div className="flex gap-[30px] items-center ">
                         {/* Stockroom Link */}
                         <Link to='/restock' className="w-full">
-                            <div className="flex justify-center items-center text-fuchsia-500 font-bold bg-white dark:bg-common-black 
+                            <div className="flex justify-center items-center text-fuchsia-500 font-bold bg-white dark:bg-zinc-700 
                                 rounded-3xl p-5 cursor-pointer hover:bg-fuchsia-500 hover:text-white dark:hover:bg-fuchsia-500 shadow-sm dark:shadow-2xl
                                 lg:justify-around">
                                 <p>Restock Products →</p>

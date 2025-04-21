@@ -29,7 +29,7 @@ export default function Dashboard() {
             lg:justify-evenly">
 
                 {/* Overview of current sales */}
-                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl 
+                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-zinc-800 p-5 shadow-sm dark:shadow-2xl 
                 flex flex-col justify-center items-center lg:w-1/4">
                     <div>
                         <p className="text-violet-500 font-bold text-xl">${current_sales}</p>
@@ -39,7 +39,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Overview of Not on Floor */}
-                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl 
+                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-zinc-800 p-5 shadow-sm dark:shadow-2xl 
                 flex flex-col justify-center items-center lg:w-1/4">
                     <div>
                         <p className="text-violet-500 font-bold text-xl">{NOF}</p>
@@ -49,7 +49,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Previously Units */}
-                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl 
+                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-zinc-800 p-5 shadow-sm dark:shadow-2xl 
                 flex flex-col justify-center items-center lg:w-1/4">
                         <p className="text-violet-500 font-bold text-xl">26</p>
                         <p className="text-violet-500">Units</p>
@@ -57,7 +57,7 @@ export default function Dashboard() {
                     </div>
 
                 {/* Sales floor units */}
-                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl 
+                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-zinc-800 p-5 shadow-sm dark:shadow-2xl 
                 flex flex-col justify-center items-center lg:w-1/4">
                     <p className="text-violet-500 font-bold text-xl">10,742</p>
                     <p className="text-violet-500">Units</p>

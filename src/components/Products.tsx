@@ -79,7 +79,7 @@ function Products() {
         <div>
             {/* Overview of Not on Floor */}
             <div className="flex gap-10 py-5 lg:justify-center mx-10">
-                <div className="w-full rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl flex justify-around
+                <div className="w-full rounded-3xl bg-white dark:bg-zinc-800 p-5 shadow-sm dark:shadow-2xl flex justify-around
                 text-center lg:w-1/4">
                     <div>
                         <p className="text-violet-500 font-bold text-xl">{NOF}</p>

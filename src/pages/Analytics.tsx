@@ -1,15 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import InventorySidebar from '../components/InventorySidebar';
 import PageHeader from '../components/PageHeader';
 import { setDocumentTitle } from '../script'; // Assuming this exists based on Login.tsx
 import Graph from '../components/Graph';
+import { getNotOnFloorNum } from '../components/ProductList';
 
 const Analytics: React.FC = () => {
     setDocumentTitle("Analytics");
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    const [NOF, setNOF] = useState<number | string>("Loading");
+        useEffect(() => {
+            window.scrollTo(0, 0);
+    
+            //retrieves units that need to be replenished
+            async function fetchNOF() {
+                setNOF(await getNotOnFloorNum());
+            }
+            fetchNOF();
+        }, [])
 
     return (
         <>
@@ -24,25 +32,30 @@ const Analytics: React.FC = () => {
                 <div className="p-4">
                     {/* Summary Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                        <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
+
+                        {/* Total sales */}
+                        <div className="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm">
                             <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-300">Total Sales</h3>
                             <p className="text-3xl font-bold text-violet-600">$24,500</p>
                             <p className="text-sm text-green-500">+12% from last month</p>
                         </div>
 
-                        <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
+                        {/* Inventory Value */}
+                        <div className="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm">
                             <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-300">Inventory Value</h3>
                             <p className="text-3xl font-bold text-violet-600">$157,200</p>
                             <p className="text-sm text-red-500">-3% from last month</p>
                         </div>
 
-                        <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
+                        {/* Low Stock Items */}
+                        <div className="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm">
                             <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-300">Low Stock Items</h3>
-                            <p className="text-3xl font-bold text-violet-600">12</p>
+                            <p className="text-3xl font-bold text-violet-600">{NOF}</p>
                             <p className="text-sm text-gray-500">Needs attention</p>
                         </div>
 
-                        <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
+                        {/* Orders Pending */}
+                        <div className="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm">
                             <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-300">Orders Pending</h3>
                             <p className="text-3xl font-bold text-violet-600">8</p>
                             <p className="text-sm text-gray-500">Processing</p>
@@ -52,19 +65,20 @@ const Analytics: React.FC = () => {
                     {/* Charts Section */}
                     <div className="flex flex-col lg:flex-row gap-6 mb-6">
                         {/* Sales Trend Chart */}
-                        <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm lg:w-2/3">
+                        <div className="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm lg:w-2/3">
                             <header className="flex gap-2 text-xl font-bold pb-5">
                                 <img className="w-7 px-1 bg-violet-500 rounded-xl" src="/images/sales_floor_white.svg" alt="chart icon" />
                                 Sales Trend
                             </header>
-                            <div className="h-64 flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-lg">
-                                {/* Placeholder for chart component */}
-                                <Graph chart="SalesFloor" /> 
+
+                            {/* Sales Floor Graph */}
+                            <div className="h-64 flex items-center justify-center bg-gray-100 dark:bg-zinc-700 rounded-lg">
+                                <Graph chart="SalesFloor" />
                             </div>
                         </div>
 
                         {/* Top Products */}
-                        <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm lg:w-1/3">
+                        <div className="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm lg:w-1/3">
                             <header className="flex gap-2 text-xl font-bold pb-5">
                                 <img className="w-7 px-1 bg-violet-500 rounded-xl" src="/stock_images/t_shirt_icon.svg" alt="product icon" />
                                 Top Products
@@ -91,23 +105,23 @@ const Analytics: React.FC = () => {
                     </div>
 
                     {/* Inventory Analysis */}
-                    <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm mb-6">
+                    <div className="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm mb-6">
                         <header className="flex gap-2 text-xl font-bold pb-5">
                             <img className="w-7 px-1 bg-violet-500 rounded-xl" src="/images/stockroom_logo_white.svg" alt="inventory icon" />
                             Inventory Analysis
                         </header>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="h-64 flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-lg">
+                            <div className="h-64 flex items-center justify-center bg-gray-100 dark:bg-zinc-700 rounded-lg">
                                 <p className="text-gray-500">Stock Distribution by Category</p>
                             </div>
-                            <div className="h-64 flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-lg">
+                            <div className="h-64 flex items-center justify-center bg-gray-100 dark:bg-zinc-700 rounded-lg">
                                 <p className="text-gray-500">Inventory Turnover Rate</p>
                             </div>
                         </div>
                     </div>
 
                     {/* Recent Activity */}
-                    <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm">
+                    <div className="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm">
                         <header className="flex gap-2 text-xl font-bold pb-5">
                             <img className="w-7 px-1 bg-violet-500 rounded-xl" src="/images/latest_activity_white.svg" alt="activity icon" />
                             Recent Activity

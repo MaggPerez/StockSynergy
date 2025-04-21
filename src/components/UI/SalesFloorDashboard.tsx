@@ -29,7 +29,7 @@ function SalesFloorDashboard() {
             lg:justify-evenly">
 
                 {/* Overview of current sales */}
-                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl 
+                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-zinc-800 p-5 shadow-sm dark:shadow-2xl 
                 flex flex-col justify-center items-center lg:w-1/4">
                     <div>
                         <p className="text-violet-500 font-bold text-xl">${current_sales}</p>
@@ -40,7 +40,7 @@ function SalesFloorDashboard() {
 
 
                 {/* Sales floor units */}
-                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm dark:shadow-2xl 
+                <div className="min-w-[150px] h-[150px] rounded-3xl bg-white dark:bg-zinc-800 p-5 shadow-sm dark:shadow-2xl 
                 flex flex-col justify-center items-center lg:w-1/4">
                     <p className="text-violet-500 font-bold text-xl">10,742</p>
                     <p className="text-violet-500">Units</p>

@@ -34,7 +34,7 @@ const Home: React.FC = () => {
                 <div className="flex gap-[35px] flex-col lg:flex-wrap lg:flex-row">
 
                     {/* News Section */}
-                    <section className="items-center p-4 mx-3 bg-white dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/3">
+                    <section className="items-center p-4 mx-3 bg-white dark:bg-zinc-800 rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/3">
                         {/* Restock with Logo */}
                         <header className="flex gap-2 text-3xl font-bold pb-5">
                             <img className="w-9 px-1 bg-violet-500 rounded-xl" src="/images/news_logo_white.svg" alt="restock logo" />News
@@ -50,7 +50,7 @@ const Home: React.FC = () => {
                     </section>
 
                     {/* Sales Floor Section */}
-                    <section className="items-center p-4 mx-3 bg-white dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2">
+                    <section className="items-center p-4 mx-3 bg-white dark:bg-zinc-800 rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2">
                         {/* Sales Floor with Logo */}
                         <header className="flex gap-2 text-3xl font-bold pb-5">
                             <img className="w-9 px-1 bg-violet-500 rounded-xl" src="/images/sales_floor_white.svg" alt="Sales Floor logo" />Sales Floor
@@ -61,7 +61,7 @@ const Home: React.FC = () => {
                     </section>
 
                     {/* Stockroom Section */}
-                    <section className="items-center p-4 mx-3 bg-white dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2">
+                    <section className="items-center p-4 mx-3 bg-white dark:bg-zinc-800 rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2">
                         {/* Stockroom with Logo */}
                         <header className="flex gap-2 text-3xl font-bold pb-5">
                             <img className="w-9 bg-violet-500 rounded-xl" src="/images/stockroom_logo_white.svg" alt="Stockroom Logo" />Stockroom
@@ -69,7 +69,7 @@ const Home: React.FC = () => {
 
                         <div className="flex gap-[30px] items-center">
                             {/* Stockroom unit */}
-                            <div className="w-1/3 rounded-3xl bg-white dark:bg-common-black p-5 shadow-sm text-center dark:shadow-2xl
+                            <div className="w-1/3 rounded-3xl bg-white dark:bg-zinc-700 p-5 shadow-sm text-center dark:shadow-2xl
                             lg:w-1/5">
                                 <p className="text-violet-500 font-bold text-xl">12,831</p>
                                 <p className="text-violet-500">Units</p>
@@ -78,7 +78,7 @@ const Home: React.FC = () => {
 
                             {/* Stockroom Link */}
                             <Link to='/stockroom'>
-                                <div className="flex justify-center items-center text-fuchsia-500 font-bold bg-white dark:bg-common-black 
+                                <div className="flex justify-center items-center text-fuchsia-500 font-bold bg-white dark:bg-zinc-700 
                                 rounded-3xl p-5 cursor-pointer hover:bg-fuchsia-500 hover:text-white dark:hover:bg-fuchsia-500 shadow-sm dark:shadow-2xl
                                 lg:justify-around">
                                     <p>Enter Stockroom Inventory →</p>
