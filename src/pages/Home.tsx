@@ -16,7 +16,7 @@ const Home: React.FC = () => {
 
     return (
         <>
-            <main className="bg-gray-50 dark:bg-common-black text-black dark:text-white h-[200vh] lg:pl-56 lg:duration-300">
+            <main className="bg-gray-50 dark:bg-common-black text-black dark:text-white min-h-screen lg:pl-56 lg:duration-300">
                 {/* Sidebar */}
                 <InventorySidebar />
 
@@ -28,10 +28,32 @@ const Home: React.FC = () => {
                 <Dashboard />
 
                 {/* Horizontal Line */}
-                <hr className="border-violet-600 border-2 mx-3 mb-5" />
+                {/* <hr className="border-violet-600 border-2 mx-3 mb-5" /> */}
 
                 {/* Main Div */}
                 <div className="flex gap-[35px] flex-col lg:flex-wrap lg:flex-row">
+
+
+
+                    {/* Quick shortcuts LEFT OFF HERE (Shown on mobile only) */}
+                    <section className="p-4 mx-3 bg-white dark:bg-zinc-800 rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/3 lg:hidden">
+                        <header className="flex gap-2 text-3xl font-bold pb-5">
+                            <img className="w-9 px-1 bg-violet-500 rounded-xl" src="/images/news_logo_white.svg" alt="restock logo" />Quick Shortcuts
+                        </header>
+
+                        <div className="flex flex-col justify-center items-center lg:items-start">
+                            <div className="grid grid-cols-2 gap-4 w-80 h-80 [&>*]:bg-gray-100 [&>*]:dark:bg-zinc-700 [&>*]:rounded-2xl [&>*]:flex [&>*]:justify-center [&>*]:items-center
+                            [&>*]:text-violet-500">
+                                {/* Links */}
+                                <Link to="/analytics"><div><img src="/images/latest_activity_white.svg" className="w-10 mx-auto invert dark:invert-0" alt="" />Analytics</div></Link>
+                                <Link to="/salesFloor"><div><img src="/images/sales_floor_white.svg" className="w-10 mx-auto invert dark:invert-0" alt="" />Sales Floor</div></Link>
+                                <Link to="/stockroom"><div><img src="/images/stockroom_logo_white.svg" className="w-10 mx-auto invert dark:invert-0" alt="" />Stockroom</div></Link>
+                                <Link to="/restock"><div><img src="/images/restock-icon.svg" className="w-10 mx-auto dark:invert" alt="" />Restock</div></Link>
+                            </div>
+                        </div>
+                    </section>
+
+
 
                     {/* News Section */}
                     <section className="items-center p-4 mx-3 bg-white dark:bg-zinc-800 rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/3">
