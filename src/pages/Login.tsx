@@ -25,20 +25,21 @@ const Login: React.FC = () => {
 
 
     return (
-        <section className="text-base bg-white h-screen text-black">
-            <div className="flex flex-col space-y-3 lg:flex-row lg:justify-center lg:items-center lg:h-screen">
+        <section className="text-base  text-black bg-white">
+            <div className="space-y-3 lg:flex lg:justify-center lg:items-center lg:h-screen">
                 {/* Image Container */}
-                <div className="w-1/2 mx-auto lg:w-full">
+                <div className="hidden lg:block lg:w-1/2">
                     <img
-                        src="/images/stock_synergy_light.svg"
+                        src="/images/stock-synergy_dark.svg"
                         alt="Logo Image"
-                        className="w-full h-auto object-contain"
+                        className="w-1/2 mx-auto lg:w-full lg:h-screen bg-custom-black"
                     />
                 </div>
 
+
                 {/* Login Form (Existing Users) */}
-                <div className="mx-7 lg:mx-12 lg:w-full lg:px-10">
-                    <form onSubmit={signInButton} id="login-field" className="space-y-6">
+                <div className="mx-7 lg:w-1/2 lg:px-28 h-screen flex flex-col justify-center">
+                    <form onSubmit={signInButton} id="login-field" className="space-y-6 ">
                         <h1 className="text-3xl font-bold text-center">Welcome, Sign in!</h1>
 
                         {/* Enter Username */}
@@ -53,7 +54,7 @@ const Login: React.FC = () => {
                                 type="text"
                                 name="username"
                                 id="username"
-                                className="bg-violet-600 border border-violet-400 text-white rounded-lg focus:ring-violet-300 focus:border-violet-400 block w-full p-4 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-300 dark:focus:border-violet-400"
+                               className="bg-transparent border-0 border-b-2 border-violet-400 text-violet-900 rounded-t-lg focus:border-violet-600 focus:ring-0 block w-full p-4 placeholder-violet-400 transition-all duration-200 dark:text-violet-100 dark:border-violet-500 dark:placeholder-violet-500 dark:focus:border-violet-300"
                                 placeholder="Username"
                                 value={Username}
                                 onChange={(e) => setUsername(e.target.value)}
@@ -74,7 +75,7 @@ const Login: React.FC = () => {
                                 name="password"
                                 id="password-field"
                                 placeholder="Password"
-                                className="bg-violet-600 border border-violet-400 text-white rounded-lg focus:ring-violet-300 focus:border-violet-400 block w-full p-4 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-300 dark:focus:border-violet-400"
+                                className="bg-transparent border-0 border-b-2 border-violet-400 text-violet-900 rounded-t-lg focus:border-violet-600 focus:ring-0 block w-full p-4 placeholder-violet-400 transition-all duration-200 dark:text-violet-100 dark:border-violet-500 dark:placeholder-violet-500 dark:focus:border-violet-300"
                                 value={Password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
@@ -97,7 +98,7 @@ const Login: React.FC = () => {
                         <button
                             id="signin-button"
                             type="submit"
-                            className="w-full text-white bg-violet-600 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-base px-5 py-4 text-center dark:bg-violet-700 dark:hover:bg-violet-800 dark:focus:ring-violet-500"
+                            className="w-full text-white bg-gradient-to-r from-violet-600 to-purple-500 hover:from-violet-700 hover:to-purple-600 hover:scale-[1.01] focus:ring-2 focus:ring-violet-300 focus:outline-none font-medium rounded-lg text-base px-5 py-4 text-center transition-all duration-200 shadow-md dark:from-violet-700 dark:to-purple-600 dark:hover:from-violet-600 dark:hover:to-purple-500 dark:focus:ring-violet-400"
                         >
                             Sign in
                         </button>
@@ -135,7 +136,7 @@ const Login: React.FC = () => {
                                     name="username"
                                     id="create-username-field"
                                     placeholder="Username"
-                                    className="bg-violet-600 border border-violet-400 text-white rounded-lg focus:ring-violet-300 focus:border-violet-400 block w-full p-4 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-300 dark:focus:border-violet-400"
+                                    className="bg-transparent border-0 border-b-2 border-violet-400 text-violet-900 rounded-t-lg focus:border-violet-600 focus:ring-0 block w-full p-4 placeholder-violet-400 transition-all duration-200 dark:text-violet-100 dark:border-violet-500 dark:placeholder-violet-500 dark:focus:border-violet-300"
                                     value={Username}
                                     onChange={(e) => setUsername(e.target.value)}
                                     required
@@ -155,7 +156,7 @@ const Login: React.FC = () => {
                                     name="password"
                                     id="create-password-field"
                                     placeholder="Password"
-                                    className="bg-violet-600 border border-violet-400 text-white rounded-lg focus:ring-violet-300 focus:border-violet-400 block w-full p-4 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-300 dark:focus:border-violet-400"
+                                    className="bg-transparent border-0 border-b-2 border-violet-400 text-violet-900 rounded-t-lg focus:border-violet-600 focus:ring-0 block w-full p-4 placeholder-violet-400 transition-all duration-200 dark:text-violet-100 dark:border-violet-500 dark:placeholder-violet-500 dark:focus:border-violet-300"
                                     value={Password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
@@ -178,7 +179,7 @@ const Login: React.FC = () => {
                             <button
                                 id="signup-button"
                                 type="submit"
-                                className="w-full text-white bg-violet-600 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-base px-5 py-4 text-center dark:bg-violet-700 dark:hover:bg-violet-800 dark:focus:ring-violet-500"
+                                className="w-full text-white bg-gradient-to-r from-violet-600 to-purple-500 hover:from-violet-700 hover:to-purple-600 hover:scale-[1.01] focus:ring-2 focus:ring-violet-300 focus:outline-none font-medium rounded-lg text-base px-5 py-4 text-center transition-all duration-200 shadow-md dark:from-violet-700 dark:to-purple-600 dark:hover:from-violet-600 dark:hover:to-purple-500 dark:focus:ring-violet-400"
                             >
                                 Sign up
                             </button>
