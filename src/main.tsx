@@ -9,6 +9,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SalesFloor from './pages/SalesFloor';
 import Restock from './pages/Restock';
 import Analytics from './pages/Analytics';
+import AddProduct from './pages/AddProduct';
 
 
 const router = createBrowserRouter([
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: '/analytics',
     element: <Analytics />
+  },
+  {
+    path: '/addproduct',
+    element: <AddProduct />
   }
 ]);
 

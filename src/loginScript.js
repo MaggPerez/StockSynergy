@@ -15,12 +15,6 @@ function LoginFunctions(){
 
     const navigate = useNavigate();
 
-    /**
-     * Function that switches window to the home page
-     */
-    function switchWindowAfterLogin(){
-        window.location.href = "home.jsx";
-    }
 
     /**
      * Function that signs up the user.
@@ -74,8 +68,21 @@ function LoginFunctions(){
 
                 //Checking to see if the user's password is correct
                 if(user.Password === Password){
-                    // alert("User logged in successfully!");
-                    loginSuccessMessage(Username);
+
+                    //Checking if the user is manager or not and then storing it locally
+                    if(user.isManager){
+                        sessionStorage.setItem("isManager", user.isManager);
+
+                        //Success message that user was able to login 
+                        loginSuccessMessage(Username + " - Manager");
+                    }
+                    else{
+                        sessionStorage.setItem("isManager", user.isManager);
+
+                        //Success message that user was able to login 
+                        loginSuccessMessage(Username + " - Employee");
+                    }                    
+
                     setUserData(user);
                     setError("");
                     console.log("User logged in successfully!");
@@ -93,6 +100,7 @@ function LoginFunctions(){
 
 
         } catch (error) {
+            alert(error)
             console.error("Error during sign in", error)
             setError("Error during sign in");
         }
