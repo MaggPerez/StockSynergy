@@ -24,7 +24,7 @@ dist-ssr
 *.sw?
 .env
 TextGeneration.py
-populateProducts.json
-populate.ts
+# populateProducts.json
+# populate.ts
 .qodo
 SearchBar.tsx

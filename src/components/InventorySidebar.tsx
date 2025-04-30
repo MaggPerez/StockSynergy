@@ -1,11 +1,24 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import DarkModeToggle from './DarkModeToggle';
+import { PlusCircle } from 'lucide-react';
 
 const InventorySidebar: React.FC = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
     const name: string | null = sessionStorage.getItem("username");
+    
+
+    /**
+     * Function to convert string to boolean
+     * @param value string
+     * @returns converts a string into a boolean
+     */
+    function stringToBoolean(value: string): boolean{
+        return value.toLocaleLowerCase() === "true";
+    }
+    
+
+    const role = stringToBoolean(sessionStorage.getItem("isManager") || "");
 
     const toggleMenu = (): void => {
         setIsSidebarOpen((prevState) => !prevState);
@@ -77,6 +90,9 @@ const InventorySidebar: React.FC = () => {
                                     <img className="w-7" src="/images/stockroom_logo_white.svg" alt="Suppliers" />
                                     Suppliers
                                 </Link>
+                                {role ? (
+                                    <Link to="/addproduct" className='flex gap-2'><PlusCircle size={29} strokeWidth={1.5} color='white' />Add Product</Link>
+                                ) : ""}
                             </div>
 
                             {/* User Section */}
