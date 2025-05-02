@@ -10,9 +10,17 @@ import SalesFloor from './pages/SalesFloor';
 import Restock from './pages/Restock';
 import Analytics from './pages/Analytics';
 import AddProduct from './pages/AddProduct';
+import PageNotFound from './components/PageNotFound';
+import Orders from './pages/Orders';
+import Suppliers from './pages/Suppliers';
+import Settings from './pages/Settings';
 
 
 const router = createBrowserRouter([
+  {
+    path: '*',
+    element: <PageNotFound />
+  },
   {
     path: '/',
     element: <App />,
@@ -42,8 +50,20 @@ const router = createBrowserRouter([
     element: <Analytics />
   },
   {
+    path: '/orders',
+    element: <Orders />
+  },
+  {
+    path: '/suppliers',
+    element: <Suppliers />
+  },
+  {
     path: '/addproduct',
     element: <AddProduct />
+  },
+  {
+    path: '/settings',
+    element: <Settings />
   }
 ]);
 

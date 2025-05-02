@@ -2,8 +2,10 @@ import PageHeader from "../components/PageHeader";
 import Graph from "../components/Graph";
 import InventorySidebar from "../components/InventorySidebar";
 import SalesFloorDashboard from "../components/UI/SalesFloorDashboard";
+import { setDocumentTitle } from "../script";
 
 function SalesFloor() {
+    setDocumentTitle("Sales Floor")
 
     return (
         <main className="lg:pl-56 lg:duration-300 text-black dark:text-white bg-gray-50 dark:bg-common-black h-screen">
