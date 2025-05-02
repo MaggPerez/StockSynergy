@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import PageHeader from '../components/PageHeader';
 import { setDocumentTitle } from '../script';
 import { PlusCircle } from 'lucide-react';
+import Populate from '../populate';
+
 
 function AddProduct() {
     setDocumentTitle("Add Product")
@@ -14,6 +16,34 @@ function AddProduct() {
             navigate("/home")
         }
     }, [navigate])
+
+    //Getting variables from populate.ts
+    const {
+        productNameInput, setProductNameInput, styleNumberInput, setStyleNumberInput,
+        categoryInput, setCategoryInput, availableRestockInput, setAvailableRestockInput,
+        productImageInput, setProductImageInput, descriptionInput, setDescriptionInput, handlePopulate
+    } = Populate();
+
+    //creating hashmap object
+    const productImageMap: Record<string, string> = {
+        M_Tees: "/stock_images/t_shirt_icon.svg",
+        M_Shorts: "/stock_images/shorts_icon.svg",
+        M_Jackets: "/stock_images/m_jacket_icon.svg",
+        M_Belts: "/stock_images/m_belt_icon.svg"
+    }
+
+
+    /**
+     * Function that handles what product category they'll select
+     * @param event 
+     */
+    const handleSelectCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedCategory = event.target.value;
+        const productImagePath = productImageMap[selectedCategory];
+        setCategoryInput(event.target.value);
+        setProductImageInput(productImagePath);
+    }
+
 
     return (
         <main className='bg-gray-50 dark:bg-common-black text-black dark:text-white min-h-screen lg:pl-56 lg:duration-300'>
@@ -35,7 +65,7 @@ function AddProduct() {
                     </div>
 
                     {/* Product Form */}
-                    <form action="" className='space-y-6'>
+                    <form onSubmit={handlePopulate} className='space-y-6'>
 
                         {/* Grid */}
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
@@ -50,7 +80,10 @@ function AddProduct() {
                                     id="productName"
                                     name="productName"
                                     className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white
-                                 dark:bg-zinc-700 text-black dark:text-white"/>
+                                 dark:bg-zinc-700 text-black dark:text-white"
+                                    value={productNameInput}
+                                    onChange={(e) => setProductNameInput(e.target.value)}
+                                    required />
                             </div>
 
                             {/* Style Number */}
@@ -63,7 +96,10 @@ function AddProduct() {
                                     id="styleNumber"
                                     name="styleNumber"
                                     className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white
-                                 dark:bg-zinc-700 text-black dark:text-white"/>
+                                 dark:bg-zinc-700 text-black dark:text-white"
+                                    value={styleNumberInput}
+                                    onChange={(e) => setStyleNumberInput(e.target.value)}
+                                    required />
                             </div>
 
                             {/* Category */}
@@ -74,7 +110,7 @@ function AddProduct() {
 
                                 {/* Category Menu */}
                                 <select id="category" name="category" className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white
-                                 dark:bg-zinc-700 text-black dark:text-white" >
+                                 dark:bg-zinc-700 text-black dark:text-white" value={categoryInput} onChange={handleSelectCategory}>
                                     <option value="" disabled>-- Choose a Category --</option>
                                     <option value="M_Tees">Men's Tees</option>
                                     <option value="M_Shorts">Men's Shorts</option>
@@ -88,7 +124,7 @@ function AddProduct() {
                                 <label htmlFor="price" className='block mb-2 text-sm font-medium'>
                                     Price ($)
                                 </label>
-                                <input type="number" id='price' name='price' min="0" step="0.01" disabled placeholder='Coming Soon'
+                                <input type="number" id='price' name='price' min="0" step="0.01" disabled placeholder='Unavailable - Coming Soon'
                                     className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white 
                                     dark:bg-zinc-700 text-black dark:text-white" />
                             </div>
@@ -100,24 +136,24 @@ function AddProduct() {
                                 </label>
                                 <input type="number" id="availableRestock" name='availableRestock' min="0"
                                     className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white 
-                                    dark:bg-zinc-700 text-black dark:text-white" />
+                                    dark:bg-zinc-700 text-black dark:text-white"
+                                    value={availableRestockInput}
+                                    onChange={(e) => setAvailableRestockInput(Number(e.target.value))}
+                                    required />
                             </div>
 
-                            {/* Product Image */}
+                            {/* Color */}
                             <div>
-                                <label htmlFor="productImage" className="block mb-2 text-sm font-medium">
-                                    Product Image <span className='text-red-500'>*</span>
+                                <label htmlFor="Color" className="block mb-2 text-sm font-medium">
+                                    Color <span className='text-red-500'></span>
                                 </label>
-                                
-                                {/* Menu Image */}
-                                <select id="category" name="category" className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white
-                                 dark:bg-zinc-700 text-black dark:text-white" >
-                                    <option value="" disabled>-- Choose a Category --</option>
-                                    <option value="M_Tees">T-Shirt</option>
-                                    <option value="M_Shorts">Shorts</option>
-                                    <option value="M_Jackets">Jacket</option>
-                                    <option value="M_Belts">Belt</option>
-                                </select>
+
+                                <input type="text"
+                                    id="styleNumber"
+                                    name="styleNumber"
+                                    className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white
+                                 dark:bg-zinc-700 text-black dark:text-white"
+                                    disabled placeholder='Unavailable - Coming Soon' />
                             </div>
                         </div>
 
@@ -127,12 +163,14 @@ function AddProduct() {
                                 Description <span className='text-red-500'>*</span>
                             </label>
                             <textarea name="description" id="description" rows={4} className='w-full p-3 border border-gray-300 rounded-lg bg-white
-                                dark:bg-zinc-700 text-black dark:text-white'>
+                                dark:bg-zinc-700 text-black dark:text-white'
+                                onChange={(e) => setDescriptionInput(e.target.value)}
+                                required>
                             </textarea>
                         </div>
 
                         {/* Submit Button */}
-                        <div className='flex justify-end'>
+                        <div className='flex justify-end gap-5'>
                             <button type="submit" className='px-5 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-lg
                             font-medium transition-colors duration-300 flex gap-1'>
                                 <PlusCircle size={26} strokeWidth={1.5} color='white' /> Add Product
