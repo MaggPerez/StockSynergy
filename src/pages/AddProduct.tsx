@@ -5,6 +5,7 @@ import PageHeader from '../components/PageHeader';
 import { setDocumentTitle } from '../script';
 import { PlusCircle } from 'lucide-react';
 import Populate from '../populate';
+import InputAddProduct from '../components/InputAddProduct';
 
 
 function AddProduct() {
@@ -156,6 +157,10 @@ function AddProduct() {
                                     disabled placeholder='Unavailable - Coming Soon' />
                             </div>
                         </div>
+
+                        {/* continue here */}
+                        <InputAddProduct name='test-name' labelName='test-label-name' inputType={'text'} valueInputName='availableRestockInput'
+                        setValueInputName={setAvailableRestockInput} requiredTag={true} disableTag={false}  />
 
                         {/* Description */}
                         <div>
