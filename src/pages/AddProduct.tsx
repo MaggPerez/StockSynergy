@@ -73,34 +73,16 @@ function AddProduct() {
 
                             {/* Product name */}
                             <div>
+                                <InputAddProduct htmlName={'productName'} labelName={'Product Name'} inputType={'text'} valueInputName={productNameInput} 
+                                setValueInputName={setProductNameInput} requiredTag={true} disableTag={false} />
 
-                                <label htmlFor="productName" className='block mb-2 text-sm font-medium'>
-                                    Product Name <span className='text-red-500'>*</span>
-                                </label>
-                                <input type="text"
-                                    id="productName"
-                                    name="productName"
-                                    className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white
-                                 dark:bg-zinc-700 text-black dark:text-white"
-                                    value={productNameInput}
-                                    onChange={(e) => setProductNameInput(e.target.value)}
-                                    required />
                             </div>
 
                             {/* Style Number */}
                             <div>
+                                <InputAddProduct htmlName={'styleNumber'} labelName={'Style Number'} inputType={'text'} valueInputName={styleNumberInput} 
+                                setValueInputName={setStyleNumberInput} requiredTag={true} disableTag={false} />
 
-                                <label htmlFor="styleNumber" className='block mb-2 text-sm font-medium'>
-                                    Style Number <span className='text-red-500'>*</span>
-                                </label>
-                                <input type="text"
-                                    id="styleNumber"
-                                    name="styleNumber"
-                                    className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white
-                                 dark:bg-zinc-700 text-black dark:text-white"
-                                    value={styleNumberInput}
-                                    onChange={(e) => setStyleNumberInput(e.target.value)}
-                                    required />
                             </div>
 
                             {/* Category */}
@@ -122,45 +104,28 @@ function AddProduct() {
 
                             {/* Price */}
                             <div>
-                                <label htmlFor="price" className='block mb-2 text-sm font-medium'>
-                                    Price ($)
-                                </label>
-                                <input type="number" id='price' name='price' min="0" step="0.01" disabled placeholder='Unavailable - Coming Soon'
-                                    className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white 
-                                    dark:bg-zinc-700 text-black dark:text-white" />
+                                <InputAddProduct htmlName={'price'} labelName={'Price ($)'} inputType={'number'} valueInputName={''} setValueInputName={function (value: string): void {
+                                    throw new Error('Function not implemented.');
+                                } } requiredTag={false} disableTag={true} placeHolderText='Unavailable - Coming Soon' />
+
                             </div>
 
                             {/* Available Restock */}
                             <div>
-                                <label htmlFor="availableRestock" className="block mb-2 text-sm font-medium">
-                                    Available Restock Quantity <span className='text-red-500'>*</span>
-                                </label>
-                                <input type="number" id="availableRestock" name='availableRestock' min="0"
-                                    className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white 
-                                    dark:bg-zinc-700 text-black dark:text-white"
-                                    value={availableRestockInput}
-                                    onChange={(e) => setAvailableRestockInput(Number(e.target.value))}
-                                    required />
+                                <InputAddProduct htmlName='availableRestock' labelName='Available Restock Quantity' inputType='number' valueInputName={availableRestockInput}
+                                    setValueInputName={setAvailableRestockInput} requiredTag={true} disableTag={false} />
                             </div>
+
 
                             {/* Color */}
                             <div>
-                                <label htmlFor="Color" className="block mb-2 text-sm font-medium">
-                                    Color <span className='text-red-500'></span>
-                                </label>
-
-                                <input type="text"
-                                    id="styleNumber"
-                                    name="styleNumber"
-                                    className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white
-                                 dark:bg-zinc-700 text-black dark:text-white"
-                                    disabled placeholder='Unavailable - Coming Soon' />
+                                <InputAddProduct htmlName={'Color'} labelName={'Color'} inputType={'Text'} valueInputName={''} setValueInputName={function (value: string): void {
+                                    throw new Error('Function not implemented.');
+                                } } requiredTag={false} disableTag={false} placeHolderText='Unavailable - Coming Soon' />
                             </div>
                         </div>
 
-                        {/* continue here */}
-                        <InputAddProduct name='test-name' labelName='test-label-name' inputType={'text'} valueInputName='availableRestockInput'
-                        setValueInputName={setAvailableRestockInput} requiredTag={true} disableTag={false}  />
+
 
                         {/* Description */}
                         <div>
