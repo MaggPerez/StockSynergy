@@ -20,6 +20,8 @@ function Populate() {
     const [productImageInput, setProductImageInput] = useState<string>("");
     const [descriptionInput, setDescriptionInput] = useState<string>("");
 
+    const [loading, setLoading] = useState(false);
+
 
     /**
      * Function that handles products being inserted to Firestore
@@ -29,11 +31,15 @@ function Populate() {
      * @returns success message that a product was inserted
      */
     const handlePopulate = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+        setLoading(true);
         e.preventDefault();
 
-        if(categoryInput === ""){return alert("Choose a Category")}
+        if (categoryInput === "") { 
+            setLoading(false);
+            return alert("Choose a Category")
+         }
 
-        
+
         //setting a variable to populate products into firebase
         const populateProduct: Product[] = [{
             availStock: Number(availableRestockInput),
@@ -50,6 +56,7 @@ function Populate() {
 
             //if there is an existing style number in use, the product will not populate
             if (existingStyleNumber === data.styleNum) {
+                setLoading(false);
                 return;
             }
 
@@ -62,7 +69,8 @@ function Populate() {
                     productName: data.prodName,
                     styleNumber: data.styleNum
                 });
-                alert("Document written!")
+                setLoading(false)
+                alert("Product Added!")
             } catch (error) {
                 console.error("Error adding document: ", error)
             }
@@ -120,7 +128,8 @@ function Populate() {
     return {
         productNameInput, setProductNameInput, styleNumberInput, setStyleNumberInput,
         categoryInput, setCategoryInput, availableRestockInput, setAvailableRestockInput,
-        productImageInput, setProductImageInput, descriptionInput, setDescriptionInput, handlePopulate
+        productImageInput, setProductImageInput, descriptionInput, setDescriptionInput, handlePopulate,
+        loading, setLoading
     };
 
 }

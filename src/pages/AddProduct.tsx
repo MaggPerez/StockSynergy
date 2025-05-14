@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import InventorySidebar from '../components/InventorySidebar'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '../components/PageHeader';
@@ -6,10 +6,12 @@ import { setDocumentTitle } from '../script';
 import { PlusCircle } from 'lucide-react';
 import Populate from '../populate';
 import InputAddProduct from '../components/InputAddProduct';
+import { ClipLoader } from 'react-spinners';
 
 
 function AddProduct() {
     setDocumentTitle("Add Product")
+
     const navigate = useNavigate();
     useEffect(() => {
         //prevents unauthorized users from entering this page
@@ -22,7 +24,8 @@ function AddProduct() {
     const {
         productNameInput, setProductNameInput, styleNumberInput, setStyleNumberInput,
         categoryInput, setCategoryInput, availableRestockInput, setAvailableRestockInput,
-        productImageInput, setProductImageInput, descriptionInput, setDescriptionInput, handlePopulate
+        productImageInput, setProductImageInput, descriptionInput, setDescriptionInput, handlePopulate,
+        loading
     } = Populate();
 
     //creating hashmap object
@@ -142,8 +145,14 @@ function AddProduct() {
                         {/* Submit Button */}
                         <div className='flex justify-end gap-5'>
                             <button type="submit" className='px-5 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-lg
-                            font-medium transition-colors duration-300 flex gap-1'>
-                                <PlusCircle size={26} strokeWidth={1.5} color='white' /> Add Product
+                            font-medium transition-colors duration-300 ' disabled={loading}>
+                                {/* Will switch to loader animation if button is clicked as long as all the requirements are fulfilled */}
+                                {loading ? (
+                                    <p className='flex gap-1'><ClipLoader color='white' size={18} /></p>
+                                ) : (
+                                    // Defaults to "Add Product" when not clicked
+                                    <p className='flex gap-1'><PlusCircle size={26} strokeWidth={1.5} color='white' /> Add Product</p>
+                                )}
                             </button>
                         </div>
                     </form>
