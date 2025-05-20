@@ -20,7 +20,7 @@ const DarkModeToggle = () => {
 
     return(
         <button 
-            className="p-2 bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-md flex items-center"
+            className="p-2 hover:bg-gray-200 hover:dark:bg-gray-800 text-black dark:text-white rounded-md flex items-center"
             onClick={() => setDarkMode(!darkMode)}>
             <img 
                 src={darkMode ? "/images/moon.svg" : "/images/sun.svg"} 
