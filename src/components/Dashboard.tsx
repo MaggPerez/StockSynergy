@@ -59,10 +59,10 @@ export default function Dashboard() {
 
 
     return (
-        <div className="w-full lg:mx-4">
+        <div className="w-full">
             {/* Header */}
 
-            <div className="mb-6">
+            <div className="mb-3">
                 <div className="flex items-center gap-3">
                     <div className="flex items-center justify-center w-10 h-10 
                     bg-violet-100 dark:bg-violet-900 rounded-xl">
@@ -96,12 +96,7 @@ export default function Dashboard() {
                             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{stat.sublabel}</p>
                         </div>
 
-                        {/* Loading indicator for NOF */}
-                        {stat.value === "Loading" && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-zinc-800 rounded-2xl">
-                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violate-600"></div>
-                            </div>
-                        )}
+                        
                     </div>
                 ))}
             </div>
