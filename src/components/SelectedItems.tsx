@@ -19,7 +19,7 @@ interface SelectedItemsContextType {
 }
 
 // Create a context for selected items
-const SelectedItemsContext = createContext<SelectedItemsContextType | undefined>(undefined);
+export const SelectedItemsContext = createContext<SelectedItemsContextType | undefined>(undefined);
 
 //Selected Items Provider
 export const SelectedItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {

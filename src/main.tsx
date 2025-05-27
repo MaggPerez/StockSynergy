@@ -14,7 +14,7 @@ import PageNotFound from './components/PageNotFound';
 import Orders from './pages/Orders';
 import Suppliers from './pages/Suppliers';
 import Settings from './pages/Settings';
-
+import { SelectedItemsProvider } from './components/SelectedItems';
 
 const router = createBrowserRouter([
   {
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
     element: <Stockroom />,
   },
   {
-    path: 'restock',
+    path: '/restock',  // Fixed: added missing '/'
     element: <Restock />
   },
   {
@@ -69,6 +69,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <SelectedItemsProvider>
+      <RouterProvider router={router} />
+    </SelectedItemsProvider>
   </StrictMode>
 );
