@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Item from "./Item";
 import { getDocs, collection, QuerySnapshot, DocumentData } from "firebase/firestore";
 import { firestoreDB } from "../firebase";
+import { formatNumber } from "../script";
 
 // Define the type for a Product
 interface Product {
@@ -70,7 +71,7 @@ export async function getNotOnFloorNum() {
         mJacketsNOF.reduce((increment, currentValue) => increment + currentValue, 0) +
         mBeltsNOF.reduce((increment, currentValue) => increment + currentValue, 0);
 
-    return NOF;
+    return formatNumber(NOF);
 }
 
 /**
@@ -108,7 +109,7 @@ function ProductList({ categoryType }: ProductListProps): JSX.Element {
                 // If restock number is not 0, then it will show what needs to be restocked.
                 (<div className="pl-4 flex gap-2">
                     <p>Not on Floor:</p>
-                    <p className="text-green-700 dark:text-[#00FF7F]">{restockNum}</p>
+                    <p className="text-green-700 dark:text-[#00FF7F]">{formatNumber(Number(restockNum))}</p>
                 </div>)
             }
 
