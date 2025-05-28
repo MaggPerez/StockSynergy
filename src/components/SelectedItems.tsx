@@ -1,14 +1,7 @@
 import { useState, useContext, createContext, ReactNode } from "react";
 import Item from "./Item";
+import Populate, {Product} from "../populate";
 
-// Define the type for a Product
-interface Product {
-    productImage: string;
-    productName: string;
-    styleNumber: string;
-    description: string;
-    availableRestock: number;
-}
 
 //Defining type for selecting items
 interface SelectedItemsContextType {
@@ -26,17 +19,23 @@ export const SelectedItemsProvider: React.FC<{ children: ReactNode }> = ({ child
     const [selectedItems, setSelectedItems] = useState<Product[]>([]);
 
     const addItem = (item: Product) => {
-        setSelectedItems((prevItems) => [...prevItems, item]);
+        setSelectedItems((prevItems) => {
+            const exists = prevItems.some(existingItem => existingItem.styleNum === item.styleNum);
+            if(exists){
+                return prevItems
+            }
+            return [...prevItems, item]
+        });
     };
 
     const removeItem = (styleNumber: string) => {
         setSelectedItems((prevItems) =>
-            prevItems.filter((item) => item.styleNumber !== styleNumber)
+            prevItems.filter((item) => item.styleNum !== styleNumber)
         );
     };
 
     const isSelected = (styleNumber: string) => {
-        return selectedItems.some((item) => item.styleNumber === styleNumber);
+        return selectedItems.some((item) => item.styleNum === styleNumber);
     };
 
     return (
@@ -55,8 +54,16 @@ export const useSelectedItems = () => {
 };
 
 
+
+
+
+
+
+
 function SelectedItems(): JSX.Element {
     const { selectedItems } = useSelectedItems();
+    const {onHandleMoveToSalesFloor} = Populate();
+
 
     //if the array is empty or has no selected values
     if (selectedItems.length === 0) {
@@ -72,15 +79,20 @@ function SelectedItems(): JSX.Element {
 
     return (
         <section className="items-center p-2 mx-3 bg-gray-50 border-2 border-violet-600 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl">
+            {/* Button to move to sales floor */}
+            <button onClick={() => onHandleMoveToSalesFloor(selectedItems)}  className="bg-blue-600 text-white p-2 m-2 rounded-2xl">Move to Sales Floor</button>
+
+            {/* Displays all selected items */}
             <div className="flex flex-col gap-5">
                 {selectedItems.map((product) => (
                     <Item
-                        key={product.styleNumber}
-                        productImage={product.productImage}
-                        productName={product.productName}
-                        styleNumber={product.styleNumber}
-                        description={product.description}
-                        availableRestock={product.availableRestock}
+                        key={product.styleNum}
+                        productImage={product.prodImg}
+                        productName={product.prodName}
+                        styleNumber={product.styleNum}
+                        description={product.des}
+                        availableRestock={product.availStock}
+                        category={product.category}
                     />
                 ))}
             </div>

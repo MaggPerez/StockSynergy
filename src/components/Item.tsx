@@ -1,5 +1,6 @@
 import React from "react";
 import Checkbox from "./Checkbox";
+import { Product } from "../populate";
 
 interface ItemProps {
     productImage: string;
@@ -7,21 +8,19 @@ interface ItemProps {
     styleNumber: string;
     description: string;
     availableRestock: number;
+    category: string;
+    status?: string;
 }
 
-function Item({
-    productImage,
-    productName,
-    styleNumber,
-    description,
-    availableRestock,
-}: ItemProps): JSX.Element {
-    const product = {
-        productImage,
-        productName,
-        styleNumber,
-        description,
-        availableRestock,
+function Item({ productImage, productName, styleNumber, description, availableRestock, category}: ItemProps): JSX.Element {
+    const product: Product = {
+        availStock: availableRestock,
+        des: description,
+        prodImg: productImage,
+        prodName: productName,
+        styleNum: styleNumber,
+        category: category, 
+        status: ""
     }
 
     return (

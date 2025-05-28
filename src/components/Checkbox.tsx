@@ -1,28 +1,19 @@
 import { useState, useEffect, createContext } from "react";
 import { useSelectedItems } from "./SelectedItems";
+import { Product } from "../populate";
 
 interface CheckboxProps {
-    product: {
-        productImage: string;
-        productName: string;
-        styleNumber: string;
-        description: string;
-        availableRestock: number;
-    }
-}
-
-interface ButtonContextProps{
-    onClick?: () => void;
+    product: Product;
 }
 
 
 function Checkbox({ product }: CheckboxProps): JSX.Element {
     const { addItem, removeItem, isSelected } = useSelectedItems();
-    const selected = isSelected(product.styleNumber);
+    const selected = isSelected(product.styleNum);
 
     const handleToggle = () => {
         if(selected){
-            removeItem(product.styleNumber);
+            removeItem(product.styleNum);
         }
         else{
             addItem(product);

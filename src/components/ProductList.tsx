@@ -20,7 +20,7 @@ interface Product {
 async function getProducts(categoryType: string): Promise<Product[]> {
     const productsCol = collection(firestoreDB, categoryType);
     const productSnapshot = await getDocs(productsCol);
-    const productList: Product[] = productSnapshot.docs.map((doc) => doc.data() as Product);
+    const productList: Product[] = productSnapshot.docs.filter((doc) => doc.data().status !== "Sales Floor").map((doc) => doc.data() as Product);
     return productList;
 }
 
@@ -32,7 +32,7 @@ async function getProducts(categoryType: string): Promise<Product[]> {
 export async function getRestockNumber(categoryType: string): Promise<number> {
     const productsCol = collection(firestoreDB, categoryType);
     const productSnapshot = await getDocs(productsCol);
-    const restockNumber: number[] = productSnapshot.docs.map((doc) => doc.data().availableRestock);
+    const restockNumber: number[] = productSnapshot.docs.filter((doc) => doc.data().status !== "Sales Floor").map((doc) => doc.data().availableRestock);
     const sum = restockNumber.reduce((increment, currentValue) => increment + currentValue, 0);
     return sum;
 }
@@ -60,14 +60,14 @@ export async function getNotOnFloorNum() {
     const retrieveM_Jackets: QuerySnapshot<DocumentData> = await getDocs(m_jackets_collection);
     const retrieveM_Belts: QuerySnapshot<DocumentData> = await getDocs(m_belts_collection);
 
-    const mTeeNOF: number[] = retrieveM_Tees.docs.map(doc => doc.data().availableRestock)
-    const mShortsNOF: number[] = retrieveM_Shorts.docs.map(doc => doc.data().availableRestock)
-    const mJacketsNOF: number[] = retrieveM_Jackets.docs.map(doc => doc.data().availableRestock)
-    const mBeltsNOF: number[] = retrieveM_Belts.docs.map(doc => doc.data().availableRestock)
+    const mTeeNOF: number[] = retrieveM_Tees.docs.filter((doc) => doc.data().status !== "Sales Floor").map(doc => doc.data().availableRestock)
+    const mShortsNOF: number[] = retrieveM_Shorts.docs.filter((doc) => doc.data().status !== "Sales Floor").map(doc => doc.data().availableRestock)
+    const mJacketsNOF: number[] = retrieveM_Jackets.docs.filter((doc) => doc.data().status !== "Sales Floor").map(doc => doc.data().availableRestock)
+    const mBeltsNOF: number[] = retrieveM_Belts.docs.filter((doc) => doc.data().status !== "Sales Floor").map(doc => doc.data().availableRestock)
 
     const NOF = mTeeNOF.reduce((increment, currentValue) => increment + currentValue, 0) +
-        mShortsNOF.reduce((increment, currentValue) => increment + currentValue, 0) + 
-        mJacketsNOF.reduce((increment, currentValue) => increment + currentValue, 0) + 
+        mShortsNOF.reduce((increment, currentValue) => increment + currentValue, 0) +
+        mJacketsNOF.reduce((increment, currentValue) => increment + currentValue, 0) +
         mBeltsNOF.reduce((increment, currentValue) => increment + currentValue, 0);
 
     return NOF;
@@ -101,10 +101,17 @@ function ProductList({ categoryType }: ProductListProps): JSX.Element {
 
     return (
         <div className="flex flex-col gap-5">
-            <div className="pl-4 flex gap-2">
-                <p>Not on Floor:</p>
-                <p className="text-green-700 dark:text-[#00FF7F]">{restockNum}</p>
-            </div>
+
+            {/* If the restock number is 0, then a message is shown that nothing needs to be restock */}
+            {restockNum === 0 ? (<p className="text-center text-green-700 dark:text-[#00FF7F]">Nothing to be restocked</p>)
+                :
+                // If restock number is not 0, then it will show what needs to be restocked.
+                (<div className="pl-4 flex gap-2">
+                    <p>Not on Floor:</p>
+                    <p className="text-green-700 dark:text-[#00FF7F]">{restockNum}</p>
+                </div>)
+            }
+
             {products.map((product, index) => (
                 <Item
                     key={index}
@@ -113,6 +120,7 @@ function ProductList({ categoryType }: ProductListProps): JSX.Element {
                     styleNumber={product.styleNumber}
                     description={product.description}
                     availableRestock={product.availableRestock}
+                    category={categoryType}
                 />
             ))}
         </div>

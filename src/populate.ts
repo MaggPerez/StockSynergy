@@ -1,15 +1,17 @@
-import { setDoc, doc, getDocs, collection, QuerySnapshot, DocumentData } from "firebase/firestore";
+import { setDoc, doc, getDocs, collection, QuerySnapshot, DocumentData, updateDoc } from "firebase/firestore";
 import { firestoreDB } from "./firebase";
 import jsonData from "./populateProducts.json"
 import { useState } from "react";
+import { getNotOnFloorNum } from "./components/ProductList";
 
-interface Product {
+export interface Product {
     availStock: number;
     des: string;
     prodImg: string;
     prodName: string;
     styleNum: string;
     category: string;
+    status: string;
 }
 
 function Populate() {
@@ -34,10 +36,10 @@ function Populate() {
         setLoading(true);
         e.preventDefault();
 
-        if (categoryInput === "") { 
+        if (categoryInput === "") {
             setLoading(false);
             return alert("Choose a Category")
-         }
+        }
 
 
         //setting a variable to populate products into firebase
@@ -47,7 +49,8 @@ function Populate() {
             prodImg: productImageInput,
             prodName: productNameInput,
             styleNum: styleNumberInput,
-            category: categoryInput
+            category: categoryInput,
+            status: "Stockroom"
         }];
 
         //Reading through JSON file having product info
@@ -125,11 +128,41 @@ function Populate() {
         }
     }
 
+    /**
+     * Method to move selected items to the Sales Floor.
+     * Basically it updates the status of the product from "Stockrooom" -> "Sales Floor"
+     * @param itemsToBeMoved contains Product data such as category, style number
+     */
+    async function onHandleMoveToSalesFloor(itemsToBeMoved: Product[]) {
+        
+        try {
+            const updateStatus: string = "Sales Floor"
+            
+            for (const data of itemsToBeMoved) {
+                const docRef = doc(firestoreDB, data.category, data.styleNum);
+                await updateDoc(docRef, {
+                    status: updateStatus
+                });
+
+                
+            }
+        } catch (error) {
+            alert("Error in moving units.")
+        }
+        finally{
+            //Alert showing that the units were moved to Sales Floor
+            alert(itemsToBeMoved.length + " Product(s) Moved to Sales Floor. Refresh page to show update.")
+
+        }
+    }
+
+
+
     return {
         productNameInput, setProductNameInput, styleNumberInput, setStyleNumberInput,
         categoryInput, setCategoryInput, availableRestockInput, setAvailableRestockInput,
         productImageInput, setProductImageInput, descriptionInput, setDescriptionInput, handlePopulate,
-        loading, setLoading
+        loading, setLoading, onHandleMoveToSalesFloor
     };
 
 }
