@@ -16,14 +16,20 @@
 
 
 ## Manager Point of View
-<img width="1800" alt="Home Page" src="https://github.com/user-attachments/assets/b9f29f9b-8a28-453a-a1ca-126dfd0ebb14" />
+<img width="1800" alt="dashboard" src="https://github.com/user-attachments/assets/16c1b71b-3ac1-43ee-b4f9-f8480f50b632" />
+
 
 ## Employee Point of View
-<img width="1800" alt="Employee Home Page" src="https://github.com/user-attachments/assets/1e2b5ee4-7701-4496-b005-33e0198ee5cb" />
+<img width="1800" alt="dashboard employee" src="https://github.com/user-attachments/assets/ccd967da-7677-41fa-8574-03cef93b1108" />
+
 
 # Analytics
 - Visual representation of total sales, inventory value, low stock alerts, top-selling products, and sales trend to help make inventory decisions.
 <img width="1800" alt="Analytics" src="https://github.com/user-attachments/assets/ec8e8b28-7114-409e-8201-b5c2bcf056e4" />
+
+# Stockroom
+- Showcases inventory overview, stockroom analytics, compares Sales Floor and Stockroom Units, and allows only managers to access a page to add new products.
+<img width="1800" alt="stockroom" src="https://github.com/user-attachments/assets/3d7e3e1a-fdcc-4358-b504-15dac5e5d012" />
 
 
 # Restock
