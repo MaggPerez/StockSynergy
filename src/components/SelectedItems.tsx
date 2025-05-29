@@ -19,6 +19,10 @@ export const SelectedItemsContext = createContext<SelectedItemsContextType | und
 export const SelectedItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [selectedItems, setSelectedItems] = useState<Product[]>([]);
 
+    /**
+     * Function to add selected items to list
+     * @param item 
+     */
     const addItem = (item: Product) => {
         setSelectedItems((prevItems) => {
             const exists = prevItems.some(existingItem => existingItem.styleNum === item.styleNum);
@@ -29,12 +33,21 @@ export const SelectedItemsProvider: React.FC<{ children: ReactNode }> = ({ child
         });
     };
 
+    /**
+     * Function to remove selected items from list
+     * @param styleNumber 
+     */
     const removeItem = (styleNumber: string) => {
         setSelectedItems((prevItems) =>
             prevItems.filter((item) => item.styleNum !== styleNumber)
         );
     };
 
+    /**
+     * Function that checks if the selected item has already been selected
+     * @param styleNumber 
+     * @returns 
+     */
     const isSelected = (styleNumber: string) => {
         return selectedItems.some((item) => item.styleNum === styleNumber);
     };
@@ -46,6 +59,11 @@ export const SelectedItemsProvider: React.FC<{ children: ReactNode }> = ({ child
     );
 };
 
+
+/**
+ * Function that allows to use the selectedItems contexts
+ * @returns context
+ */
 export const useSelectedItems = () => {
     const context = useContext(SelectedItemsContext);
     if (!context) {
@@ -66,7 +84,7 @@ function SelectedItems(): JSX.Element {
     const { onHandleMoveToSalesFloor, loading } = Populate();
 
 
-    //if the array is empty or has no selected values
+    //if the array is empty or has no selected values, it will return "No items selected"
     if (selectedItems.length === 0) {
         return (
             <section className="items-center p-4 mx-3 bg-gray-50 border-2 border-violet-600 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl">
@@ -92,7 +110,7 @@ function SelectedItems(): JSX.Element {
             </button>
 
 
-            {/* Displays all selected items */}
+            {/* Displays all selected items and their properties */}
             <div className="flex flex-col gap-5">
                 {selectedItems.map((product) => (
                     <Item

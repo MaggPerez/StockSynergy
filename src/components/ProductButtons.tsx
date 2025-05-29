@@ -4,7 +4,7 @@ interface ProductButtonsProps {
     categoryType: string; //M_Tees, M_Jackets, etc.
     onClick: () => void;  //onClick helps to open the content after tapping the button.
     selectedItemsCounter?: number; //displays counter of how many items are selected.
-    showCounter?: boolean;
+    showCounter?: boolean; //boolean to reveal counter or not
 }
 
 function ProductButtons({ categoryType, onClick, selectedItemsCounter, showCounter = false }: ProductButtonsProps): JSX.Element {

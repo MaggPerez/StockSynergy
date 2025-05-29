@@ -10,9 +10,10 @@ import { useSelectedItems } from "../components/SelectedItems";
 function Stockroom() {
     setDocumentTitle("Stockroom");
     const [NOF, setNOF] = useState<number | string>("Loading");
+
+    //Will be used to keep track of items that are pending to be restocked
     const { selectedItems } = useSelectedItems();
 
-    
     
     // Get user role from session storage
     const isManager = sessionStorage.getItem("isManager") === "true";
