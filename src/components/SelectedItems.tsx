@@ -1,6 +1,7 @@
 import { useState, useContext, createContext, ReactNode } from "react";
 import Item from "./Item";
-import Populate, {Product} from "../populate";
+import Populate, { Product } from "../populate";
+import { ClipLoader } from "react-spinners";
 
 
 //Defining type for selecting items
@@ -21,7 +22,7 @@ export const SelectedItemsProvider: React.FC<{ children: ReactNode }> = ({ child
     const addItem = (item: Product) => {
         setSelectedItems((prevItems) => {
             const exists = prevItems.some(existingItem => existingItem.styleNum === item.styleNum);
-            if(exists){
+            if (exists) {
                 return prevItems
             }
             return [...prevItems, item]
@@ -62,7 +63,7 @@ export const useSelectedItems = () => {
 
 function SelectedItems(): JSX.Element {
     const { selectedItems } = useSelectedItems();
-    const {onHandleMoveToSalesFloor} = Populate();
+    const { onHandleMoveToSalesFloor, loading } = Populate();
 
 
     //if the array is empty or has no selected values
@@ -80,7 +81,16 @@ function SelectedItems(): JSX.Element {
     return (
         <section className="items-center p-2 mx-3 bg-gray-50 border-2 border-violet-600 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl">
             {/* Button to move to sales floor */}
-            <button onClick={() => onHandleMoveToSalesFloor(selectedItems)}  className="bg-blue-600 text-white p-2 m-2 rounded-2xl">Move to Sales Floor</button>
+            <button onClick={() => onHandleMoveToSalesFloor(selectedItems)} className="bg-blue-600 text-white p-2 m-2 rounded-2xl"
+                disabled={loading}>
+                {loading ?
+                    //If button is clicked, a spin loader animation is played and button is disabled
+                    (<p className='flex gap-1'><ClipLoader color='white' size={18} /></p>)
+                    :
+                    //If button is not clicked, it displays the text to move items to Sales Floor
+                    (<p>Move to Sales Floor</p>)}
+            </button>
+
 
             {/* Displays all selected items */}
             <div className="flex flex-col gap-5">

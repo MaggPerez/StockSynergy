@@ -109,7 +109,7 @@ function ProductList({ categoryType }: ProductListProps): JSX.Element {
                 // If restock number is not 0, then it will show what needs to be restocked.
                 (<div className="pl-4 flex gap-2">
                     <p>Not on Floor:</p>
-                    <p className="text-green-700 dark:text-[#00FF7F]">{formatNumber(Number(restockNum))}</p>
+                    <p className="text-green-700 dark:text-[#00FF7F]">{formatNumber(Number(restockNum) || 0)}</p>
                 </div>)
             }
 

@@ -5,10 +5,14 @@ import InventorySidebar from "../components/InventorySidebar";
 import { setDocumentTitle } from "../script";
 import { Link } from "react-router-dom";
 import Graph from "../components/Graph";
+import { useSelectedItems } from "../components/SelectedItems";
 
 function Stockroom() {
     setDocumentTitle("Stockroom");
     const [NOF, setNOF] = useState<number | string>("Loading");
+    const { selectedItems } = useSelectedItems();
+
+    
     
     // Get user role from session storage
     const isManager = sessionStorage.getItem("isManager") === "true";
@@ -102,7 +106,7 @@ function Stockroom() {
                                 <span className="text-sm text-gray-500 dark:text-gray-400">Pending</span>
                             </div>
                             <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Pending Restocks</h3>
-                            <p className="text-2xl font-bold text-orange-600">17</p>
+                            <p className="text-2xl font-bold text-orange-600">{selectedItems.length || 0}</p>
                         </div>
                     </div>
                 </div>

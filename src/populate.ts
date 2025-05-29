@@ -134,6 +134,9 @@ function Populate() {
      * @param itemsToBeMoved contains Product data such as category, style number
      */
     async function onHandleMoveToSalesFloor(itemsToBeMoved: Product[]) {
+
+        //Loading animation
+        setLoading(true);
         
         try {
             const updateStatus: string = "Sales Floor"
@@ -151,6 +154,8 @@ function Populate() {
         }
         finally{
             //Alert showing that the units were moved to Sales Floor
+            setLoading(false);
+
             alert(itemsToBeMoved.length + " Product(s) Moved to Sales Floor. Refresh page to show update.")
 
         }
@@ -162,7 +167,7 @@ function Populate() {
         productNameInput, setProductNameInput, styleNumberInput, setStyleNumberInput,
         categoryInput, setCategoryInput, availableRestockInput, setAvailableRestockInput,
         productImageInput, setProductImageInput, descriptionInput, setDescriptionInput, handlePopulate,
-        loading, setLoading, onHandleMoveToSalesFloor
+        loading, setLoading, onHandleMoveToSalesFloor,
     };
 
 }
