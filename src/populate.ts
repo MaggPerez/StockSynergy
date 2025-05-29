@@ -2,7 +2,7 @@ import { setDoc, doc, getDocs, collection, QuerySnapshot, DocumentData, updateDo
 import { firestoreDB } from "./firebase";
 import jsonData from "./populateProducts.json"
 import { useState } from "react";
-import { getNotOnFloorNum } from "./components/ProductList";
+import { useSelectedItems } from "./components/SelectedItems";
 
 export interface Product {
     availStock: number;
@@ -23,6 +23,8 @@ function Populate() {
     const [descriptionInput, setDescriptionInput] = useState<string>("");
 
     const [loading, setLoading] = useState(false);
+
+    const { selectedItems, addItem, removeItem, isSelected } = useSelectedItems();
 
 
     /**
@@ -141,11 +143,19 @@ function Populate() {
         try {
             const updateStatus: string = "Sales Floor"
             
+            //updating status to Sales Floor which states that a unit from the stockroom will be moved to the Sales Floor
             for (const data of itemsToBeMoved) {
                 const docRef = doc(firestoreDB, data.category, data.styleNum);
+
+                //updates status
                 await updateDoc(docRef, {
                     status: updateStatus
                 });
+
+                //Clearing all selected items after successful move
+                itemsToBeMoved.forEach(item => {
+                    removeItem(item.styleNum)
+                })
 
                 
             }
@@ -155,7 +165,7 @@ function Populate() {
         finally{
             //Alert showing that the units were moved to Sales Floor
             setLoading(false);
-
+            
             alert(itemsToBeMoved.length + " Product(s) Moved to Sales Floor. Refresh page to show update.")
 
         }
