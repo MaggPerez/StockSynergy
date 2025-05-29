@@ -80,7 +80,7 @@ const Home: React.FC = () => {
                         <Link to="/restock" className="group">
                             <div className="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100 dark:border-zinc-700 hover:border-violet-200 dark:hover:border-violet-600">
                                 <div className="flex items-center justify-center w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-xl mb-4 group-hover:bg-orange-200 dark:group-hover:bg-orange-800 transition-colors">
-                                    <img src="/images/restock-icon.svg" className="w-6 h-6 dark:invert" alt="Restock" />
+                                    <img src="/images/package_open_icon.svg" className="w-6 h-6 invert dark:invert-0" alt="Restock" />
                                 </div>
                                 <h3 className="font-semibold text-gray-800 dark:text-white">Restock</h3>
                                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Replenish items</p>

@@ -4,6 +4,8 @@ import ProductList from "./ProductList";
 import { getNotOnFloorNum } from "./ProductList";
 import SelectedItems from "./SelectedItems";
 import { useSelectedItems } from "./SelectedItems";
+import { ClipLoader } from "react-spinners";
+import { formatNumber } from "../script";
 
 
 
@@ -21,7 +23,10 @@ function Products() {
     const { selectedItems } = useSelectedItems();
 
     //Setting the Not on Floor tracker
-    const [NOF, setNOF] = useState<number | string>("Loading");
+    const [NOF, setNOF] = useState<number>(0);
+
+    //Formatting current Not on Floor tracker
+    const current_NOF = NOF === 0 ? <p className='flex gap-1 items-center'><ClipLoader color='purple' size={28} /></p> : formatNumber((Number(NOF)))
     useEffect(() => {
         window.scrollTo(0, 0);
 
@@ -86,7 +91,7 @@ function Products() {
                 <div className="w-full rounded-3xl bg-white dark:bg-zinc-800 p-5 shadow-sm dark:shadow-2xl flex justify-around
                 text-center lg:w-1/4">
                     <div>
-                        <p className="text-violet-500 font-bold text-xl">{NOF}</p>
+                        <p className="text-violet-500 font-bold text-xl">{current_NOF}</p>
                         <p className="text-violet-500">Units</p>
                         <h3>NOF</h3>
                     </div>

@@ -71,7 +71,7 @@ export async function getNotOnFloorNum() {
         mJacketsNOF.reduce((increment, currentValue) => increment + currentValue, 0) +
         mBeltsNOF.reduce((increment, currentValue) => increment + currentValue, 0);
 
-    return formatNumber(NOF);
+    return NOF;
 }
 
 /**

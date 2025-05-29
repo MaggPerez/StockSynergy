@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import InventorySidebar from '../components/InventorySidebar';
 import PageHeader from '../components/PageHeader';
-import { setDocumentTitle } from '../script'; // Assuming this exists based on Login.tsx
+import { formatNumber, setDocumentTitle } from '../script'; // Assuming this exists based on Login.tsx
 import Graph from '../components/Graph';
 import { getNotOnFloorNum } from '../components/ProductList';
+import { ClipLoader } from 'react-spinners';
 
 const Analytics: React.FC = () => {
     setDocumentTitle("Analytics");
 
-    const [NOF, setNOF] = useState<number | string>("Loading");
+    const [NOF, setNOF] = useState<number>(0);
+
+    //low Stock Items will do the spin animation until it gets Not on Floor numbers
+    const lowStockItems = NOF === 0 ? <p className='flex gap-1 items-center'><ClipLoader color='purple' size={28} /></p> : formatNumber(Number(NOF))
         useEffect(() => {
             window.scrollTo(0, 0);
     
@@ -18,6 +22,7 @@ const Analytics: React.FC = () => {
             }
             fetchNOF();
         }, [])
+
 
     return (
         <>
@@ -50,7 +55,7 @@ const Analytics: React.FC = () => {
                         {/* Low Stock Items */}
                         <div className="bg-white dark:bg-zinc-800 p-4 rounded-xl shadow-sm">
                             <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-300">Low Stock Items</h3>
-                            <p className="text-3xl font-bold text-violet-600">{NOF}</p>
+                            <p className="text-3xl font-bold text-violet-600">{lowStockItems}</p>
                             <p className="text-sm text-gray-500">Needs attention</p>
                         </div>
 

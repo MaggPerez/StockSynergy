@@ -2,14 +2,15 @@ import PageHeader from "../components/PageHeader";
 import { useEffect, useState } from "react";
 import { getNotOnFloorNum } from "../components/ProductList";
 import InventorySidebar from "../components/InventorySidebar";
-import { setDocumentTitle } from "../script";
+import { formatNumber, setDocumentTitle } from "../script";
 import { Link } from "react-router-dom";
 import Graph from "../components/Graph";
 import { useSelectedItems } from "../components/SelectedItems";
+import { ClipLoader } from "react-spinners";
 
 function Stockroom() {
     setDocumentTitle("Stockroom");
-    const [NOF, setNOF] = useState<number | string>("Loading");
+    const [NOF, setNOF] = useState<number>(0);
 
     //Will be used to keep track of items that are pending to be restocked
     const { selectedItems } = useSelectedItems();
@@ -17,6 +18,9 @@ function Stockroom() {
     
     // Get user role from session storage
     const isManager = sessionStorage.getItem("isManager") === "true";
+
+    //Formatting current Not on Floor tracker
+    const current_NOF = NOF === 0 ? <p className='flex gap-1 items-center'><ClipLoader color='purple' size={28} /></p> : formatNumber((Number(NOF)))
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -63,7 +67,7 @@ function Stockroom() {
                                 <span className="text-sm text-gray-500 dark:text-gray-400">Units</span>
                             </div>
                             <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Not on Floor</h3>
-                            <p className="text-2xl font-bold text-violet-600">{NOF}</p>
+                            <p className="text-2xl font-bold text-violet-600">{current_NOF}</p>
                         </div>
 
 

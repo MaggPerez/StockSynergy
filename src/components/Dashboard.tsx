@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react"
 import { getNotOnFloorNum } from "../components/ProductList";
-import { generateSales } from "../script";
+import { generateSales, formatNumber } from "../script";
+import { ClipLoader } from "react-spinners";
+
 
 export default function Dashboard() {
-    let current_sales = generateSales();
+    const current_sales = generateSales();
+    const rawCurrentSales = current_sales.replace(/,/g, "");
+    const salesTrendStatus = Number(rawCurrentSales);    
 
-    const [NOF, setNOF] = useState<number | string>("Loading");
+    const [NOF, setNOF] = useState<number>(0);
     useEffect(() => {
 
         async function fetchNOF() {
@@ -27,13 +31,13 @@ export default function Dashboard() {
         },
         {
             //Not on Floor
-            value: NOF,
+            value: NOF === 0 ? <p className='flex gap-1 items-center'><ClipLoader color='orange' size={24} /></p> : formatNumber((Number(NOF))),
             label: "Units Not on Floor",
             sublabel: "Need Restocking",
             color: "orange",
             bgColor: "bg-orange-100 dark:bg-orange-900",
             textColor: "text-orange-600 dark:text-orange-400",
-            icon: "/images/restock-icon.svg"
+            icon: "/images/package_open_icon.svg"
         },
         {
             //Previous Not on Floor
@@ -81,7 +85,7 @@ export default function Dashboard() {
                     <div key={index} className="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-700 hover:shadow-md transition-all duration-200 hover:border-gray-200 dark:hover:border-zinc-600">
                         {/* Icon */}
                         <div className={`flex items-center justify-center w-12 h-12 ${stat.bgColor} rounded-xl mb-4`}>
-                            <img src={stat.icon} className="w-6 h-6 invert" alt={stat.label} />
+                            <img src={stat.icon} className="w-6 h-6 invert dark:invert-0" alt={stat.label} />
                         </div>
 
                         {/* Value */}
@@ -110,7 +114,7 @@ export default function Dashboard() {
                         <span className="text-sm font-medium text-violet-700 dark:text-violet-300">Sales Trend</span>
                     </div>
                     <p className="text-xs text-violet-600 dark:text-violet-400 mt-1">
-                        {current_sales > 1000 ? "Strong performance today" : "Steady growth"}
+                        {salesTrendStatus > 5000 ? "Strong performance today" : "Steady growth"}
                     </p>
                 </div>
 
@@ -121,7 +125,8 @@ export default function Dashboard() {
                         <span className="text-sm font-medium text-orange-700 dark:text-orange-300">Restock Alert</span>
                     </div>
                     <p className="text-xs text-orange-600 dark:text-orange-400 mt-1">
-                        {NOF !== "Loading" && typeof NOF === "number" && NOF > 20 ? "High priority items" : "Normal levels"}
+                        {typeof NOF === "number" && Number(NOF) > 20 ? "High priority items" : "Normal levels"}
+
                     </p>
                 </div>
 
