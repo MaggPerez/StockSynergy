@@ -15,6 +15,7 @@ import Orders from './pages/Orders';
 import Suppliers from './pages/Suppliers';
 import Settings from './pages/Settings';
 import { SelectedItemsProvider } from './components/SelectedItems';
+import { SidebarProvider } from './components/SidebarProvider'; // Add this import
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
     element: <Stockroom />,
   },
   {
-    path: '/restock',  // Fixed: added missing '/'
+    path: '/restock',
     element: <Restock />
   },
   {
@@ -69,8 +70,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
-    <SelectedItemsProvider>
-      <RouterProvider router={router} />
-    </SelectedItemsProvider>
+    <SidebarProvider>
+      <SelectedItemsProvider>
+        <RouterProvider router={router} />
+      </SelectedItemsProvider>
+    </SidebarProvider>
   </StrictMode>
 );

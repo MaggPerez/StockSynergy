@@ -5,9 +5,11 @@ import Graph from "../components/Graph";
 import { setDocumentTitle } from "../script.js"
 import PageHeader from "../components/PageHeader";
 import InventorySidebar from '../components/InventorySidebar'
-
+import { useSidebar } from '../components/SidebarProvider'; // Add this import
+import SidebarLayout from "../components/SidebarLayout";
 
 const Home: React.FC = () => {
+    const { isSidebarOpen } = useSidebar(); // Get sidebar state
     setDocumentTitle("Home");
 
     useEffect(() => {
@@ -16,10 +18,9 @@ const Home: React.FC = () => {
 
     return (
         <>
-            <main className="bg-gray-50 dark:bg-common-black text-black dark:text-white min-h-screen lg:pl-56 duration-300 transition-all">
-                {/* Sidebar */}
-                <InventorySidebar />
-
+        <SidebarLayout>
+            
+            <main>
 
                 {/* Title of current page */}
                 <div>
@@ -27,13 +28,10 @@ const Home: React.FC = () => {
                     <p className="text-gray-600 dark:text-gray-400 mt-2 pl-4">Welcome back! Here's what's happening with your inventory today.</p>
                 </div>
 
-
                 {/* Dashboard having latest activities */}
                 <div className="px-6 mb-8">
                     <Dashboard />
                 </div>
-
-
 
                 {/* Quick Actions */}
                 <div className="px-6 mb-8">
@@ -51,7 +49,6 @@ const Home: React.FC = () => {
                             </div>
                         </Link>
 
-
                         {/* Sales floor link */}
                         <Link to="/salesFloor" className="group">
                             <div className="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100 dark:border-zinc-700 hover:border-violet-200 dark:hover:border-violet-600">
@@ -63,7 +60,6 @@ const Home: React.FC = () => {
                             </div>
                         </Link>
 
-
                         {/* Stockroom link */}
                         <Link to="/stockroom" className="group">
                             <div className="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100 dark:border-zinc-700 hover:border-violet-200 dark:hover:border-violet-600">
@@ -74,7 +70,6 @@ const Home: React.FC = () => {
                                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Check inventory</p>
                             </div>
                         </Link>
-
 
                         {/* Restock */}
                         <Link to="/restock" className="group">
@@ -169,6 +164,7 @@ const Home: React.FC = () => {
                 </div>
 
             </main>
+        </SidebarLayout>
         </>
     );
 };

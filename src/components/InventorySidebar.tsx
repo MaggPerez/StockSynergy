@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import DarkModeToggle from './DarkModeToggle';
 import { PlusCircle } from 'lucide-react';
+import { useSidebar } from '../components/SidebarProvider'; // Adjust path as needed
 
 const InventorySidebar: React.FC = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
+    const { isSidebarOpen, toggleSidebar } = useSidebar();
     const name: string | null = sessionStorage.getItem("username");
     
-
     /**
      * Function to convert string to boolean
      * @param value string
@@ -17,24 +17,19 @@ const InventorySidebar: React.FC = () => {
         return value.toLocaleLowerCase() === "true";
     }
     
-
     const role = stringToBoolean(sessionStorage.getItem("isManager") || "");
-
-    const toggleMenu = (): void => {
-        setIsSidebarOpen((prevState) => !prevState);
-    }
 
     return (
         <>
             <div>
-                <nav className={`${isSidebarOpen ? "w-0 lg:w-56" : "w-1/2 md:w-72"} bg-violet-600 w-0 h-screen fixed
+                <nav className={`${isSidebarOpen ? "w-56" : "w-0"} bg-violet-600 h-screen fixed
                     top-0 left-0 overflow-x-hidden pt-0 duration-500 rounded-tr-[4em] text-lg z-10`}>
 
                     <div className="flex flex-col h-full text-white font-normal">
-                        {/* Close Button */}
-                        <a className="flex justify-end text-3xl pr-10 pt-3 lg:p-1 lg:hidden" 
+                        {/* Close Button - Now visible on all screen sizes */}
+                        <a className="flex justify-end text-3xl pr-10 pt-3" 
                            href="#" 
-                           onClick={toggleMenu}>&times;</a>
+                           onClick={toggleSidebar}>&times;</a>
 
                         {/* Logo */}
                         <div className="flex items-center justify-center lg:pt-1">
@@ -111,10 +106,10 @@ const InventorySidebar: React.FC = () => {
                     </div>
                 </nav>
 
-                {/* Hamburger Menu */}
-                <div className="flex justify-between lg:justify-end items-center px-4 py-2">
-                    <span className={`${isSidebarOpen ? "lg:hidden" : "lg:hidden"} text-5xl cursor-pointer text-violet-600`} 
-                          onClick={toggleMenu}>
+                {/* Hamburger Menu - Now always visible when sidebar is closed */}
+                <div className="flex justify-between items-center px-4 py-2">
+                    <span className={`${!isSidebarOpen ? "block" : "hidden"} text-5xl cursor-pointer text-violet-600`} 
+                          onClick={toggleSidebar}>
                         &#9776;
                     </span>
                     <DarkModeToggle />

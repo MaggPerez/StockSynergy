@@ -5,6 +5,7 @@ import { formatNumber, setDocumentTitle } from '../script'; // Assuming this exi
 import Graph from '../components/Graph';
 import { getNotOnFloorNum } from '../components/ProductList';
 import { ClipLoader } from 'react-spinners';
+import SidebarLayout from '../components/SidebarLayout';
 
 const Analytics: React.FC = () => {
     setDocumentTitle("Analytics");
@@ -26,9 +27,11 @@ const Analytics: React.FC = () => {
 
     return (
         <>
-            <main className="bg-gray-50 dark:bg-common-black text-black dark:text-white min-h-screen lg:pl-56 lg:duration-300">
+        <SidebarLayout>
+
+            <main>
                 {/* Sidebar */}
-                <InventorySidebar />
+
 
                 {/* Title of current page */}
                 <PageHeader title="Analytics" />
@@ -166,6 +169,7 @@ const Analytics: React.FC = () => {
                     </div>
                 </div>
             </main>
+        </SidebarLayout>
         </>
     );
 };
