@@ -13,6 +13,9 @@ router.get('/', async (req, res) => {
     res.json(data);
 });
 
+
+
+// Inserting products
 router.post('/', async (req, res) => {
     const { style_number, product_name, product_image, available_restock, status, description } = req.body;
 
@@ -30,6 +33,26 @@ router.post('/', async (req, res) => {
     }
     res.status(201).json(data)
 });
+
+
+//Get products based on table
+router.get('/section/:table', async (req, res) => {
+    const { table } = req.params;
+
+    const allowedTables = ["M_Tees", "M_Shorts"];
+    
+    if(!allowedTables.includes(table)){
+        return res.status(400).json({ error: "Invalid Section Name"});
+    }
+
+    const { data, error } = await supabase.from(table).select("*");
+
+    if(error){
+        return res.status(500).json({ error: error.message});
+    }
+
+    res.json(data);
+})
 
 
 module.exports = router;

@@ -25,7 +25,7 @@ function Item({ productImage, productName, styleNumber, description, availableRe
 
     return (
         <section
-            className="items-center p-4 mx-3 bg-gray-50 border-2 border-violet-600 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2"
+            className="text-black dark:text-white items-center p-4 mx-3 bg-gray-50 border-2 border-violet-600 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2"
         >
             <div className="flex flex-wrap justify-between items-center">
                 {/* Item Image with Product Name */}

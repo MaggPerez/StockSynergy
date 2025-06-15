@@ -6,6 +6,7 @@ import SelectedItems from "./SelectedItems";
 import { useSelectedItems } from "./SelectedItems";
 import { ClipLoader } from "react-spinners";
 import { formatNumber } from "../script";
+import ProductItems from "./ProductItems";
 
 
 
@@ -46,12 +47,12 @@ function Products() {
             case 'M_Tees':
                 return <div>
                     <h2 className="text-xl font-bold pl-4 pt-2">Men's T-Shirts</h2>
-                    <ProductList categoryType={selectedProduct} />
+                    <ProductItems categoryType={selectedProduct} />
                 </div>;
             case 'M_Shorts':
                 return <div>
                     <h2 className="text-xl font-bold pl-4 pt-2">Men's Shorts</h2>
-                    <ProductList categoryType={selectedProduct} />
+                    <ProductItems categoryType={selectedProduct} />
                 </div>;
             case 'M_Jackets':
                 return <div>
