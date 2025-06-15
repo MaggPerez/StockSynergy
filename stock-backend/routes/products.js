@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 router.get('/section/:table', async (req, res) => {
     const { table } = req.params;
 
-    const allowedTables = ["M_Tees", "M_Shorts"];
+    const allowedTables = ["M_Tees", "M_Shorts", "M_Jackets", "M_Belts"];
     
     if(!allowedTables.includes(table)){
         return res.status(400).json({ error: "Invalid Section Name"});
@@ -47,9 +47,33 @@ router.get('/section/:table', async (req, res) => {
 
     const { data, error } = await supabase.from(table).select("*");
 
+
     if(error){
         return res.status(500).json({ error: error.message});
     }
+
+
+    res.json(data);
+})
+
+
+//Getting all available restock values and sums up all the available restock values
+router.get('/value/:table', async (req, res) => {
+    const { table } = req.params;
+
+    const allowedTables = ["M_Tees", "M_Shorts", "M_Jackets", "M_Belts"];
+    
+    if(!allowedTables.includes(table)){
+        return res.status(400).json({ error: "Invalid Section Name"});
+    }
+
+    const { data, error } = await supabase.from(table).select("available_restock.sum()");
+
+    
+    if(error){
+        return res.status(500).json({ error: error.message});
+    }
+
 
     res.json(data);
 })

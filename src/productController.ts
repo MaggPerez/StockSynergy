@@ -31,9 +31,18 @@ export async function getProducts(section: string) {
 //create insert method (like in Populate.ts)
 
 
-
-//create Not on Floor summation
-
+/**
+ * Method that gets Not on Floor aka available restock number based on the section the user selects.
+ * Example: M_Tees, M_Shorts
+ * @param table category section
+ * @returns Single object array containing the summation of the available restock 
+ */
+export async function getNotOnFloorSection(table: string) {
+    const response = await fetch(`http://localhost:3000/api/products/value/${table}`)
+    const data = await response.json();
+    console.log("NOF Section data: ", data)
+    return data;
+}
 
 
 //create UPDATE method in backend for Move To's Stockroom and Sales Floor

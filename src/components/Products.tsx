@@ -57,12 +57,12 @@ function Products() {
             case 'M_Jackets':
                 return <div>
                     <h2 className="text-xl font-bold pl-4 pt-2">Men's Jackets</h2>
-                    <ProductList categoryType={selectedProduct} />
+                    <ProductItems categoryType={selectedProduct} />
                 </div>
             case 'M_Belts':
                 return <div>
                     <h2 className="text-xl font-bold pl-4 pt-2">Men's Belts</h2>
-                    <ProductList categoryType={selectedProduct} />
+                    <ProductItems categoryType={selectedProduct} />
                 </div>
             case 'M_Sweaters':
                 return <div>
