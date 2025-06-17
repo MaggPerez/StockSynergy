@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import PageHeader from '../components/PageHeader';
 import { setDocumentTitle } from '../script';
 import { PlusCircle } from 'lucide-react';
-import Populate from '../populate';
 import InputAddProduct from '../components/InputAddProduct';
 import { ClipLoader } from 'react-spinners';
+import {Product, insertProduct } from '../productController';
 
 
 function AddProduct() {
@@ -20,13 +20,15 @@ function AddProduct() {
         }
     }, [navigate])
 
-    //Getting variables from populate.ts
-    const {
-        productNameInput, setProductNameInput, styleNumberInput, setStyleNumberInput,
-        categoryInput, setCategoryInput, availableRestockInput, setAvailableRestockInput,
-        productImageInput, setProductImageInput, descriptionInput, setDescriptionInput, handlePopulate,
-        loading
-    } = Populate();
+    const [productNameInput, setProductNameInput] = useState<string>("");
+    const [styleNumberInput, setStyleNumberInput] = useState<string>("");
+    const [categoryInput, setCategoryInput] = useState<string>("");
+    const [availableRestockInput, setAvailableRestockInput] = useState<number | string>("");
+    const [productImageInput, setProductImageInput] = useState<string>("");
+    const [descriptionInput, setDescriptionInput] = useState<string>("");
+
+    const [loading, setLoading] = useState(false);
+
 
     //creating hashmap object
     const productImageMap: Record<string, string> = {
@@ -46,6 +48,52 @@ function AddProduct() {
         const productImagePath = productImageMap[selectedCategory];
         setCategoryInput(event.target.value);
         setProductImageInput(productImagePath);
+    }
+
+
+
+    /**
+     * Method that handles new product submissions
+     * @param e prevents automatic submissions
+     * @returns alert message that a new product was added
+     */
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
+        e.preventDefault();
+
+        //Loading spinner turns on
+        setLoading(true);
+
+        //Validating to see if the user has selected a category.
+        try {
+            if(categoryInput === ""){
+            setLoading(false);
+
+            //Tells the user to choose a category
+            return alert("Choose a Category");
+        }
+
+        //Creating Product Object based on what the user types in.
+        const newProduct: Product = {
+            style_number: styleNumberInput,
+            product_name: productNameInput,
+            product_image: productImageInput,
+            available_restock: Number(availableRestockInput),
+            status: "Stockroom",
+            description: descriptionInput
+        };
+
+        //Inserting the new product into the inventory
+        await insertProduct(categoryInput, newProduct);
+        alert("New Product Added!");
+
+        } catch (error) {
+            console.error(error)
+        }
+        finally {
+
+            //Turns off the loading animation
+            setLoading(false);
+        }
     }
 
 
@@ -69,7 +117,7 @@ function AddProduct() {
                     </div>
 
                     {/* Product Form */}
-                    <form onSubmit={handlePopulate} className='space-y-6'>
+                    <form onSubmit={handleSubmit} className='space-y-6'>
 
                         {/* Grid */}
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>

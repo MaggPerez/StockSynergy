@@ -28,7 +28,29 @@ export async function getProducts(section: string) {
 }
 
 
-//create insert method (like in Populate.ts)
+/**
+ * Method to insert new products into inventory.
+ * @param section Category of the product, M_Tees or M_Shorts
+ * @param newProduct Product object containing details such as style number, etc
+ */
+export async function insertProduct(section: string, newProduct: Product) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/products/insert/${section}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newProduct),
+        });
+
+        const data = await response.json();
+        console.log("Product created: ", data)
+        
+    } catch (error) {
+        console.error('Error posting product:', error)
+    }
+}
+
 
 
 /**
@@ -46,4 +68,13 @@ export async function getNotOnFloorSection(table: string) {
 
 
 //create UPDATE method in backend for Move To's Stockroom and Sales Floor
+
+
+/**
+ * WHAT TO DO NEXT:
+ * 1. Create insert method of Product[] array and link it to AddProduct.tsx
+ * 2. Create Update Method for Move To's
+ * 3. Deployment time
+ */
+
 

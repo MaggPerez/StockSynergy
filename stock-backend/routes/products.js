@@ -16,13 +16,14 @@ router.get('/', async (req, res) => {
 
 
 // Inserting products
-router.post('/', async (req, res) => {
+router.post('/insert/:table', async (req, res) => {
+    const { table } = req.params;
     const { style_number, product_name, product_image, available_restock, status, description } = req.body;
 
     //message that shows the incoming post request that is set to insert into database
     console.log('Incoming POST:', req.body);
     const { data, error } = await supabase
-        .from('M_Tees')
+        .from(table)
         .insert([{ style_number, product_name, product_image, available_restock, status, description }])
 
     //Will show Supabase insert results in the console
