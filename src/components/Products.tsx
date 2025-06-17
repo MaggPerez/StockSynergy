@@ -7,6 +7,7 @@ import { useSelectedItems } from "./SelectedItems";
 import { ClipLoader } from "react-spinners";
 import { formatNumber } from "../script";
 import ProductItems from "./ProductItems";
+import { getTotalNotOnFloor } from "../productController";
 
 
 
@@ -32,7 +33,7 @@ function Products() {
         window.scrollTo(0, 0);
 
         async function fetchNOF() {
-            setNOF(await getNotOnFloorNum());
+            setNOF(await getTotalNotOnFloor());
         }
         fetchNOF();
     }, [])

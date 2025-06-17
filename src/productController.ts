@@ -1,4 +1,6 @@
-
+/**
+ * Gloabl interface for Product standards
+ */
 export interface Product {
     style_number: string;
     product_name: string;
@@ -52,6 +54,17 @@ export async function insertProduct(section: string, newProduct: Product) {
 }
 
 
+/**
+ * Method that gets Not on Floor aka all of the available restock number for every single section available
+ * @returns Total available restock for all sections 
+ */
+export async function getTotalNotOnFloor(){
+    const response = await fetch('http://localhost:3000/api/products/units');
+    const data = await response.json();
+    return data;
+}
+
+
 
 /**
  * Method that gets Not on Floor aka available restock number based on the section the user selects.
@@ -69,12 +82,5 @@ export async function getNotOnFloorSection(table: string) {
 
 //create UPDATE method in backend for Move To's Stockroom and Sales Floor
 
-
-/**
- * WHAT TO DO NEXT:
- * 1. Create insert method of Product[] array and link it to AddProduct.tsx
- * 2. Create Update Method for Move To's
- * 3. Deployment time
- */
 
 

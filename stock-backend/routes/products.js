@@ -58,7 +58,8 @@ router.get('/section/:table', async (req, res) => {
 })
 
 
-//Getting all available restock values and sums up all the available restock values
+//Getting all available restock values and sums up all the available restock values based on the section 
+//the user picks
 router.get('/value/:table', async (req, res) => {
     const { table } = req.params;
 
@@ -78,6 +79,46 @@ router.get('/value/:table', async (req, res) => {
 
     res.json(data);
 })
+
+
+
+router.get('/units', async (req, res) => {
+
+    const { data, error } = await getTotalRestock();
+    console.log("From reading getTotalRestock: ", data);
+
+    if(error){
+        return res.status(500).json({ error: error.message });
+    }
+
+
+    res.json(data);
+})
+
+
+async function getTotalRestock() {
+  let NOF = 0;
+  const tables = ['M_Tees', 'M_Shorts', 'M_Jackets', 'M_Belts'];
+
+  for (const table of tables) {
+    const { data, error } = await supabase
+      .from(table)
+      .select('available_restock');
+
+    if (error) {
+      console.error(`Error fetching from ${table}:`, error);
+      return { data: null, error};
+    }
+
+    const sum = data.reduce((acc, item) => acc + (item.available_restock || 0), 0);
+    NOF += sum;
+  }
+
+  console.log('Total available_restock across all tables:', NOF);
+
+  //Returning as an object instead of number
+  return { data: NOF, error: null};
+}
 
 
 module.exports = router;
