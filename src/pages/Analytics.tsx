@@ -31,7 +31,7 @@ const Analytics: React.FC = () => {
                 <InventorySidebar />
 
                 {/* Title of current page */}
-                <PageHeader title="Analytics" />
+                <PageHeader title="Analytics" pathTo='/home' chevronName='Home' />
 
                 {/* Analytics Dashboard */}
                 <div className="p-4">

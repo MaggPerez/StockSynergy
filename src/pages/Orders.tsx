@@ -7,7 +7,7 @@ function Orders() {
   return (
     <main className="bg-gray-50 dark:bg-common-black text-black dark:text-white min-h-screen lg:pl-56 lg:duration-300">
         <InventorySidebar />
-        <PageHeader title="Orders - Coming Soon" />
+        <PageHeader title="Orders - Coming Soon" pathTo="/home" chevronName="Home" />
     </main>
   )
 }

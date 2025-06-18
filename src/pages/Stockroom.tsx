@@ -46,7 +46,7 @@ function Stockroom() {
 
             {/* Page header */}
             <div>
-                <PageHeader title="Stockroom" pathTo="/home" />
+                <PageHeader title="Stockroom" pathTo="/home" chevronName="Home" />
                 <p className="text-gray-600 dark:text-gray-400 mt-2 pl-4">Manage your stockroom inventory and track restocking activities.</p>
             </div>
 

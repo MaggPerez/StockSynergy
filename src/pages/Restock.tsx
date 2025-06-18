@@ -11,7 +11,7 @@ function Restock() {
       <InventorySidebar />
 
       <div className="flex justify-between">
-        <PageHeader title="Restock" pathTo="/stockroom" />
+        <PageHeader title="Restock" pathTo="/stockroom" chevronName='Stockroom' />
       </div>
 
       {/* Displays all categories (ex: M_Tees, M_Jackets) and their information */}

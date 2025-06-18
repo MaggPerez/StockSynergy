@@ -19,7 +19,7 @@ function SalesFloor() {
             {/* Sidebar */}
             <InventorySidebar />
 
-            <PageHeader title="Sales Floor" pathTo="/home" />
+            <PageHeader title="Sales Floor" pathTo="/home" chevronName="Home" />
 
             <SalesFloorDashboard />
 

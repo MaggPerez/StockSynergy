@@ -14,6 +14,7 @@ function AddProduct() {
 
     const navigate = useNavigate();
     useEffect(() => {
+        window.scrollTo(0, 0);
         //prevents unauthorized users from entering this page
         if (sessionStorage.getItem("isManager") === "false") {
             navigate("/home")
@@ -103,7 +104,7 @@ function AddProduct() {
             <InventorySidebar />
 
             {/* Title of page */}
-            <PageHeader title="Add Product" />
+            <PageHeader title="Add Product" pathTo='/home' chevronName='Home' />
 
             <div className='p-4 md:p-6'>
 
