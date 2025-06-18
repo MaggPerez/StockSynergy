@@ -3,9 +3,21 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
+
+//Allows localhost and stocksynergy.netlify.app to use back-end server
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://stocksynergy.netlify.app'
+];
+
 app.use(cors({
-    origin: 'https://stocksynergy.netlify.app',
-    credentials: true
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true
 }));
 
 app.use(express.json());
