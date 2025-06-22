@@ -3,7 +3,7 @@ import InventorySidebar from '../components/InventorySidebar';
 import PageHeader from '../components/PageHeader';
 import { formatNumber, setDocumentTitle } from '../script'; // Assuming this exists based on Login.tsx
 import Graph from '../components/Graph';
-import { getNotOnFloorNum } from '../components/ProductList';
+import { getTotalNotOnFloor } from '../productController';
 import { ClipLoader } from 'react-spinners';
 
 const Analytics: React.FC = () => {
@@ -18,7 +18,7 @@ const Analytics: React.FC = () => {
     
             //retrieves units that need to be replenished
             async function fetchNOF() {
-                setNOF(await getNotOnFloorNum());
+                setNOF(await getTotalNotOnFloor());
             }
             fetchNOF();
         }, [])

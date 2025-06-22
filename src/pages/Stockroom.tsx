@@ -1,6 +1,6 @@
 import PageHeader from "../components/PageHeader";
 import { useEffect, useState } from "react";
-import { getNotOnFloorNum } from "../components/ProductList";
+import { getTotalNotOnFloor } from "../productController";
 import InventorySidebar from "../components/InventorySidebar";
 import { formatNumber, setDocumentTitle } from "../script";
 import { Link } from "react-router-dom";
@@ -26,7 +26,7 @@ function Stockroom() {
         window.scrollTo(0, 0);
 
         async function fetchNOF() {
-            setNOF(await getNotOnFloorNum());
+            setNOF(await getTotalNotOnFloor());
         }
         fetchNOF();
     }, [])

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import { getNotOnFloorNum } from "../components/ProductList";
 import { generateSales, formatNumber } from "../script";
+import { getTotalNotOnFloor } from "../productController";
 import { ClipLoader } from "react-spinners";
 
 
@@ -13,7 +13,7 @@ export default function Dashboard() {
     useEffect(() => {
 
         async function fetchNOF() {
-            setNOF(await getNotOnFloorNum());
+            setNOF(await getTotalNotOnFloor());
         }
         fetchNOF();
     }, [])

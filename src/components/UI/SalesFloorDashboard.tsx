@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { getNotOnFloorNum } from "../ProductList";
+import { getTotalNotOnFloor } from "../../productController";
 import { formatNumber, generateSales } from "../../script";
 import { ClipLoader } from "react-spinners";
 
@@ -17,7 +17,7 @@ function SalesFloorDashboard() {
     useEffect(() => {
 
         async function fetchNOF() {
-            setNOF(await getNotOnFloorNum());
+            setNOF(await getTotalNotOnFloor());
         }
         fetchNOF();
     }, [])
