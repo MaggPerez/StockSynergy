@@ -15,6 +15,7 @@ import Orders from './pages/Orders';
 import Suppliers from './pages/Suppliers';
 import Settings from './pages/Settings';
 import { SelectedItemsProvider } from './components/SelectedItems';
+import { SidebarProvider } from './components/SidebarProvider';
 
 const router = createBrowserRouter([
   {
@@ -69,8 +70,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
+    <SidebarProvider>
     <SelectedItemsProvider>
       <RouterProvider router={router} />
     </SelectedItemsProvider>
+    </SidebarProvider>
   </StrictMode>
 );

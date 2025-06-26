@@ -11,7 +11,7 @@ interface PageHeaderProps {
 function PageHeader({ title, pathTo, chevronName }: PageHeaderProps): JSX.Element {
     let newPath = pathTo?.replace("/", "");
     return (
-        <div className="flex flex-col gap-4 pl-4">
+        <div className="flex flex-col gap-4 pl-4 pt-16">
             { pathTo &&
                 <Link to={pathTo} className=' flex items-center gap-2 w-28'>
                     <div className='flex gap-3 lg:hidden items-center'><ChevronLeft size={25} className='bg-gray-200 dark:bg-common-black rounded-xl' /><p>{chevronName}</p></div>

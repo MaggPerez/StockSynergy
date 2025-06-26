@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import InventorySidebar from '../components/InventorySidebar';
 import PageHeader from '../components/PageHeader';
 import { formatNumber, setDocumentTitle } from '../script'; // Assuming this exists based on Login.tsx
 import Graph from '../components/Graph';
 import { getTotalNotOnFloor } from '../productController';
 import { ClipLoader } from 'react-spinners';
+import { SidebarLayout } from '../components/SidebarLayout';
 
 const Analytics: React.FC = () => {
     setDocumentTitle("Analytics");
@@ -26,9 +26,8 @@ const Analytics: React.FC = () => {
 
     return (
         <>
-            <main className="bg-gray-50 dark:bg-common-black text-black dark:text-white min-h-screen lg:pl-56 lg:duration-300">
-                {/* Sidebar */}
-                <InventorySidebar />
+        <SidebarLayout>
+            <main>
 
                 {/* Title of current page */}
                 <PageHeader title="Analytics" pathTo='/home' chevronName='Home' />
@@ -166,6 +165,8 @@ const Analytics: React.FC = () => {
                     </div>
                 </div>
             </main>
+
+        </SidebarLayout>
         </>
     );
 };

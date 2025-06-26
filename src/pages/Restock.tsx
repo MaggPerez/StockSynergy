@@ -1,22 +1,22 @@
 import Products from '../components/Products'
-import InventorySidebar from '../components/InventorySidebar'
+import { SidebarLayout } from "../components/SidebarLayout";
 import PageHeader from '../components/PageHeader'
 import { setDocumentTitle } from '../script'
 
 function Restock() {
   setDocumentTitle("Restock")
   return (
-    <main className="bg-gray-50 dark:bg-common-black text-black dark:text-white lg:pl-56 lg:duration-300 h-[130vh]">
+    <SidebarLayout>
+      <main className=" h-[130vh]">
 
-      <InventorySidebar />
+        <div className="flex justify-between">
+          <PageHeader title="Restock" pathTo="/stockroom" chevronName='Stockroom' />
+        </div>
 
-      <div className="flex justify-between">
-        <PageHeader title="Restock" pathTo="/stockroom" chevronName='Stockroom' />
-      </div>
-
-      {/* Displays all categories (ex: M_Tees, M_Jackets) and their information */}
-      <Products />
-    </main>
+        {/* Displays all categories (ex: M_Tees, M_Jackets) and their information */}
+        <Products />
+      </main>
+    </SidebarLayout>
   )
 }
 

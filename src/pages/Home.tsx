@@ -4,7 +4,7 @@ import Dashboard from "../components/Dashboard";
 import Graph from "../components/Graph";
 import { setDocumentTitle } from "../script.js"
 import PageHeader from "../components/PageHeader";
-import InventorySidebar from '../components/InventorySidebar'
+import { SidebarLayout } from "../components/SidebarLayout";
 
 
 const Home: React.FC = () => {
@@ -16,15 +16,16 @@ const Home: React.FC = () => {
 
     return (
         <>
-            <main className="bg-gray-50 dark:bg-common-black text-black dark:text-white min-h-screen lg:pl-56 duration-300 transition-all">
+        <SidebarLayout>
+
+            <main>
                 {/* Sidebar */}
-                <InventorySidebar />
 
 
                 {/* Title of current page */}
                 <div>
                     <PageHeader title="Home" />
-                    <p className="text-gray-600 dark:text-gray-400 mt-2 pl-4">Welcome back! Here's what's happening with your inventory today.</p>
+                    <p className="text-gray-600 dark:text-gray-400 mt-2 pl-4 mb-3">Welcome back! Here's what's happening with your inventory today.</p>
                 </div>
 
 
@@ -169,6 +170,7 @@ const Home: React.FC = () => {
                 </div>
 
             </main>
+        </SidebarLayout>
         </>
     );
 };
