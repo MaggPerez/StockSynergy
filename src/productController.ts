@@ -82,7 +82,33 @@ export async function getNotOnFloorSection(table: string) {
 }
 
 
-//create UPDATE method in backend for Move To's Stockroom and Sales Floor
+
+/**
+ * Method that moves selected items from Restock.tsx in each section to the Sales Floor
+ * @param items List of selected items ready to be moved to the sales floor
+ */
+export async function moveToSalesFloor(items: Product[]) {
+    try {
+        const response = await fetch(`${baseURL}/api/products/move`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(items),
+    });
+
+    if(!response.ok) {
+        throw new Error(`HTTP Error! Status: ${response.status}`)
+    }
+
+    alert("Items Successfully Moved!")
+    console.log("Products moved to Sales Floor");
+
+
+    } catch (error) {
+        console.error("Error in moving products to sales floor", error)
+    }
+}
 
 
 

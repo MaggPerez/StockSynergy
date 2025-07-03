@@ -81,7 +81,7 @@ router.get('/value/:table', async (req, res) => {
 })
 
 
-
+//GET method to get the total restock number
 router.get('/units', async (req, res) => {
 
     const { data, error } = await getTotalRestock();
@@ -96,6 +96,41 @@ router.get('/units', async (req, res) => {
 })
 
 
+//PUT request to update status of items from Stockroom to Sales Floor
+router.put('/move', async (req, res) => {
+
+    //Product will be an array of selected items
+    const product  = req.body;
+
+    // Available Tables
+    const tables = ['M_Tees', 'M_Shorts', 'M_Jackets', 'M_Belts'];
+
+    //Iterating through all tables
+    for (const table of tables){
+
+        //Iterating through all selected products as item
+        product.forEach(async item => {
+
+            //Changing the status of the item
+            const { error } = await supabase.from(table).update({ status: item.status }).eq('style_number', item.style_number).select()
+            
+            if (error){
+                return res.status(500).json({ error: error.message });
+            }
+        });
+
+    }
+
+    return res.status(200).json({ Message: "Success"})
+
+
+})
+
+
+/**
+ * 
+ * @returns Total Restock Number for all Tables
+ */
 async function getTotalRestock() {
   let NOF = 0;
   const tables = ['M_Tees', 'M_Shorts', 'M_Jackets', 'M_Belts'];
