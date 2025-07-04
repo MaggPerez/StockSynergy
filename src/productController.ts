@@ -1,5 +1,5 @@
 /**
- * Gloabl interface for Product standards
+ * Global interface for Product standards
  */
 export interface Product {
     style_number: string;
@@ -49,7 +49,7 @@ export async function insertProduct(section: string, newProduct: Product) {
 
         const data = await response.json();
         console.log("Product created: ", data)
-        
+
     } catch (error) {
         console.error('Error posting product:', error)
     }
@@ -60,7 +60,7 @@ export async function insertProduct(section: string, newProduct: Product) {
  * Method that gets Not on Floor aka all of the available restock number for every single section available
  * @returns Total available restock for all sections 
  */
-export async function getTotalNotOnFloor(){
+export async function getTotalNotOnFloor() {
     const response = await fetch(`${baseURL}/api/products/units`);
     const data = await response.json();
     return data;
@@ -90,23 +90,23 @@ export async function getNotOnFloorSection(table: string) {
 export async function moveToSalesFloor(items: Product[]) {
     try {
         const response = await fetch(`${baseURL}/api/products/move`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(items),
-    });
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(items),
+        });
 
-    if(!response.ok) {
-        throw new Error(`HTTP Error! Status: ${response.status}`)
-    }
+        if (!response.ok) {
+            throw new Error(`HTTP Error! Status: ${response.status}`)
+        }
 
-    alert("Items Successfully Moved!")
-    console.log("Products moved to Sales Floor");
-
-
+        
     } catch (error) {
         console.error("Error in moving products to sales floor", error)
+    }
+    finally {
+        alert(items.length + " Product(s) was successfully moved to Sales Floor. Refresh page")
     }
 }
 

@@ -74,7 +74,7 @@ function ProductItems({ categoryType }: ProductListProps) {
                     product_name={productItem.product_name} 
                     product_image={productItem.product_image}
                     available_restock={productItem.available_restock} 
-                    status={''} 
+                    status={productItem.status} 
                     description={productItem.description} 
                 />
             ))}

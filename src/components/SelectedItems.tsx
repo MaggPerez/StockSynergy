@@ -82,7 +82,7 @@ export const useSelectedItems = () => {
 
 function SelectedItems(): JSX.Element {
     const { selectedItems } = useSelectedItems();
-    const { onHandleMoveToSalesFloor, loading } = Populate();
+    const { loading } = Populate();
 
 
     //if the array is empty or has no selected values, it will return "No items selected"

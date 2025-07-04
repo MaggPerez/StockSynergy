@@ -11,7 +11,7 @@ interface ItemProps {
     status?: string;
 }
 
-function Item({ style_number, product_name, product_image, available_restock, status, description}: Product): JSX.Element {
+function Item({ style_number, product_name, product_image, available_restock, status, description }: Product): JSX.Element {
     const product: Product = {
         style_number: style_number,
         product_name: product_name,
@@ -25,6 +25,7 @@ function Item({ style_number, product_name, product_image, available_restock, st
         <section
             className="text-black dark:text-white items-center p-4 mx-3 bg-gray-50 border-2 border-violet-600 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl lg:w-1/2"
         >
+            <p className="rounded-xl bg-gray-200 w-24 p-0.5 text-center">{status}</p>
             <div className="flex flex-wrap justify-between items-center">
                 {/* Item Image with Product Name */}
                 <div className="flex items-center gap-5">
