@@ -22,13 +22,14 @@ function ProductItems({ categoryType }: ProductListProps) {
             //Starts loading animation
             setLoading(true)
             try {
-                setProducts(await getProducts(categoryType));
+                //Grabbing products based on what section the user selects along with its Not on Floor data.
+                setProducts((await getProducts(categoryType)));
                 const nofData = await getNotOnFloorSection(categoryType);
 
                 //Checking to see if the NOF value is an array and is not empty. Otherwise nof value is set to 0
                 const nofValue = Array.isArray(nofData) && nofData.length > 0 ? nofData[0].sum : 0;
-                console.log(nofValue);
 
+                //Setting NOF tracker
                 setNOF(nofValue);
                 
             } catch (error) {
@@ -43,6 +44,7 @@ function ProductItems({ categoryType }: ProductListProps) {
         fetchData();
     }, [categoryType])
 
+
     
     //Loading animation runs first while fetching data
     if(loading){
@@ -53,8 +55,8 @@ function ProductItems({ categoryType }: ProductListProps) {
         )
     }
 
-    //If Not on Floor is at 0, then nothing needs to be restocked
-    return NOF === 0 ? (
+    //If a category has no products, then nothing needs to be restocked
+    return products.length === 0 ? (
         <p className="text-center text-green-700 dark:text-[#00FF7F]">Nothing to be restocked</p>
     )
     : (
@@ -67,7 +69,7 @@ function ProductItems({ categoryType }: ProductListProps) {
             </div>
 
             {/* Displays list of items needed to be restocked */}
-            {products.filter((filteringItems) => filteringItems.status !== "Sales Floor").map((productItem) => (
+            {products.map((productItem) => (
                 <Item 
                     key={productItem.style_number}
                     style_number={productItem.style_number}

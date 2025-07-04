@@ -81,7 +81,7 @@ export const useSelectedItems = () => {
 
 
 function SelectedItems(): JSX.Element {
-    const { selectedItems } = useSelectedItems();
+    const { selectedItems, removeItem } = useSelectedItems();
     const { loading } = Populate();
 
 
@@ -100,7 +100,7 @@ function SelectedItems(): JSX.Element {
     return (
         <section className="items-center p-2 mx-3 bg-gray-50 border-2 border-violet-600 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl">
             {/* Button to move to sales floor */}
-            <button onClick={() => moveToSalesFloor(selectedItems)} className="bg-blue-600 text-white p-2 m-2 rounded-2xl"
+            <button onClick={() => moveToSalesFloor(selectedItems, removeItem)} className="bg-blue-600 text-white p-2 m-2 rounded-2xl"
                 disabled={loading}>
                 {loading ?
                     //If button is clicked, a spin loader animation is played and button is disabled

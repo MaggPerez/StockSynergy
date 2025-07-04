@@ -86,8 +86,9 @@ export async function getNotOnFloorSection(table: string) {
 /**
  * Method that moves selected items from Restock.tsx in each section to the Sales Floor
  * @param items List of selected items ready to be moved to the sales floor
+ * @param removeItem Function to remove items from selected items list
  */
-export async function moveToSalesFloor(items: Product[]) {
+export async function moveToSalesFloor(items: Product[], removeItem: (styleNumber: string) => void) {
     try {
         const response = await fetch(`${baseURL}/api/products/move`, {
             method: 'PUT',
@@ -97,16 +98,22 @@ export async function moveToSalesFloor(items: Product[]) {
             body: JSON.stringify(items),
         });
 
+        //Throws error status if there was a HTTP error
         if (!response.ok) {
             throw new Error(`HTTP Error! Status: ${response.status}`)
         }
 
         
     } catch (error) {
-        console.error("Error in moving products to sales floor", error)
+        return console.error("Error in moving products to sales floor", error)
     }
     finally {
-        alert(items.length + " Product(s) was successfully moved to Sales Floor. Refresh page")
+        alert(items.length + " Product(s) successfully moved to Sales Floor.");
+
+        //Removing the selected items off the list
+        items.forEach((item) => {
+            removeItem(item.style_number)
+        })
     }
 }
 

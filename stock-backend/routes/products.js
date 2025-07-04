@@ -46,7 +46,8 @@ router.get('/section/:table', async (req, res) => {
         return res.status(400).json({ error: "Invalid Section Name"});
     }
 
-    const { data, error } = await supabase.from(table).select("*");
+    //Retrieving products that do not have "Sales Floor" as the status
+    const { data, error } = await supabase.from(table).select("*").neq("status", "Sales Floor");
 
 
     if(error){
