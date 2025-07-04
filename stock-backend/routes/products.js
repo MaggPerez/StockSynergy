@@ -102,6 +102,8 @@ router.put('/move', async (req, res) => {
     //Product will be an array of selected items
     const product  = req.body;
 
+    const moveToSalesFloor = "Sales Floor"
+
     // Available Tables
     const tables = ['M_Tees', 'M_Shorts', 'M_Jackets', 'M_Belts'];
 
@@ -112,7 +114,7 @@ router.put('/move', async (req, res) => {
         product.forEach(async item => {
 
             //Changing the status of the item
-            const { error } = await supabase.from(table).update({ status: item.status }).eq('style_number', item.style_number).select()
+            const { error } = await supabase.from(table).update({ status: moveToSalesFloor }).eq('style_number', item.style_number).select()
             
             if (error){
                 return res.status(500).json({ error: error.message });
