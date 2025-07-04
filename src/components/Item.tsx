@@ -1,26 +1,24 @@
 import React from "react";
 import Checkbox from "./Checkbox";
-import { Product } from "../populate";
+import { Product } from "../productController";
 
 interface ItemProps {
-    productImage: string;
-    productName: string;
     styleNumber: string;
-    description: string;
+    productName: string;
+    productImage: string;
     availableRestock: number;
-    category: string;
+    description: string;
     status?: string;
 }
 
-function Item({ productImage, productName, styleNumber, description, availableRestock, category}: ItemProps): JSX.Element {
+function Item({ style_number, product_name, product_image, available_restock, status, description}: Product): JSX.Element {
     const product: Product = {
-        availStock: availableRestock,
-        des: description,
-        prodImg: productImage,
-        prodName: productName,
-        styleNum: styleNumber,
-        category: category, 
-        status: ""
+        style_number: style_number,
+        product_name: product_name,
+        product_image: product_image,
+        available_restock: available_restock,
+        status: status,
+        description: description
     }
 
     return (
@@ -30,14 +28,14 @@ function Item({ productImage, productName, styleNumber, description, availableRe
             <div className="flex flex-wrap justify-between items-center">
                 {/* Item Image with Product Name */}
                 <div className="flex items-center gap-5">
-                    <img className="w-10 bg-violet-600 rounded-xl" src={productImage} alt={productImage} />
-                    <p>{productName}</p>
+                    <img className="w-10 bg-violet-600 rounded-xl" src={product_image} alt={product_image} />
+                    <p>{product_name}</p>
                 </div>
 
                 {/* Style Number */}
                 <div>
                     <h3 className="font-bold">Style Number</h3>
-                    <p className="text-right">{styleNumber}</p>
+                    <p className="text-right">{style_number}</p>
                 </div>
             </div>
             {/* Item description */}
@@ -51,7 +49,7 @@ function Item({ productImage, productName, styleNumber, description, availableRe
             {/* Available Restock + View Item */}
             <div className="flex justify-between text-xs pt-2">
                 <h4 className="font-bold text-green-700 dark:text-[#00FF7F]">
-                    Available Restock: {availableRestock} Unit(s)
+                    Available Restock: {available_restock} Unit(s)
                 </h4>
                 <Checkbox product={product} />
                 <a href="#" className="hover:text-violet-600 dark:hover:text-violet-400">

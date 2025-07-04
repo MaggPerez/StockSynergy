@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import { useSelectedItems } from "./SelectedItems";
-import { Product } from "../populate";
+import { Product } from "../productController";
 
 interface CheckboxProps {
     product: Product;
@@ -9,11 +9,11 @@ interface CheckboxProps {
 
 function Checkbox({ product }: CheckboxProps): JSX.Element {
     const { addItem, removeItem, isSelected } = useSelectedItems();
-    const selected = isSelected(product.styleNum);
+    const selected = isSelected(product.style_number);
 
     const handleToggle = () => {
         if(selected){
-            removeItem(product.styleNum);
+            removeItem(product.style_number);
         }
         else{
             addItem(product);

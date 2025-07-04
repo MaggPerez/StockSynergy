@@ -66,18 +66,18 @@ function ProductItems({ categoryType }: ProductListProps) {
                 <p className='text-green-700 dark:text-[#00FF7F]'>{NOF}</p>
             </div>
 
-
-            {products.map((productItem) => (
-                <Item
+            {/* Displays list of items needed to be restocked */}
+            {products.filter((filteringItems) => filteringItems.status !== "Sales Floor").map((productItem) => (
+                <Item 
                     key={productItem.style_number}
-                    styleNumber={productItem.style_number}
-                    productName={productItem.product_name}
-                    productImage={productItem.product_image}
-                    availableRestock={productItem.available_restock}
-                    description={productItem.description}
-                    category={''} />
+                    style_number={productItem.style_number}
+                    product_name={productItem.product_name} 
+                    product_image={productItem.product_image}
+                    available_restock={productItem.available_restock} 
+                    status={''} 
+                    description={productItem.description} 
+                />
             ))}
-
         </div>
     )
 }

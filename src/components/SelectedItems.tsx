@@ -1,6 +1,7 @@
 import { useState, useContext, createContext, ReactNode } from "react";
 import Item from "./Item";
-import Populate, { Product } from "../populate";
+import Populate from "../populate";
+import { Product, moveToSalesFloor } from "../productController";
 import { ClipLoader } from "react-spinners";
 
 
@@ -25,7 +26,7 @@ export const SelectedItemsProvider: React.FC<{ children: ReactNode }> = ({ child
      */
     const addItem = (item: Product) => {
         setSelectedItems((prevItems) => {
-            const exists = prevItems.some(existingItem => existingItem.styleNum === item.styleNum);
+            const exists = prevItems.some(existingItem => existingItem.style_number === item.style_number);
             if (exists) {
                 return prevItems
             }
@@ -39,7 +40,7 @@ export const SelectedItemsProvider: React.FC<{ children: ReactNode }> = ({ child
      */
     const removeItem = (styleNumber: string) => {
         setSelectedItems((prevItems) =>
-            prevItems.filter((item) => item.styleNum !== styleNumber)
+            prevItems.filter((item) => item.style_number !== styleNumber)
         );
     };
 
@@ -49,7 +50,7 @@ export const SelectedItemsProvider: React.FC<{ children: ReactNode }> = ({ child
      * @returns 
      */
     const isSelected = (styleNumber: string) => {
-        return selectedItems.some((item) => item.styleNum === styleNumber);
+        return selectedItems.some((item) => item.style_number === styleNumber);
     };
 
     return (
@@ -99,7 +100,7 @@ function SelectedItems(): JSX.Element {
     return (
         <section className="items-center p-2 mx-3 bg-gray-50 border-2 border-violet-600 dark:bg-common-black rounded-3xl shadow-sm dark:shadow-2xl">
             {/* Button to move to sales floor */}
-            <button onClick={() => onHandleMoveToSalesFloor(selectedItems)} className="bg-blue-600 text-white p-2 m-2 rounded-2xl"
+            <button onClick={() => moveToSalesFloor(selectedItems)} className="bg-blue-600 text-white p-2 m-2 rounded-2xl"
                 disabled={loading}>
                 {loading ?
                     //If button is clicked, a spin loader animation is played and button is disabled
@@ -114,13 +115,13 @@ function SelectedItems(): JSX.Element {
             <div className="flex flex-col gap-5">
                 {selectedItems.map((product) => (
                     <Item
-                        key={product.styleNum}
-                        productImage={product.prodImg}
-                        productName={product.prodName}
-                        styleNumber={product.styleNum}
-                        description={product.des}
-                        availableRestock={product.availStock}
-                        category={product.category}
+                        key={product.style_number}
+                        style_number={product.style_number}
+                        product_name={product.product_name}
+                        product_image={product.product_image}
+                        available_restock={product.available_restock}
+                        status={product.status}
+                        description={product.description}
                     />
                 ))}
             </div>
