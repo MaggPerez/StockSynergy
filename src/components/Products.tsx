@@ -68,12 +68,12 @@ function Products() {
             case 'M_Sweaters':
                 return <div>
                     <h2 className="text-xl font-bold pl-4 pt-2">Men's Sweaters</h2>
-                    <p className="text-center text-green-700 dark:text-[#00FF7F]">Nothing to be restocked</p>
+                    <ProductItems categoryType={selectedProduct} />
                 </div>
             case 'M_Sandals':
                 return <div>
                     <h2 className="text-xl font-bold pl-4 pt-2">Men's Sandals</h2>
-                    <p className="text-center text-green-700 dark:text-[#00FF7F]">Nothing to be restocked</p>
+                    <ProductItems categoryType={selectedProduct} />
                 </div>
             case 'selected':
                 return <div>
