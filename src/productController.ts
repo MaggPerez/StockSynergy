@@ -117,5 +117,12 @@ export async function moveToSalesFloor(items: Product[], removeItem: (styleNumbe
     }
 }
 
+export async function getSalesFloorUnits() {
+    const response = await fetch(`${baseURL}/api/products/salesfloorunits`)
+    const data = await response.json();
+    console.log("Sales Floor Units: ", data)
+    return data;
+}
+
 
 

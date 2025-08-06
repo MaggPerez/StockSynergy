@@ -129,6 +129,21 @@ router.put('/move', async (req, res) => {
 
 })
 
+/**
+ * Sales Floor route
+ */
+router.get('/salesfloorunits', async (req, res) => {
+    const { data, error } = await getSalesFloorNumbers();
+    console.log("Reading from getSalesFloorUnits ", data)
+
+    if(error){
+        return res.status(500).json({ error: error.message });
+    }
+
+
+    res.json(data);
+})
+
 
 /**
  * 
@@ -156,6 +171,30 @@ async function getTotalRestock() {
 
   //Returning as an object instead of number
   return { data: NOF, error: null};
+}
+
+
+
+async function getSalesFloorNumbers() {
+    let salesFloorUnits = 0
+
+    const tables = ['M_Tees', "M_Shorts", "M_Jackets", "M_Belts"]
+
+    for (const table of tables){
+        const { data, error } = await supabase.from(table).select('status')
+
+        if(error){
+            console.error(`Error fetching from ${table}: `, error)
+        }
+
+        const sum = data.reduce((acc, item) => acc + (item.status === "Sales Floor"), 0)
+        salesFloorUnits += sum
+
+    }
+
+    console.log("Count of products in sales floor: ", salesFloorUnits)
+    return { data: salesFloorUnits, error: null}
+
 }
 
 

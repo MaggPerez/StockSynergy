@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { getTotalNotOnFloor } from "../../productController";
 import { formatNumber, generateSales } from "../../script";
 import { ClipLoader } from "react-spinners";
+import { getSalesFloorUnits } from "../../productController";
 
 function SalesFloorDashboard() {
     const current_sales = generateSales();
@@ -11,15 +12,19 @@ function SalesFloorDashboard() {
     //Setting the Not on Floor tracker
     const [NOF, setNOF] = useState<number>(0);
 
+    //Setting Sales Floor Units
+    const [salesFloorUnits, setSalesFloorUnits] = useState<number>(0)
+
     //Formatting current Not on Floor tracker
     const current_NOF = NOF === 0 ? <p className='flex gap-1 items-center'><ClipLoader color='orange' size={28} /></p> : formatNumber((Number(NOF)))
     
     useEffect(() => {
 
-        async function fetchNOF() {
+        async function fetchData() {
             setNOF(await getTotalNotOnFloor());
+            setSalesFloorUnits(await getSalesFloorUnits())
         }
-        fetchNOF();
+        fetchData();
     }, [])
 
     return (
@@ -70,7 +75,7 @@ function SalesFloorDashboard() {
                     </div>
 
                     <div>
-                        <p className="text-2xl font-bold text-blue-600 dark:text-white mb-1">{formatNumber(10742)}</p>
+                        <p className="text-2xl font-bold text-blue-600 dark:text-white mb-1">{formatNumber(salesFloorUnits)}</p>
                         <p className="text-sm text-gray-600 dark:text-gray-400">Units on Floor</p>
                         <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">Available inventory</p>
                     </div>
