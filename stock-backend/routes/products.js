@@ -176,7 +176,9 @@ async function getTotalRestock() {
 
 
 async function getSalesFloorNumbers() {
+    //What will be returned
     let salesFloorUnits = 0
+    const sectionCounts = {}
 
     const tables = ['M_Tees', "M_Shorts", "M_Jackets", "M_Belts"]
 
@@ -185,15 +187,25 @@ async function getSalesFloorNumbers() {
 
         if(error){
             console.error(`Error fetching from ${table}: `, error)
+            sectionCounts[table] = 0
+            continue
         }
 
+        //Counting how many items are in the sales floor
         const sum = data.reduce((acc, item) => acc + (item.status === "Sales Floor"), 0)
+
+        //For each section, a table e.g (M_Tees) will have the count of items that are on the sales floor
+        //This will be allowed to call each section to if we want M_Tees, M_Shorts total
+        sectionCounts[table] = sum
+
+        //Counting the total number of items on the sales floor
         salesFloorUnits += sum
 
     }
 
     console.log("Count of products in sales floor: ", salesFloorUnits)
-    return { data: salesFloorUnits, error: null}
+    console.log("Section counts: ", sectionCounts)
+    return { data: { total: salesFloorUnits, sections: sectionCounts }, error: null}
 
 }
 

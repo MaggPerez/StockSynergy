@@ -11,6 +11,9 @@ import {
   elements
 } from "chart.js";
 
+import { getSalesFloorUnits } from "../productController";
+import { useEffect, useState } from "react";
+
 ChartJS.register(
   Title,
   Tooltip,
@@ -25,17 +28,52 @@ interface GraphCharts {
   chart?: any;
 }
 
+interface SalesFloorInterface {
+  total: number,
+  section: {
+    M_Tees: number,
+    M_Shorts: number,
+    M_Jackets: number,
+    M_Belts: number
+  }
+}
+
+
 
 function salesFloorChart() {
+  useEffect(() => {
+    async function fetchData() {
+      const result = await getSalesFloorUnits()
+
+      setSalesFloorUnits({
+        total: result.total,
+        section: {
+          M_Tees: result.sections.M_Tees,
+          M_Shorts: result.sections.M_Shorts,
+          M_Jackets: result.sections.M_Jackets,
+          M_Belts: result.sections.M_Belts,
+        }
+      })
+    }
+    fetchData()
+  }, [])
+
+  const [salesFloorUnits, setSalesFloorUnits] = useState<SalesFloorInterface>()
+
   const data = {
-    labels: ['Sales Floor', 'Tees', 'Jeans', 'Jackets', 'Accessories'],
+    labels: ['Sales Floor', 'Tees', 'Shorts', 'Belts', 'Accessories'],
     datasets: [
       {
         label: 'Units',
-        backgroundColor: '#68d391',
-        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: '#8b5cf6', // violet-500
+        borderColor: '#a78bfa', // violet-400
         borderWidth: 1,
-        data: [10742, 5000, 2200, 1200, 2342],
+        data: [
+          salesFloorUnits?.total,
+          salesFloorUnits?.section.M_Tees,
+          salesFloorUnits?.section.M_Shorts,
+          salesFloorUnits?.section.M_Jackets,
+          salesFloorUnits?.section.M_Belts],
       },
     ],
   };

@@ -22,7 +22,8 @@ function SalesFloorDashboard() {
 
         async function fetchData() {
             setNOF(await getTotalNotOnFloor());
-            setSalesFloorUnits(await getSalesFloorUnits())
+            const result = await getSalesFloorUnits();
+            setSalesFloorUnits(result.total)
         }
         fetchData();
     }, [])

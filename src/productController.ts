@@ -117,10 +117,15 @@ export async function moveToSalesFloor(items: Product[], removeItem: (styleNumbe
     }
 }
 
+
+/**
+ * Fetches the sales floor units data including the total count and details of each unit.
+ * @returns Sales Floor Units data
+ */
 export async function getSalesFloorUnits() {
     const response = await fetch(`${baseURL}/api/products/salesfloorunits`)
     const data = await response.json();
-    console.log("Sales Floor Units: ", data)
+    console.log("Sales Floor Units data: ", data)
     return data;
 }
 
