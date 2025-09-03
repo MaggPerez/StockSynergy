@@ -2,21 +2,15 @@ import { useState, useEffect } from "react"
 import { generateSales, formatNumber } from "../script";
 import { getTotalNotOnFloor } from "../productController";
 import { ClipLoader } from "react-spinners";
+import { useNOFContext } from "./providers/NOFProvider";
 
 
 export default function Dashboard() {
     const current_sales = generateSales();
     const rawCurrentSales = current_sales.replace(/,/g, "");
-    const salesTrendStatus = Number(rawCurrentSales);    
+    const salesTrendStatus = Number(rawCurrentSales);
+    const nofContext = useNOFContext()
 
-    const [NOF, setNOF] = useState<number>(0);
-    useEffect(() => {
-
-        async function fetchNOF() {
-            setNOF(await getTotalNotOnFloor());
-        }
-        fetchNOF();
-    }, [])
 
     const stats = [
         {
@@ -31,7 +25,7 @@ export default function Dashboard() {
         },
         {
             //Not on Floor
-            value: NOF === 0 ? <p className='flex gap-1 items-center'><ClipLoader color='orange' size={24} /></p> : formatNumber((Number(NOF))),
+            value: nofContext.NOF === 0 ? <p className='flex gap-1 items-center'><ClipLoader color='orange' size={24} /></p> : formatNumber((Number(nofContext.NOF))),
             label: "Units Not on Floor",
             sublabel: "Need Restocking",
             color: "orange",
@@ -125,7 +119,7 @@ export default function Dashboard() {
                         <span className="text-sm font-medium text-orange-700 dark:text-orange-300">Restock Alert</span>
                     </div>
                     <p className="text-xs text-orange-600 dark:text-orange-400 mt-1">
-                        {typeof NOF === "number" && Number(NOF) > 20 ? "High priority items" : "Normal levels"}
+                        {typeof nofContext.NOF === "number" && Number(nofContext.NOF) > 20 ? "High priority items" : "Normal levels"}
 
                     </p>
                 </div>

@@ -8,7 +8,7 @@ interface NOFObject {
 //Creating NOF context
 const NOFContext = createContext<NOFObject | null>(null)
 
-export const useNOFObject = () => {
+export const useNOFContext = () => {
     const objectNOF = useContext(NOFContext)
     if (!objectNOF) {
         throw new Error("useNOFObject must be used within a Provider")
