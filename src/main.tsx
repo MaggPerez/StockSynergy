@@ -16,6 +16,7 @@ import Suppliers from './pages/Suppliers';
 import Settings from './pages/Settings';
 import { SelectedItemsProvider } from './components/SelectedItems';
 import { SidebarProvider } from './components/SidebarProvider';
+import NOFProvider from './components/providers/NOFProvider';
 
 const router = createBrowserRouter([
   {
@@ -71,9 +72,11 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <SidebarProvider>
-    <SelectedItemsProvider>
+      <NOFProvider>
+        <SelectedItemsProvider>
       <RouterProvider router={router} />
     </SelectedItemsProvider>
+      </NOFProvider>
     </SidebarProvider>
   </StrictMode>
 );
