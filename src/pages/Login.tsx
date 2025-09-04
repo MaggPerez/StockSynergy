@@ -1,17 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import LoginFunctions from "../loginScript";
 import { setDocumentTitle } from "../script";
+import { signIn, signUp } from "../login";
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
     // Set document title when the component is mounted
     setDocumentTitle("Login");
+    const navigate = useNavigate();
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
-    // Destructure values from LoginFunctions hook
+
+    async function handleSignIn(e: React.FormEvent<HTMLFormElement>): Promise<void> {
+        e.preventDefault();
+
+        try {
+            await signIn(username, password)
+            // Redirect to home page after successful sign in
+            navigate('/home')
+        } catch (error) {
+            alert("Sign in error")
+        }
+    }
+
+    async function handleSignUp(e: React.FormEvent<HTMLFormElement>): Promise<void> {
+        e.preventDefault()
+
+        try {
+            await signUp(username, password)
+            
+            navigate('/home')
+
+        } catch (error) {
+            alert("Error")
+        }
+    }
+
+
+
     const {
-        Username,
-        setUsername,
-        setPassword,
-        Password,
         signUpButton,
         signInButton,
         switchToSignUp,
@@ -39,7 +67,7 @@ const Login: React.FC = () => {
 
                 {/* Login Form (Existing Users) */}
                 <div className="mx-7 lg:w-1/2 lg:px-28 h-screen flex flex-col justify-center">
-                    <form onSubmit={signInButton} id="login-field" className="space-y-6 ">
+                    <form onSubmit={handleSignIn} id="login-field" className="space-y-6 ">
                         <h1 className="text-3xl font-bold text-center">Welcome, Sign in!</h1>
 
                         {/* Enter Username */}
@@ -54,9 +82,9 @@ const Login: React.FC = () => {
                                 type="text"
                                 name="username"
                                 id="username"
-                               className="bg-transparent border-0 border-b-2 border-violet-400 text-violet-900 rounded-t-lg focus:border-violet-600 focus:ring-0 block w-full p-4 placeholder-violet-400 transition-all duration-200 dark:text-violet-100 dark:border-violet-500 dark:placeholder-violet-500 dark:focus:border-violet-300"
+                                className="bg-transparent border-0 border-b-2 border-violet-400 text-violet-900 rounded-t-lg focus:border-violet-600 focus:ring-0 block w-full p-4 placeholder-violet-400 transition-all duration-200 dark:text-violet-100 dark:border-violet-500 dark:placeholder-violet-500 dark:focus:border-violet-300"
                                 placeholder="Username"
-                                value={Username}
+                                value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
                             />
@@ -76,7 +104,7 @@ const Login: React.FC = () => {
                                 id="password-field"
                                 placeholder="Password"
                                 className="bg-transparent border-0 border-b-2 border-violet-400 text-violet-900 rounded-t-lg focus:border-violet-600 focus:ring-0 block w-full p-4 placeholder-violet-400 transition-all duration-200 dark:text-violet-100 dark:border-violet-500 dark:placeholder-violet-500 dark:focus:border-violet-300"
-                                value={Password}
+                                value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
@@ -120,7 +148,7 @@ const Login: React.FC = () => {
 
                     {/* Sign Up Form (New Users) */}
                     <div id="signUp-field" className="hidden">
-                        <form onSubmit={signUpButton} className="space-y-6">
+                        <form onSubmit={handleSignUp} className="space-y-6">
                             <h1 className="text-3xl font-bold text-center">Create an account!</h1>
 
                             {/* Create Username */}
@@ -137,7 +165,7 @@ const Login: React.FC = () => {
                                     id="create-username-field"
                                     placeholder="Username"
                                     className="bg-transparent border-0 border-b-2 border-violet-400 text-violet-900 rounded-t-lg focus:border-violet-600 focus:ring-0 block w-full p-4 placeholder-violet-400 transition-all duration-200 dark:text-violet-100 dark:border-violet-500 dark:placeholder-violet-500 dark:focus:border-violet-300"
-                                    value={Username}
+                                    value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                     required
                                 />
@@ -157,7 +185,7 @@ const Login: React.FC = () => {
                                     id="create-password-field"
                                     placeholder="Password"
                                     className="bg-transparent border-0 border-b-2 border-violet-400 text-violet-900 rounded-t-lg focus:border-violet-600 focus:ring-0 block w-full p-4 placeholder-violet-400 transition-all duration-200 dark:text-violet-100 dark:border-violet-500 dark:placeholder-violet-500 dark:focus:border-violet-300"
-                                    value={Password}
+                                    value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
                                 />
