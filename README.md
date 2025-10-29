@@ -3,6 +3,28 @@
 - An inventory retail system designed to track stock units, sales floor inventory, and incoming products in real-time. 
 - Built to optimize retail operations, improve stock accuracy, and simplify inventory management for seamless business workflows.
 
+
+## Tech Stack
+
+**Frontend:**
+- React
+- TypeScript
+- Vite
+- React Router DOM
+- Tailwind CSS
+
+**Backend & Database:**
+- Firebase
+- Supabase
+
+**Data Visualization:**
+- Chart.js
+- React Chart.js 2
+
+**UI Components:**
+- Lucide React (Icons)
+
+
 # Login Page
 - Users, more specifically managers and employees can login to the system.
 - New users are able to create an account.
